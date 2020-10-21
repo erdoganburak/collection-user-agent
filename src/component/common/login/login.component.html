@@ -1,0 +1,38 @@
+<div class="row align-items-center justify-content-center vh-100 background">
+  <div class="col-xl-8 col-lg-10 col-md-12">
+    <div class="login-box animated fadeInDown delay-base">
+      <div class="login-box-content">
+        <div class="text-font-black text-app-green mb-auto text-font-size-xl text-center"></div>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="inputUsername">Kullanıcı Adı</label>
+            <input type="text" formControlName="username" class="form-control form-control-sm" id="inputUsername"
+              placeholder="Kullanıcı Adı" [ngClass]="{ 'is-invalid': submitted && controls.username.errors }">
+            <div *ngIf="submitted && controls.username.errors" class="invalid-feedback">
+              <div *ngIf="controls.username.errors.required">Kullanıcı adını doldurun.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword">Şifre</label>
+            <input type="password" class="form-control form-control-sm" formControlName="password" id="inputPassword"
+              placeholder="Şifre"
+              [ngClass]="{ 'is-invalid': submitted && controls.password.errors }">
+            <div *ngIf="submitted && controls.password.errors" class="invalid-feedback">
+              <div *ngIf="controls.password.errors.required">Şifre alanını doldurun.</div>
+            </div>
+          </div>
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="checkRememberMe" formControlName="rememberMe">
+            <label class="form-check-label" for="checkRememberMe">Beni Hatırla</label>
+          </div>
+          <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary">Giriş Yap</button>
+          </div>
+        </form>
+      </div>
+      <div class="login-box-image">
+
+      </div>
+    </div>
+  </div>
+</div>

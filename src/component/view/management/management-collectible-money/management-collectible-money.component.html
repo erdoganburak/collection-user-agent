@@ -1,0 +1,134 @@
+<div class="row">
+    <div class="col-xl-2 form">
+        <form [formGroup]="moneyForm">
+            <div class="form-group">
+                <label for="inputName">İsim</label>
+                <input type="text" formControlName="name" class="form-control form-control-sm" id="inputName"
+                    placeholder="İsim" [ngClass]="{ 'is-invalid': submitted && controls.name.errors }">
+            </div>
+
+            <div class="form-group">
+                <label for="inputProductNo">Ürün Numarası</label>
+                <input type="text" formControlName="productNo" class="form-control form-control-sm" id="inputProductNo"
+                    placeholder="Ürün Numarası" [ngClass]="{ 'is-invalid': submitted && controls.productNo.errors }">
+            </div>
+
+            <div class="form-group">
+                <label for="inputSerialNo">Seri Numarası</label>
+                <input type="text" formControlName="serialNo" class="form-control form-control-sm" id="inputSerialNo"
+                    placeholder="Numarası" [ngClass]="{ 'is-invalid': submitted && controls.serialNo.errors }">
+            </div>
+
+            <div class="form-group">
+                <label for="inputCondition">Kondisyon</label>
+                <input type="number" formControlName="condition" class="form-control form-control-sm"
+                    id="inputCondition" placeholder="Kondisyon"
+                    [ngClass]="{ 'is-invalid': submitted && controls.condition.errors }">
+            </div>
+
+            <div class="form-group">
+                <label for="inputMinPrice">Mininum Fiyat</label>
+                <input type="number" formControlName="minPrice" class="form-control form-control-sm" id="inputMinPrice"
+                    placeholder="Minumum Fiyat" [ngClass]="{ 'is-invalid': submitted && controls.minPrice.errors }">
+            </div>
+
+            <div class="form-group">
+                <label for="inputMaxPrice">Maksimum Fiyat</label>
+                <input type="number" formControlName="maxPrice" class="form-control form-control-sm" id="inputMaxPrice"
+                    placeholder="Maksimum Fiyat" [ngClass]="{ 'is-invalid': submitted && controls.maxPrice.errors }">
+            </div>
+
+            <div class="form-group">
+                <label for="inputPrice">Emisyon</label>
+                <div class="form-group">
+                    <ng-multiselect-dropdown [placeholder]="'Emisyon Seçiniz'" [data]="emissions"
+                        formControlName="emissions" [settings]="dropdownEmissionSettings"
+                        (onSelect)="onEmissionSelected($event)" (onDeSelect)="onEmissionDeSelect($event)">
+                    </ng-multiselect-dropdown>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputPrice">Küpür</label>
+                <div class="form-group">
+                    <ng-multiselect-dropdown [placeholder]="'Küpür Seçiniz'" [data]="clippings"
+                        formControlName="clippings" [settings]="dropdownClippingSettings"
+                        (onSelect)="onClippingSelected($event)" (onDeSelect)="onClippingDeSelect($event)">
+                    </ng-multiselect-dropdown>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-info" (click)="search()">Ara</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-xl-10 col-lg-12 col-md-12 ">
+        <div class="row">
+            <div class="col-xl-12">
+                <app-management-header [title]="title" [description]="description" [icon]="icon">
+                </app-management-header>
+            </div>
+            <div class="col-xl-12">
+                <div class="d-flex justify-content-end my-3">
+                    <button type="button" class="btn btn-primary" (click)="onClickAddNew()">Para ekle</button>
+                </div>
+                <div *ngIf="paginationResponse != null" class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th style="width: 10%" scope="col">Resim</th>
+                                <th scope="col">İsim</th>
+                                <th scope="col">Ürün Numarası</th>
+                                <th scope="col">Seri Numarası</th>
+                                <th scope="col">Kondisyon</th>
+                                <th scope="col">Küpür</th>
+                                <th scope="col">Emisyon</th>
+                                <th scope="col">Fiyat</th>
+                                <th scope="col">Düzenle</th>
+                                <th scope="col">Sil</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let money of collectibleMoneys | paginate: {
+                                    itemsPerPage: this.paginationResponse.limit,
+                                    currentPage: pageNumber,
+                                    totalItems: this.paginationResponse.count
+                                }">
+                                <td>
+                                    <div class="row d-flex justify-content-start">
+                                        <div class="col-sm-12 col-md-6 col-lg-4">
+                                            <img class="fit-image" src="{{imagePath + money.frontImage}}" />
+                                        </div>
+                                    </div>
+                                </td>
+                                <th scope=" row">{{money.name}}</th>
+                                <td scope="row">{{money.productNo}}</td>
+                                <td scope="row">{{money.serialNo}}</td>
+                                <td scope="row">{{money.condition}}</td>
+                                <td scope="row">{{money.clipping?.quantity | currency: "TRY"}}</td>
+                                <td scope="row">{{money.emission?.name}}</td>
+                                <td scope="row">{{money.price | currency: "TRY"}}</td>
+                                <td>
+                                    <div class="d-flex justify-content-center" (click)="onClickEdit(money)">
+                                        <fa-icon [icon]="['fas', 'edit']" size="1x">
+                                        </fa-icon>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-center" (click)="onClickDelete(money)">
+                                        <fa-icon [icon]="['fas', 'trash']" size="1x">
+                                        </fa-icon>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <app-pagination [paginationResponse]="paginationResponse"
+                        (pageNumberChanged)="pageNumberChanged($event)">
+                    </app-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

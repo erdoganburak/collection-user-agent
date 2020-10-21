@@ -1,0 +1,41 @@
+@import "../../../styles/_bootstrap.scss";
+@import "../../../styles/mixins/gradient.mixin.scss";
+@import "../../../styles/mixins/border.mixin.scss";
+@import "../../../styles/mixins/flex.mixin.scss";
+@import "../../../styles/variables.scss";
+
+.background {
+  @include linear-gradient(to bottom, $secondary 0%, $dark 100%);
+
+}
+
+.login-box {
+  @include display-flex();
+  @include flex-direction-row();
+  @include rounded($spacer);
+  @include align-content-stretch();
+  // background-image: url("/remoteweb/assets/images/background.jpg");
+  background-size: cover;
+  min-height: 60vh;
+  box-shadow: $box-shadow;
+
+  .login-box-image {
+    @include rounded-top-right($spacer);
+    @include rounded-bottom-right($spacer);
+    @include flex-grow(1);
+    @include linear-gradient(to bottom, $primary 0%, $secondary 100%);
+  }
+
+  .login-box-content {
+    min-width: 25%;
+    @include display-flex;
+    @include flex-direction-column;
+    @include justify-content-flex-end;
+    @include rounded-top-left($spacer);
+    @include rounded-bottom-left($spacer);
+    padding: $spacer * 2;
+    background-color: #fff;
+    -webkit-box-shadow: 10px 0 5px -2px #888;
+    box-shadow: 8px 0 4px -2px rgba(#000, 0.3);
+  }
+}

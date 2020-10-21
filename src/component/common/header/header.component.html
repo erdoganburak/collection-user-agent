@@ -1,0 +1,53 @@
+<ng-container>
+  <nav class="navbar navbar-expand-sm header-nav">
+    <a class="navbar-brand text-app-green ml-3 mr-3"><strong></strong></a>
+    <button class="navbar-toggler hidden-sm-up" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed"
+      data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon text-white">
+        <fa-icon [icon]="['fas', 'bars']" [fixedWidth]="true" size="lg"></fa-icon>
+      </span>
+    </button>
+    <div class="collapse navbar-collapse" [ngbCollapse]="isNavbarCollapsed">
+      <ul class="navbar-nav mr-auto text-white">
+        <ng-container *ngFor="let menuItem of menuItems">
+          <ng-container *ngIf="!menuItem.childs">
+            <li class="nav-item">
+              <a class="nav-link cursor-pointer" (click)="gotoPage(menuItem)">{{menuItem.title}}</a>
+            </li>
+          </ng-container>
+          <ng-container *ngIf="menuItem.childs">
+            <li class="nav-item dropdown" ngbDropdown>
+              <a class="nav-link dropdown-toggle cursor-pointer" id="id01" ngbDropdownToggle>{{menuItem.title}}</a>
+              <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
+                <ng-container *ngFor="let childItem of menuItem.childs">
+                  <a class="dropdown-item cursor-pointer" (click)="gotoPage(childItem)">{{childItem.title}}</a>
+                </ng-container>
+              </div>
+            </li>
+          </ng-container>
+        </ng-container>
+      </ul>
+      <ul class="navbar-nav px-3 text-white">
+        <li class="nav-item dropdown" ngbDropdown>
+          <a class="nav-link cursor-pointer dropdown-toggle mr-3 mr-lg-0" ngbDropdownToggle data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <fa-icon [icon]="['fas', 'user-circle']" size="2x"></fa-icon>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right dropdown-menu-right-fix"
+            aria-labelledby="navbarDropdownMenuLink" ngbDropdownMenu>
+            <span class="dropdown-header text-font-size-md">Yönetim</span>
+            <div class="dropdown-divider"></div>
+            <a *ngIf="!sessionService.isLoggedIn" class="dropdown-item cursor-pointer" (click)="onClickLogin()">
+              <fa-icon [icon]=" ['fas', 'key' ]" [fixedWidth]="true" class="mr-2 text-secondary"></fa-icon>Giriş Yap
+            </a>
+            <div class="dropdown-divider"></div>
+            <a *ngIf="sessionService.isLoggedIn" class="dropdown-item cursor-pointer" (click)="onClickLogout()">
+              <fa-icon [icon]="['fas', 'sign-out-alt']" [fixedWidth]="true" class="mr-2 text-secondary"></fa-icon>Çıkış
+              Yap
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</ng-container>

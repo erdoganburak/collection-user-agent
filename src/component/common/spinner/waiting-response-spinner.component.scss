@@ -1,0 +1,13 @@
+.waitingSpinnerContainer
+{
+	position: 			absolute;
+	top: 				0px;
+	left: 				0px;
+    width: 				100vw;
+    height: 			100vh;
+    justify-content: 	center;
+    display: 			flex;
+    align-items: 		center;
+    z-index:            500000;
+    background: 		rgba(49, 112, 143, 0.15);
+}

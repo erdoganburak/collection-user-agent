@@ -1,0 +1,13 @@
+<div class="item p-3">
+    <div class="picture-container p-3">
+        <img class="picture" src="{{imagePath}}" alt="Money picture">
+    </div>
+    <div class="body">
+        <p class="title h5">{{item.name}}</p>
+        <small class="text-muted">Seri Numarası: {{item.serialNo}}</small>
+        <small class="text-muted">Kondisyon: {{item.condition}} / 10</small>
+    </div>
+    <div class="footer">
+        <p class="text h5">{{item.price | currency: "TRY"}}</p>
+    </div>
+</div>

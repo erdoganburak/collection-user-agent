@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* make changes to the !default Bootstrap variables */
+@import "styles/variables.scss";
+@import "styles/fonts.scss";
+
+/* finally, import Bootstrap to set the changes! */
+@import "~bootstrap/scss/bootstrap";
+@import "~ngx-toastr/toastr-bs4-alert";
+
+#toast-container > div {
+    opacity: 1;
+}
+
+/*.toast-success {
+    background-color: red !important;
+}*/
+
+.dropdown-menu-right-fix {
+    right: 0 !important;
+}

@@ -1,0 +1,49 @@
+<div class="row d-flex justify-content-center">
+    <div class="col-xl-8 col-lg-12 col-md-12">
+        <app-management-header [title]="title" [description]="description" [icon]="icon"></app-management-header>
+        <div class="d-flex justify-content-end my-3">
+            <button type="button" class="btn btn-primary" (click)="onClickAddNew()">Emisyon Ekle</button>
+        </div>
+        <div *ngIf="paginationResponse != null" class="table-container">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th style="width: 45%" scope="col">İsim</th>
+                        <th style="width: 45%" scope="col">Küpürler</th>
+                        <th style="width: 5%" scope="col">Düzenle</th>
+                        <th style="width: 5%" scope="col">Sil</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let emission of emissions | paginate: {
+                        itemsPerPage: this.paginationResponse.limit,
+                        currentPage: pageNumber,
+                        totalItems: this.paginationResponse.count
+                    }">
+                        <th scope=" row">{{emission.name}}</th>
+                        <td scope=" row">
+                            <span *ngFor="let clipping of emission.clippings; let i = index">
+                        <td scope="row">{{clipping.quantity | currency: "TRY"}}</td>
+                        <span *ngIf="clipping && i!==emission.clippings.length-1">, </span>
+                        </span>
+                        </td>
+                        <td>
+                            <div class="d-flex justify-content-center" (click)="onClickEdit(emission)">
+                                <fa-icon [icon]="['fas', 'edit']" size="1x">
+                                </fa-icon>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex justify-content-center" (click)="onClickDelete(emission)">
+                                <fa-icon [icon]="['fas', 'trash']" size="1x">
+                                </fa-icon>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <app-pagination [paginationResponse]="paginationResponse" (pageNumberChanged)="pageNumberChanged($event)">
+            </app-pagination>
+        </div>
+    </div>
+</div>

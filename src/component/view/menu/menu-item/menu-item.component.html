@@ -1,0 +1,8 @@
+<div class="row" (click)="onClickMenuItem()">
+    <div class="col-3 icon-container">
+        <fa-icon [icon]="['fas', item.icon]" size="3x" class="d-flex justify-content-center"></fa-icon>
+    </div>
+    <div class="col-9 title-container d-flex align-items-center">
+        <span class="title">{{item.title}}</span>
+    </div>
+</div>

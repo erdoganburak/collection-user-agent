@@ -1,0 +1,42 @@
+<div class="row d-flex justify-content-center">
+    <div class="col-xl-8 col-lg-12 col-md-12">
+        <app-management-header [title]="title" [description]="description" [icon]="icon"></app-management-header>
+        <div class="d-flex justify-content-end my-3">
+            <button type="button" class="btn btn-primary" (click)="onClickAddNew()">Küpür Ekle</button>
+        </div>
+        <div *ngIf="paginationResponse != null" class="table-container">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th style="width: 90%" scope="col">Miktar</th>
+                        <th style="width: 5%" scope="col">Düzenle</th>
+                        <th style="width: 5%" scope="col">Sil</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let clipping of clippings | paginate: {
+                        itemsPerPage: this.paginationResponse.limit,
+                        currentPage: pageNumber,
+                        totalItems: this.paginationResponse.count
+                    }">
+                        <td scope="row">{{clipping.quantity | currency: "TRY"}}</td>
+                        <td>
+                            <div class="d-flex justify-content-center" (click)="onClickEdit(clipping)">
+                                <fa-icon [icon]="['fas', 'edit']" size="1x">
+                                </fa-icon>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex justify-content-center" (click)="onClickDelete(clipping)">
+                                <fa-icon [icon]="['fas', 'trash']" size="1x">
+                                </fa-icon>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <app-pagination [paginationResponse]="paginationResponse" (pageNumberChanged)="pageNumberChanged($event)">
+            </app-pagination>
+        </div>
+    </div>
+</div>

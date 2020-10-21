@@ -1,0 +1,14 @@
+<div class="modal-header">
+  <h4 class="modal-title">
+    <span>CUSTOM MODAL TITLE</span>
+  </h4>
+</div>
+<div class="modal-body">
+  <span>CUSTOM MODAL BODY</span>
+  <span>{{data}}</span>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-primary" (click)="onCancelClicked($event)"
+    [hidden]="showCancel">VAZGEÇ</button>
+  <button type="button" class="btn" (click)="onOkClicked($event)" autofocus [hidden]="showOk">TAMAM</button>
+</div>

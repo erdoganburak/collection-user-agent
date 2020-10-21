@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  API_BASE_PATH: 'http://localhost:3000',
+  API_IMAGE_PATH: 'http://localhost:3000/image/get-image/',
+  REQUEST_ITEM_LIMIT: 20
 };
 
 /*
@@ -14,3 +17,5 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+
+

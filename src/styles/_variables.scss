@@ -1,0 +1,42 @@
+// BOOTSTRAP
+/*$spacer: 0.7rem;
+$font-size-base: 0.8rem;
+$font-family-base: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;*/
+
+// https://themestr.app/theme?start=1&font=Open%20Sans&palette=2&icons=fontawesome&border-width=1px&spacer=0.7rem&btn-border-radius=1.35rem&enable-gradients=false
+
+$font-family-base: "Lato-Regular", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "Noto Sans", sans-serif;
+$font-family-black: "Lato-Bold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "Noto Sans", sans-serif;
+$headings-font-family: "Lato-Regular", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "Noto Sans", sans-serif;
+$font-size-base: 0.9rem;
+
+$body-bg: #e9ecf1; //#eaebf0;
+
+$primary: #00669e;
+$secondary: #c4cdd5;
+$success: #cee8c9;
+$danger: #ba494b;
+$info: #4a90e2;
+$warning: #f1be48;
+$light: #eaf3fc;
+$dark: #637381;
+$enable-gradients: false;
+$spacer: 0.7rem;
+$border-width: 1px;
+$btn-border-radius: 0.2rem;
+$grid-gutter-width: 1rem;
+$label-margin-bottom: 0.1rem;
+$title: 18px;
+$description: 14px;
+$border-radius: 4px;
+// ANIMATE SCSS
+// https://github.com/tgdev/animate-sass/blob/master/helpers/_settings.scss
+$base-duration: 0.5s;
+$use-fade: true;
+
+// PROJECT
+$app-green: #73be44;
+$app-gray: #f4f8ff;

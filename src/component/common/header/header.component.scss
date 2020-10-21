@@ -1,0 +1,14 @@
+@import "../../../styles/mixins/gradient.mixin.scss";
+@import "../../../styles/variables";
+
+.header-nav {
+    @include linear-gradient(to right, $primary 30%, $dark 100%);
+    .nav-link {
+        color: $secondary;
+    }
+
+    .nav-link:hover {
+        cursor: pointer;
+        color: $light;
+    }
+}

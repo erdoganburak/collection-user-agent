@@ -1,0 +1,20 @@
+.menu-item-container {
+    -webkit-box-shadow: -1px 2px 9px 2px rgba(173, 173, 173, 0.68);
+    -moz-box-shadow: -1px 2px 9px 2px rgba(173, 173, 173, 0.68);
+    box-shadow: -1px 2px 9px 2px rgba(173, 173, 173, 0.68);
+    opacity: 1;
+    transition: 0.3s;
+    margin: 5px;
+    display: block;
+}
+
+.menu-item-container:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.menu-title-row {
+    border-bottom: 1px solid rgb(224, 224, 224);
+    margin-top: 10px;
+    margin-bottom: 20px;
+}

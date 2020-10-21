@@ -1,0 +1,19 @@
+@import "../../../../styles/variables";
+
+.icon-container {
+    padding: 5px;
+    fa-icon {
+        color: white;
+    }
+}
+
+.title {
+    color: $dark;
+    font-size: $title;
+    font-weight: bold;
+}
+
+.description {
+    color: $dark;
+    font-size: $description;
+}

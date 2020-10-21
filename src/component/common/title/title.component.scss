@@ -1,0 +1,11 @@
+@import "../../../styles/mixins/gradient.mixin.scss";
+@import "../../../styles/variables";
+
+:host {
+    .title {
+        font-weight: bold;
+    }
+
+    .description {
+    }
+}

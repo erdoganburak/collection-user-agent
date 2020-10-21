@@ -1,0 +1,14 @@
+<div class="modal-header">
+  <h4 class="modal-title">
+    <span>{{settings.title}}</span>
+  </h4>
+</div>
+<div class="modal-body">
+  <p [innerHTML]="settings.message"></p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-primary" *ngIf="settings.showDeclineButton"
+    (click)="onCancelClicked($event)">{{settings.declineButtonText}}</button>
+  <button type="button" class="btn" [ngClass]="{'btn-primary': settings.type==1, 'btn-danger': settings.type==2}"
+    (click)="onOkClicked($event)" autofocus>{{settings.approveButtonText}}</button>
+</div>
