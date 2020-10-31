@@ -1,8 +1,11 @@
 <div class="modal-body">
   <div class="row">
     <div class="col-12 mb-5">
-      <ngx-image-zoom *ngIf="selectedImageUrl" [thumbImage]="selectedImageUrl" [fullImage]="selectedImageUrl"
-        [magnification]="2" [enableScrollZoom]="true" [enableLens]="false" [lensWidth]="200"></ngx-image-zoom>
+      <!-- <ngx-image-zoom *ngIf="selectedImageUrl" [thumbImage]="selectedImageUrl" [fullImage]="selectedImageUrl"
+        [magnification]="2" [enableScrollZoom]="true" [enableLens]="false" [lensWidth]="200"></ngx-image-zoom> -->
+
+      <img class="main-picture" src="{{selectedImageUrl}}" alt="Money picture">
+
     </div>
     <div *ngIf="items" class="col-12">
       <div class="row">

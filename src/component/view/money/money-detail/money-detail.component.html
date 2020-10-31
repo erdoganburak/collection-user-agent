@@ -1,17 +1,17 @@
 <div *ngIf="item" class="row d-flex justify-content-center">
-    <div class="col-xl-8 col-lg-12 col-md-12 my-5 container">
+    <div class="col-xl-8 col-lg-12 col-md-12 my-5 mx-3 container">
         <div class="row">
             <div class="main-item col-xl-6 col-lg-12 col-md-12">
                 <div class="row">
-                    <div class="col-12 m-5">
-                        <p class="title h2">{{item.name}}</p>
-                    </div>
                     <div class="col-12 picture-container my-5" (click)="onClickImage()">
                         <img class="picture" src="{{imagePath}}" alt="Money picture">
                     </div>
                 </div>
             </div>
             <div class="col-xl-6 col-lg-12 col-md-12 detail my-5">
+                <div class="col-12 detail-item-container py-3">
+                    <p class="title h2">{{item.name}}</p>
+                </div>
                 <div class="col-12 detail-item-container py-3">
                     <span class="h6 field">Ürün Numarası: </span>
                     <span class="h6 value"> {{item.productNo}}</span>
@@ -21,18 +21,10 @@
                     <span class="h6 value"> {{item.serialNo}}</span>
                 </div>
                 <div class="col-12 detail-item-container py-3">
-                    <span class="h6 field">Küpür: </span>
-                    <span class="h6 value"> {{item.clipping?.quantity}}</span>
-                </div>
-                <div class="col-12 detail-item-container py-3">
-                    <span class="h6 field">Emisyon: </span>
-                    <span class="h6 value"> {{item.emission?.name}}</span>
-                </div>
-                <div class="col-12 detail-item-container py-3">
                     <span class="h6 field">Kondisyon: </span>
                     <span class="h6 value">{{item.condition}} / 10</span>
                 </div>
-                <div class="col-12 py-3">
+                <div class="col-12 pt-5">
                     <div class="d-flex align-content-center flex-column">
                         <p class="h1 price">{{item.price | currency: "TRY"}}</p>
                         <div class="mt-4">
@@ -47,6 +39,32 @@
 
                 </div>
             </div>
+
         </div>
     </div>
+
+
+
+    <div class="col-xl-8 col-lg-12 col-md-12 my-5 mx-3">
+        <div class="my-5 mx-3 d-flex justify-content-center">
+            <p class="title h3">İlgilenebileceginiz Diger {{item.emission.name}} Ürünleri</p>
+        </div>
+
+        <div class="row d-flex justify-content-center" *ngIf="collectibleMoneys && paginationResponse"
+            [@listAnimation]="collectibleMoneys.length">
+            <div *ngFor="let item of collectibleMoneys | paginate: {
+                itemsPerPage: this.paginationResponse.limit,
+                currentPage: pageNumber,
+                totalItems: this.paginationResponse.count
+            }" class="col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6 my-3">
+                <app-money-item (click)="onClickItem(item)" [item]="item"></app-money-item>
+            </div>
+            <div class="col-12 my-5">
+                <app-pagination [paginationResponse]="paginationResponse"
+                    (pageNumberChanged)="pageNumberChanged($event)">
+                </app-pagination>
+            </div>
+        </div>
+    </div>
+
 </div>

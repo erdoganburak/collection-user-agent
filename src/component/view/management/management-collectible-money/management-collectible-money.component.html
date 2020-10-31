@@ -1,83 +1,90 @@
 <div class="row">
-    <div class="col-xl-2 form">
-        <form [formGroup]="moneyForm">
-            <div class="form-group">
-                <label for="inputName">İsim</label>
-                <input type="text" formControlName="name" class="form-control form-control-sm" id="inputName"
-                    placeholder="İsim" [ngClass]="{ 'is-invalid': submitted && controls.name.errors }">
-            </div>
-
-            <div class="form-group">
-                <label for="inputProductNo">Ürün Numarası</label>
-                <input type="text" formControlName="productNo" class="form-control form-control-sm" id="inputProductNo"
-                    placeholder="Ürün Numarası" [ngClass]="{ 'is-invalid': submitted && controls.productNo.errors }">
-            </div>
-
-            <div class="form-group">
-                <label for="inputSerialNo">Seri Numarası</label>
-                <input type="text" formControlName="serialNo" class="form-control form-control-sm" id="inputSerialNo"
-                    placeholder="Numarası" [ngClass]="{ 'is-invalid': submitted && controls.serialNo.errors }">
-            </div>
-
-            <div class="form-group">
-                <label for="inputCondition">Kondisyon</label>
-                <input type="number" formControlName="condition" class="form-control form-control-sm"
-                    id="inputCondition" placeholder="Kondisyon"
-                    [ngClass]="{ 'is-invalid': submitted && controls.condition.errors }">
-            </div>
-
-            <div class="form-group">
-                <label for="inputMinPrice">Mininum Fiyat</label>
-                <input type="number" formControlName="minPrice" class="form-control form-control-sm" id="inputMinPrice"
-                    placeholder="Minumum Fiyat" [ngClass]="{ 'is-invalid': submitted && controls.minPrice.errors }">
-            </div>
-
-            <div class="form-group">
-                <label for="inputMaxPrice">Maksimum Fiyat</label>
-                <input type="number" formControlName="maxPrice" class="form-control form-control-sm" id="inputMaxPrice"
-                    placeholder="Maksimum Fiyat" [ngClass]="{ 'is-invalid': submitted && controls.maxPrice.errors }">
-            </div>
-
-            <div class="form-group">
-                <label for="inputPrice">Emisyon</label>
-                <div class="form-group">
-                    <ng-multiselect-dropdown [placeholder]="'Emisyon Seçiniz'" [data]="emissions"
-                        formControlName="emissions" [settings]="dropdownEmissionSettings"
-                        (onSelect)="onEmissionSelected($event)" (onDeSelect)="onEmissionDeSelect($event)">
-                    </ng-multiselect-dropdown>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="inputPrice">Küpür</label>
-                <div class="form-group">
-                    <ng-multiselect-dropdown [placeholder]="'Küpür Seçiniz'" [data]="clippings"
-                        formControlName="clippings" [settings]="dropdownClippingSettings"
-                        (onSelect)="onClippingSelected($event)" (onDeSelect)="onClippingDeSelect($event)">
-                    </ng-multiselect-dropdown>
-                </div>
-            </div>
-
-            <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-info" (click)="search()">Ara</button>
-            </div>
-        </form>
+    <div class="col-12">
+        <app-management-header [title]="title" [description]="description" [icon]="icon">
+        </app-management-header>
     </div>
-    <div class="col-xl-10 col-lg-12 col-md-12 ">
+    <div class="col-12">
         <div class="row">
-            <div class="col-xl-12">
-                <app-management-header [title]="title" [description]="description" [icon]="icon">
-                </app-management-header>
+            <div class="col-xl-2 form">
+                <form [formGroup]="moneyForm">
+                    <div class="form-group">
+                        <label for="inputName">İsim</label>
+                        <input type="text" formControlName="name" class="form-control form-control-sm" id="inputName"
+                            placeholder="İsim" [ngClass]="{ 'is-invalid': submitted && controls.name.errors }">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputProductNo">Ürün Numarası</label>
+                        <input type="text" formControlName="productNo" class="form-control form-control-sm"
+                            id="inputProductNo" placeholder="Ürün Numarası"
+                            [ngClass]="{ 'is-invalid': submitted && controls.productNo.errors }">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputSerialNo">Seri Numarası</label>
+                        <input type="text" formControlName="serialNo" class="form-control form-control-sm"
+                            id="inputSerialNo" placeholder="Numarası"
+                            [ngClass]="{ 'is-invalid': submitted && controls.serialNo.errors }">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputCondition">Kondisyon</label>
+                        <input type="number" formControlName="condition" class="form-control form-control-sm"
+                            id="inputCondition" placeholder="Kondisyon"
+                            [ngClass]="{ 'is-invalid': submitted && controls.condition.errors }">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputMinPrice">Mininum Fiyat</label>
+                        <input type="number" formControlName="minPrice" class="form-control form-control-sm"
+                            id="inputMinPrice" placeholder="Minumum Fiyat"
+                            [ngClass]="{ 'is-invalid': submitted && controls.minPrice.errors }">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputMaxPrice">Maksimum Fiyat</label>
+                        <input type="number" formControlName="maxPrice" class="form-control form-control-sm"
+                            id="inputMaxPrice" placeholder="Maksimum Fiyat"
+                            [ngClass]="{ 'is-invalid': submitted && controls.maxPrice.errors }">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputPrice">Emisyon</label>
+                        <div class="form-group">
+                            <ng-multiselect-dropdown [placeholder]="'Emisyon Seçiniz'" [data]="emissions"
+                                (click)="onEmissionsDropdownClicked()" formControlName="emissions"
+                                [settings]="dropdownEmissionSettings" (onSelect)="onEmissionSelected($event)"
+                                (onDeSelect)="onEmissionDeSelect($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputPrice">Küpür</label>
+                        <div class="form-group">
+                            <ng-multiselect-dropdown [placeholder]="'Küpür Seçiniz'" [data]="clippings"
+                                (click)="onClippingDropdownClicked()" formControlName="clippings"
+                                [settings]="dropdownClippingSettings" (onSelect)="onClippingSelected($event)"
+                                (onDeSelect)="onClippingDeSelect($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-sm btn-info" (click)="search()">Ara</button>
+                    </div>
+                </form>
             </div>
-            <div class="col-xl-12">
+            <div class="col-xl-10">
                 <div class="d-flex justify-content-end my-3">
-                    <button type="button" class="btn btn-primary" (click)="onClickAddNew()">Para ekle</button>
+                    <button type="button" class="btn btn-sm btn-primary" (click)="onClickAddNew()">Para
+                        ekle</button>
                 </div>
                 <div *ngIf="paginationResponse != null" class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th style="width: 10%" scope="col">Resim</th>
+                                <th style="width: 5%" scope="col">Resim</th>
                                 <th scope="col">İsim</th>
                                 <th scope="col">Ürün Numarası</th>
                                 <th scope="col">Seri Numarası</th>
@@ -110,16 +117,22 @@
                                 <td scope="row">{{money.emission?.name}}</td>
                                 <td scope="row">{{money.price | currency: "TRY"}}</td>
                                 <td>
-                                    <div class="d-flex justify-content-center" (click)="onClickEdit(money)">
+                                    <button type="button" class="btn btn-sm btn-outline-primary"
+                                        (click)="onClickEdit(money)">Düzenle</button>
+                                    <!-- <div class="d-flex justify-content-center" (click)="onClickEdit(money)">
                                         <fa-icon [icon]="['fas', 'edit']" size="1x">
                                         </fa-icon>
-                                    </div>
+                                    </div> -->
                                 </td>
                                 <td>
+                                    <button type="button" class="btn btn-sm btn-danger"
+                                        (click)="onClickDelete(money)">Sil</button>
+                                    <!--
                                     <div class="d-flex justify-content-center" (click)="onClickDelete(money)">
                                         <fa-icon [icon]="['fas', 'trash']" size="1x">
                                         </fa-icon>
                                     </div>
+                                     -->
                                 </td>
                             </tr>
                         </tbody>

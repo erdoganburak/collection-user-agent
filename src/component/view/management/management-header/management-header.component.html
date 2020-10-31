@@ -1,19 +1,18 @@
-<div class="row container">
-    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+<div class="row">
+    <div class="icon-container">
+        <fa-icon [icon]="['fas', icon]" size="3x"></fa-icon>
+    </div>
+    <div class="item">
         <div class="row">
-            <div class="col-3 icon-container">
-                <fa-icon [icon]="['fas', icon]" size="3x" class="d-flex justify-content-center"></fa-icon>
+            <div class="col-12">
+                <span class="title">{{title}}</span>
             </div>
-            <div class="col-9 d-flex align-items-center">
-                <div class="row">
-                    <div class="col-12">
-                        <span class="title">{{title}}</span>
-                    </div>
-                    <div class="col-12">
-                        <span class="description">{{description}}</span>
-                    </div>
-                </div>
+            <div class="col-12">
+                <span class="description">{{description}}</span>
             </div>
         </div>
+    </div>
+    <div class="col-12">
+        <hr>
     </div>
 </div>
