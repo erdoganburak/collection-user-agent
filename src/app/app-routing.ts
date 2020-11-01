@@ -13,6 +13,7 @@ import { ManagementClippingComponent } from 'src/component/view/management/manag
 import { ManagementEmissionComponent } from 'src/component/view/management/management-emission/management-emission.component';
 import { ManagementCollectibleMoneyComponent } from 'src/component/view/management/management-collectible-money/management-collectible-money.component';
 import { MoneyDetailComponent } from 'src/component/view/money/money-detail/money-detail.component';
+import { ShoppingCartComponent } from 'src/component/view/shopping-cart/shopping-cart.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,11 @@ const routes: Routes = [
   {
     path: PageRoutes.MOVIES.path,
     component: MovieComponent,
+    canActivate: [RoutingService]
+  },
+  {
+    path: PageRoutes.SHOPPING_CART.path,
+    component: ShoppingCartComponent,
     canActivate: [RoutingService]
   },
   {

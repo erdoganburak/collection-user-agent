@@ -68,4 +68,8 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
         this.sessionService.logout();
     }
 
+    public goToShoppingCart() {
+        this.routingService.goToShoppingCart();
+    }
+
 }

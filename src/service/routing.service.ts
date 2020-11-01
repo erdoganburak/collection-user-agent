@@ -40,15 +40,23 @@ export class RoutingService implements CanActivate {
         let menuItems: Array<RoutingHeaderMenuItem> = [
             {
                 title: PageRoutes.HOME.value,
-                page: PageRoutes.HOME
+                page: PageRoutes.HOME,
+                visible: true
             },
             {
                 title: PageRoutes.MONEY.value,
-                page: PageRoutes.MONEY
+                page: PageRoutes.MONEY,
+                visible: true
             },
             {
                 title: PageRoutes.MOVIES.value,
-                page: PageRoutes.MOVIES
+                page: PageRoutes.MOVIES,
+                visible: true
+            },
+            {
+                title: PageRoutes.SHOPPING_CART.value,
+                page: PageRoutes.SHOPPING_CART,
+                visible: false
             }
         ];
 
@@ -78,11 +86,13 @@ export class RoutingService implements CanActivate {
                 {
                     title: PageRoutes.MANAGEMENT_MONEY.value,
                     page: PageRoutes.MANAGEMENT_MONEY,
-                    childs: this.getManagementMoneyItems()
+                    childs: this.getManagementMoneyItems(),
+                    visible: true
                 },
                 {
                     title: PageRoutes.MANAGEMENT_MOVIE.value,
-                    page: PageRoutes.MANAGEMENT_MOVIE
+                    page: PageRoutes.MANAGEMENT_MOVIE,
+                    visible: true
                 }
             ]
         };
@@ -94,17 +104,20 @@ export class RoutingService implements CanActivate {
             {
                 title: PageRoutes.MANAGEMENT_CLIPPING.value,
                 page: PageRoutes.MANAGEMENT_CLIPPING,
-                icon: "coins"
+                icon: "coins",
+                visible: true
             },
             {
                 title: PageRoutes.MANAGEMENT_EMISSION.value,
                 page: PageRoutes.MANAGEMENT_EMISSION,
-                icon: "money-check-alt"
+                icon: "money-check-alt",
+                visible: true
             },
             {
                 title: PageRoutes.MANAGEMENT_COLLECTIBLE_MONEY.value,
                 page: PageRoutes.MANAGEMENT_COLLECTIBLE_MONEY,
-                icon: "money-bill-alt"
+                icon: "money-bill-alt",
+                visible: true
             }
         ]
     }
@@ -117,6 +130,10 @@ export class RoutingService implements CanActivate {
             this.activeHeaderPage = item.childs[0].page.fullPath
             this.gotoPage(item.childs[0].page.fullPath);
         }
+    }
+
+    public goToShoppingCart() {
+        this.gotoPage(PageRoutes.SHOPPING_CART.fullPath);
     }
 
     public gotoPage(fullPath: string, params: any = null) {

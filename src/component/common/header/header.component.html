@@ -12,7 +12,8 @@
         <ng-container *ngFor="let menuItem of menuItems">
           <ng-container *ngIf="!menuItem.childs">
             <li class="nav-item">
-              <a class="nav-link cursor-pointer" (click)="gotoPage(menuItem)">{{menuItem.title}}</a>
+              <a *ngIf="menuItem.visible" class="nav-link cursor-pointer"
+                (click)="gotoPage(menuItem)">{{menuItem.title}}</a>
             </li>
           </ng-container>
           <ng-container *ngIf="menuItem.childs">
@@ -28,6 +29,11 @@
         </ng-container>
       </ul>
       <ul class="navbar-nav px-3 text-white">
+        <li class="nav-item">
+          <a class="nav-link cursor-pointer" (click)="goToShoppingCart()">
+            <fa-icon [icon]="['fas', 'shopping-cart']" size="2x"></fa-icon>
+          </a>
+        </li>
         <li class="nav-item dropdown" ngbDropdown>
           <a class="nav-link cursor-pointer dropdown-toggle mr-3 mr-lg-0" ngbDropdownToggle data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
@@ -40,7 +46,6 @@
             <a *ngIf="!sessionService.isLoggedIn" class="dropdown-item cursor-pointer" (click)="onClickLogin()">
               <fa-icon [icon]=" ['fas', 'key' ]" [fixedWidth]="true" class="mr-2 text-secondary"></fa-icon>Giriş Yap
             </a>
-            <div class="dropdown-divider"></div>
             <a *ngIf="sessionService.isLoggedIn" class="dropdown-item cursor-pointer" (click)="onClickLogout()">
               <fa-icon [icon]="['fas', 'sign-out-alt']" [fixedWidth]="true" class="mr-2 text-secondary"></fa-icon>Çıkış
               Yap

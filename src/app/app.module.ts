@@ -48,7 +48,7 @@ import { MoneyItemComponent } from 'src/component/view/money/money-item/money-it
 import { TitleComponent } from 'src/component/common/title/title.component';
 import { MoneyDetailComponent } from 'src/component/view/money/money-detail/money-detail.component';
 
-import { faKey } from '@fortawesome/free-solid-svg-icons';
+import { faKey, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { faCog } from '@fortawesome/free-solid-svg-icons';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
@@ -60,6 +60,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { ImageModal } from 'src/component/common/image-modal/image-modal.component';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
+import { ShoppingCartComponent } from 'src/component/view/shopping-cart/shopping-cart.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { NgxImageZoomModule } from 'ngx-image-zoom';
     MoneyItemComponent,
     TitleComponent,
     MoneyDetailComponent,
-    ImageModal
+    ImageModal,
+    ShoppingCartComponent
   ],
   imports: [
     FormsModule,
@@ -162,6 +164,7 @@ export class AppModule {
     library.addIcons(faMoneyCheckAlt);
     library.addIcons(faTrash);
     library.addIcons(faEdit);
+    library.addIcons(faShoppingCart);
   }
 
 }
