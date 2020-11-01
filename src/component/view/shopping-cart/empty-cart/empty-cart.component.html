@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col-12">
+        <p class="h3 text-center">Alışveriş Sepetiniz Boş</p>
+        <p class="h6 text-center">Biraz gezinmeye ne dersin?</p>
+    </div>
+    <div class="col-12">
+        <ng-lottie [styles]="styles" [options]="options" (animationCreated)="animationCreated($event)" width="500px"
+            height="500px"></ng-lottie>
+    </div>
+    <div class="col-12">
+        <p class="h3 text-center">Nasıl Alışveriş Yapabilirsiniz?</p>
+        <p class="h6 text-center">Sipariş vermek için aşağıdaki adımları izlemelisiniz.</p>
+    </div>
+    <div class="col-12">
+        <div class="d-flex justify-content-center mt-5">
+            <button type="button" class="btn btn-lg btn-primary" (click)="onClickStartShopping()">Alışverişe Başla</button>
+        </div>
+    </div>
+</div>

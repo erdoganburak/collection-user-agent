@@ -10,6 +10,7 @@ export class TitleComponent implements OnInit, OnDestroy, AfterViewInit {
 
     @Input() title: string;
     @Input() description: string;
+    @Input() centerTitle?: boolean;
 
     constructor() {
 

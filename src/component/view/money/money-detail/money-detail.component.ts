@@ -11,7 +11,6 @@ import { RoutingParamKeys } from 'src/constant/routing-param-keys.constant';
 import { environment } from 'src/environments/environment';
 import CollectibleMoneyBasic from 'src/model/collectible-money/collectible-money-basic';
 import CollectibleMoneyFilterRequest from 'src/model/collectible-money/collectible-money-filter-request';
-import CollectibleMoneyFilterResponse from 'src/model/collectible-money/collectible-money-filter-response';
 import PaginationRequest from 'src/model/common/pagination-request.model';
 import PaginationResponse from 'src/model/common/pagination-response.model';
 import { CollectibleMoneyApiService } from 'src/service/collectible-money/collectible-money-api.service';
@@ -33,11 +32,17 @@ export class MoneyDetailComponent implements OnInit, OnDestroy {
     public item: CollectibleMoneyBasic;
     public id: string;
     public imagePath: string;
+    public otherProductsTitle: string;
+    public otherProductsRequest: CollectibleMoneyFilterRequest;
+    public showAll: boolean;
+    public showPagination: boolean;
+    public centerTitle: boolean;
+    public centerProducts: boolean;
+    public dontUseRouting: boolean;
 
     private routingParams: RoutingParams;
     private collectibleMoneySubscription: Subscription;
     private images: Array<string>;
-    private pageNumber: number;
 
     constructor(
         private route: ActivatedRoute,
@@ -63,17 +68,6 @@ export class MoneyDetailComponent implements OnInit, OnDestroy {
         if (this.collectibleMoneySubscription) this.collectibleMoneySubscription.unsubscribe();
     }
 
-    public getData() {
-        this.collectibleMoneyService.getCollectibleMoneys(this.createCollectibleMoneyRequest()).subscribe(
-            (response: CollectibleMoneyFilterResponse) => {
-                if (response) {
-                    this.collectibleMoneys = response.moneys;
-                    this.paginationResponse = response.paginationResponse;
-                }
-            }
-        );
-    }
-
     public onClickImage(): void {
         const modalRef = this.modalService.open(ImageModal, { centered: true, size: "xl" });
         (modalRef.componentInstance as ImageModal).items = this.images;
@@ -86,8 +80,8 @@ export class MoneyDetailComponent implements OnInit, OnDestroy {
 
     private createCollectibleMoneyRequest(): CollectibleMoneyFilterRequest {
         const paginationRequest: PaginationRequest = {
-            skip: (this.pageNumber - 1) * Pagination.EMISSION_PAGINATION_LIMIT,
-            limit: Pagination.EMISSION_PAGINATION_LIMIT
+            skip: 0,
+            limit: Pagination.MONEY_DETAIL_PAGINATION_LIMIT
         }
         return {
             productType: ProductType.Money,
@@ -119,26 +113,27 @@ export class MoneyDetailComponent implements OnInit, OnDestroy {
                     if (this.item.backImage)
                         this.images.push(this.item.backImage);
 
-                    this.pageNumber = 1;
-                    this.getData();
+                    this.initializeOtherProducts();
                 }
             );
         }
     }
 
-    public pageNumberChanged(pageNumber): void {
-        this.collectibleMoneys = null;
-        this.pageNumber = pageNumber;
-        this.getData()
+    private initializeOtherProducts(): void {
+        this.otherProductsTitle = "İlgilenebileceğiniz Diğer " + this.item.emission.name + " Ürünleri"
+        this.otherProductsRequest = this.createCollectibleMoneyRequest();
+        this.showAll = false;
+        this.showPagination = true;
+        this.centerTitle = true;
+        this.centerProducts = true;
+        this.dontUseRouting = true;
     }
 
-    public onClickItem(item: CollectibleMoneyBasic) {
+    public otherProductItemClicked(item: CollectibleMoneyBasic): void {
+        this.item = item;
         this.id = item._id;
         this.getMoneyById();
-        window.scroll(0,0);
-        // let params = {};
-        // params[RoutingParamKeys.MoneyId] = item._id;
-        //  this.routingService.gotoPage(PageRoutes.MONEY_DETAIL.fullPath, params);
+        window.scroll(0, 0);
     }
 
 }

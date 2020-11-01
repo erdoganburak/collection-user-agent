@@ -47,6 +47,7 @@ import { registerLocaleData } from '@angular/common';
 import { MoneyItemComponent } from 'src/component/view/money/money-item/money-item.component';
 import { TitleComponent } from 'src/component/common/title/title.component';
 import { MoneyDetailComponent } from 'src/component/view/money/money-detail/money-detail.component';
+import player from 'lottie-web';
 
 import { faKey, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { faCog } from '@fortawesome/free-solid-svg-icons';
@@ -61,7 +62,13 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { ImageModal } from 'src/component/common/image-modal/image-modal.component';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { ShoppingCartComponent } from 'src/component/view/shopping-cart/shopping-cart.component';
+import { LottieModule } from 'ngx-lottie';
+import { EmptyCartComponent } from 'src/component/view/shopping-cart/empty-cart/empty-cart.component';
+import { MoneyShowcaseComponent } from 'src/component/view/money/money-showcase/money-showcase.component';
 
+export function playerFactory() {
+  return player;
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -90,7 +97,9 @@ import { ShoppingCartComponent } from 'src/component/view/shopping-cart/shopping
     TitleComponent,
     MoneyDetailComponent,
     ImageModal,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    EmptyCartComponent,
+    MoneyShowcaseComponent
   ],
   imports: [
     FormsModule,
@@ -100,6 +109,7 @@ import { ShoppingCartComponent } from 'src/component/view/shopping-cart/shopping
     FontAwesomeModule,
     HttpClientModule,
     ReactiveFormsModule,
+    [LottieModule.forRoot({ player: playerFactory })],
     ToastrModule.forRoot({
       timeOut: 4000,
       positionClass: 'toast-bottom-right',
@@ -147,6 +157,7 @@ import { ShoppingCartComponent } from 'src/component/view/shopping-cart/shopping
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
   constructor(library: FaIconLibrary) {
     registerLocaleData(localeTr);

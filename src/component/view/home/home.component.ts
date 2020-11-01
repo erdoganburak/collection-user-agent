@@ -1,17 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ProductType } from 'src/app/enum/product-type.enum';
 import { Sort } from 'src/app/enum/sort.enum';
-import { DialogType } from 'src/app/enum/system/dialog-type.enum';
-import { ToastrType } from 'src/app/enum/toastr.enum';
+import { Pagination } from 'src/constant/pagination.constant';
+import CollectibleMoneyFilterRequest from 'src/model/collectible-money/collectible-money-filter-request';
 import PaginationRequest from 'src/model/common/pagination-request.model';
-import PaginationResponse from 'src/model/common/pagination-response.model';
-import GetMoneyRequest from 'src/model/money/get-money-request.model';
-import GetMoneyResponse from 'src/model/money/get-money-response.model';
-import MoneyBasic from 'src/model/money/money-basic.model';
 import { InteractionService } from 'src/service/interaction.service';
 import { MoneyApiService } from 'src/service/money/money-api.service';
-import { DenemeComponent } from '../deneme/deneme.component';
-
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
@@ -20,76 +15,46 @@ import { DenemeComponent } from '../deneme/deneme.component';
 
 export class HomeComponent implements OnInit, OnDestroy {
 
-    private moneys: Array<MoneyBasic>;
-    private paginationResponse: PaginationResponse;
+    public moneyRequest: CollectibleMoneyFilterRequest;
+    public moneyTitle: string;
+    public moneyShowAll: boolean;
+    public showPagination: boolean;
+    public centerTitle: boolean;
 
-    constructor(private moneyService: MoneyApiService, private interactionService: InteractionService, private modalService: NgbModal) {
+    constructor() {
 
     }
 
     ngOnInit(): void {
-
-        // this.openModal();
-        /* this.interactionService.showDialog({
-             title: "MODAL TITLE",
-             message: "This is a modal bro",
-             messageData: "this.item",
-             type: DialogType.Default
-         }).then((result) => {
- 
-         }, (reason) => {
- 
-         });*/
+        this.moneyRequest = this.createCollectibleMoneyRequest();
+        this.moneyTitle = "Son Eklenen Koleksiyonel Paralar";
+        this.moneyShowAll = true;
+        this.showPagination = false;
+        this.centerTitle = true;
     }
-
 
     ngOnDestroy(): void {
 
     }
 
-    public openModal() {
-        const modalRef = this.modalService.open(DenemeComponent, { centered: true, size: "xl" });
-        (modalRef.componentInstance as DenemeComponent).data = "DATAAA";
-        modalRef.result.then(() => {
-
-        }, (reason) => {
-            //
-        });
-    }
-
-    private getData() {
-
-        /*this.moneyService.getMoneys(this.createMoneyRequest()).subscribe(
-            (response: GetMoneyResponse) => {
-                if (response && response.moneys) {
-                    debugger;
-                    this.moneys = response.moneys;
-                    if (response.paginationResponse) {
-                        this.paginationResponse = response.paginationResponse;
-                    }
-                }
-            }
-        );*/
-    }
-
-    private createMoneyRequest(): GetMoneyRequest {
+    private createCollectibleMoneyRequest(): CollectibleMoneyFilterRequest {
         const paginationRequest: PaginationRequest = {
             skip: 0,
-            limit: 0
+            limit: Pagination.HOME_PAGINATION_LIMIT
         }
         return {
+            productType: ProductType.Money,
             productNo: "",
             name: "",
-            condition: null,
             serialNo: "",
             minPrice: null,
             maxPrice: null,
+            condition: null,
+            clipping: "",
             emission: "",
-            clipping: null,
             sort: Sort.Desc,
             paginationRequest: paginationRequest,
         }
     }
-
 
 }

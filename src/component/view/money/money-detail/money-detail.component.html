@@ -43,28 +43,10 @@
         </div>
     </div>
 
-
-
     <div class="col-xl-8 col-lg-12 col-md-12 my-5 mx-3">
-        <div class="my-5 mx-3 d-flex justify-content-center">
-            <p class="title h3">İlgilenebileceginiz Diger {{item.emission.name}} Ürünleri</p>
-        </div>
-
-        <div class="row d-flex justify-content-center" *ngIf="collectibleMoneys && paginationResponse"
-            [@listAnimation]="collectibleMoneys.length">
-            <div *ngFor="let item of collectibleMoneys | paginate: {
-                itemsPerPage: this.paginationResponse.limit,
-                currentPage: pageNumber,
-                totalItems: this.paginationResponse.count
-            }" class="col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6 my-3">
-                <app-money-item (click)="onClickItem(item)" [item]="item"></app-money-item>
-            </div>
-            <div class="col-12 my-5">
-                <app-pagination [paginationResponse]="paginationResponse"
-                    (pageNumberChanged)="pageNumberChanged($event)">
-                </app-pagination>
-            </div>
-        </div>
+        <app-money-showcase (itemClicked)="otherProductItemClicked($event)" [title]="otherProductsTitle"
+            [request]="otherProductsRequest" [showAll]="showAll" [showPagination]="showPagination"
+            [centerTitle]="centerTitle" [centerProducts]="centerProducts" [dontUseRouting]="dontUseRouting">
+        </app-money-showcase>
     </div>
-
 </div>
