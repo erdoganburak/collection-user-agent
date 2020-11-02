@@ -65,6 +65,7 @@ import { ShoppingCartComponent } from 'src/component/view/shopping-cart/shopping
 import { LottieModule } from 'ngx-lottie';
 import { EmptyCartComponent } from 'src/component/view/shopping-cart/empty-cart/empty-cart.component';
 import { MoneyShowcaseComponent } from 'src/component/view/money/money-showcase/money-showcase.component';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 export function playerFactory() {
   return player;
@@ -109,6 +110,7 @@ export function playerFactory() {
     FontAwesomeModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NzSelectModule,
     [LottieModule.forRoot({ player: playerFactory })],
     ToastrModule.forRoot({
       timeOut: 4000,

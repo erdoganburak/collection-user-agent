@@ -69,7 +69,7 @@ export class MoneyDetailComponent implements OnInit, OnDestroy {
     }
 
     public onClickImage(): void {
-        const modalRef = this.modalService.open(ImageModal, { centered: true, size: "xl" });
+        const modalRef = this.modalService.open(ImageModal, { centered: true, size: "lg" });
         (modalRef.componentInstance as ImageModal).items = this.images;
         modalRef.result.then(() => {
 
