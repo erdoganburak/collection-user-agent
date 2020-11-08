@@ -10,7 +10,7 @@ export default interface CollectibleMoneyFilterRequest {
     minPrice: number,
     maxPrice: number,
     condition: number,
-    clipping: string,
+    clippings: Array<string>,
     emission: string,
     sort: Sort,
     paginationRequest: PaginationRequest

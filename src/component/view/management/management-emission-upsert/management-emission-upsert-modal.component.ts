@@ -11,8 +11,6 @@ import ClippingBasic from 'src/model/clipping/clipping-basic.model';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import EmissionBasic from 'src/model/emission/emission-basic.model';
 import { ToastrType } from 'src/app/enum/toastr.enum';
-
-
 @Component({
     selector: 'app-management-emission-upsert-modal.component',
     templateUrl: './management-emission-upsert-modal.component.html',
@@ -40,52 +38,15 @@ export class ManagementEmissionUpsertModal extends BaseModalComponent implements
     }
 
     ngOnInit(): void {
-
         this.emissionForm = this.formBuilder.group({
             name: ['', Validators.required],
-            clippings: [[], Validators.required],
+            clippings: [],
         });
 
-
         if (this.id) {
-            this.controls.name.setValue(this.data.name);
+            this.emissionForm.patchValue(this.data);
         }
 
-        let list = [];
-        if (this.data && this.data.clippings) {
-            this.data.clippings.forEach(id => {
-                let found: ClippingBasic = this.clippings.find(
-                    c => c._id === id);
-                list.push(found);
-                this.selectedItems.push(id)
-            });
-            this.controls.clippings.setValue(list)
-        }
-
-        this.dropdownSettings = {
-            singleSelection: false,
-            idField: '_id',
-            textField: 'quantity',
-            selectAllText: 'Hepsini Seç',
-            unSelectAllText: 'Hepsini Sil',
-            itemsShowLimit: 3,
-            allowSearchFilter: false,
-            enableCheckAll: false
-        };
-    }
-
-    onItemSelect(item: ClippingBasic) {
-        console.log(item);
-        this.selectedItems.push(item._id)
-    }
-
-    onItemDeSelect(item: ClippingBasic) {
-        console.log(item)
-        const objIndex = this.selectedItems.findIndex(id => id === item._id);
-        if (objIndex > -1) {
-            this.selectedItems.splice(objIndex, 1);
-        }
-        console.log(this.selectedItems)
     }
 
     ngOnDestroy(): void {
@@ -98,16 +59,16 @@ export class ManagementEmissionUpsertModal extends BaseModalComponent implements
 
     public get controls() { return this.emissionForm.controls; }
 
-
     public onSubmit() {
         this.submitted = true;
 
         if (this.emissionForm.invalid) {
             return;
         }
+
         const request: EmissionUpsertRequest = {
             name: this.controls.name.value,
-            clippings: this.selectedItems
+            clippings: this.controls.clippings.value
         }
 
         if (this.id) {

@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~ng-zorro-antd/style/index.min.css"; /* Import base styles */
 @import "~ng-zorro-antd/select/style/index.min.css"; /* Import one component's styles */
+@import "~ng-zorro-antd/spin/style/index.min.css"; /* Import one component's styles */
 
 /* make changes to the !default Bootstrap variables */
 @import "styles/variables.scss";
@@ -10,6 +11,13 @@
 @import "~bootstrap/scss/bootstrap";
 @import "~ngx-toastr/toastr-bs4-alert";
 
+body{
+    background-color: #f4f8ff !important;
+}
+
+.cdk-overlay-container {
+    z-index: 9999 !important;
+}
 #toast-container > div {
     opacity: 1;
 }

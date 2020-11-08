@@ -1,17 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Sort } from 'src/app/enum/sort.enum';
 import { DialogType } from 'src/app/enum/system/dialog-type.enum';
 import { ToastrType } from 'src/app/enum/toastr.enum';
 import { Pagination } from 'src/constant/pagination.constant';
 import ClippingBasic from 'src/model/clipping/clipping-basic.model';
-import ClippingGetAllRequest from 'src/model/clipping/clipping-get-all-request.model';
-import ClippingGetAllResponse from 'src/model/clipping/clipping-get-all-response.model';
 import PaginationRequest from 'src/model/common/pagination-request.model';
 import PaginationResponse from 'src/model/common/pagination-response.model';
 import EmissionBasic from 'src/model/emission/emission-basic.model';
-import EmissionGetAllRequest from 'src/model/emission/emission-get-all-request.model';
-import EmissionGetAllResponse from 'src/model/emission/emission-get-all-response.model';
 import { ClippingApiService } from 'src/service/clipping/clipping-api.service';
 import { EmissionApiService } from 'src/service/emission/emission-api.service';
 import { CollectibleMoneyApiService } from 'src/service/collectible-money/collectible-money-api.service';
@@ -23,7 +19,6 @@ import CollectibleMoneyFilterRequest from 'src/model/collectible-money/collectib
 import { ProductType } from 'src/app/enum/product-type.enum';
 import { ProductApiService } from 'src/service/product/product-api.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -32,7 +27,7 @@ import { environment } from 'src/environments/environment';
     styleUrls: ['./management-collectible-money.component.scss']
 })
 
-export class ManagementCollectibleMoneyComponent implements OnInit, OnDestroy {
+export class ManagementCollectibleMoneyComponent implements OnInit, OnDestroy, AfterViewInit {
 
     public title: string;
     public description: string;
@@ -42,10 +37,6 @@ export class ManagementCollectibleMoneyComponent implements OnInit, OnDestroy {
     public emissions: Array<EmissionBasic>;
     public paginationResponse: PaginationResponse;
     public moneyForm: FormGroup;
-    public dropdownEmissionSettings: IDropdownSettings = {};
-    public dropdownClippingSettings: IDropdownSettings = {};
-    public selectedEmission: EmissionBasic;
-    public selectedClipping: ClippingBasic;
     public imagePath: string;
 
     private pageNumber: number;
@@ -71,48 +62,41 @@ export class ManagementCollectibleMoneyComponent implements OnInit, OnDestroy {
             name: [''],
             condition: [''],
             serialNo: [''],
-            emissions: [''],
-            clippings: [''],
+            emissions: '',
+            clippings: [],
             minPrice: [''],
             maxPrice: [''],
         });
-        this.dropdownEmissionSettings = {
-            singleSelection: true,
-            idField: '_id',
-            textField: 'name',
-            itemsShowLimit: 1,
-            allowSearchFilter: false,
-        };
 
-        this.dropdownClippingSettings = {
-            singleSelection: true,
-            idField: '_id',
-            textField: 'quantity',
-            itemsShowLimit: 1,
-            allowSearchFilter: false,
-            enableCheckAll: false
-        };
-        if (!this.clippings && !this.emissions) {
-            this.clippingService.getClippings(this.createClippingGetAllRequest()).subscribe(
-                (response: ClippingGetAllResponse) => {
-                    if (response) {
-                        this.clippings = response.clippings;
-                        this.emissionService.getEmissions(this.createEmissionGetAllRequest()).subscribe(
-                            (response: EmissionGetAllResponse) => {
-                                if (response) {
-                                    this.emissions = response.emissions;
-                                    this.getData();
-                                }
-                            }
-                        );
-                    }
-                }
-            );
-        }
+        this.onChanges();
+        this.getData();
     }
 
     ngOnDestroy(): void {
 
+    }
+
+    ngAfterViewInit(): void {
+
+    }
+
+    public onChanges(): void {
+        this.moneyForm.get('emissions').valueChanges.subscribe(value => {
+            if (this.emissions) {
+                let selectedEmission = this.emissions.find(item => item._id === value);
+                if (selectedEmission) {
+                    this.clippings = selectedEmission.clippings;
+                    this.controls.clippings.setValue(null)
+                }
+
+            }
+        });
+    }
+
+    public get controls() { return this.moneyForm.controls; }
+
+    public onEmissionsReceived(emissions: Array<EmissionBasic>): void {
+        this.emissions = emissions;
     }
 
     public onClickAddNew(): void {
@@ -120,7 +104,6 @@ export class ManagementCollectibleMoneyComponent implements OnInit, OnDestroy {
     }
 
     public onClickEdit(collectilbleMoney: CollectibleMoneyBasic): void {
-        debugger;
         this.openModal(collectilbleMoney);
     }
 
@@ -180,13 +163,15 @@ export class ManagementCollectibleMoneyComponent implements OnInit, OnDestroy {
         );
     }
 
+    public onEmissionSelected() {
+        debugger;
+    }
+
     private createCollectibleMoneyRequest(): CollectibleMoneyFilterRequest {
         const paginationRequest: PaginationRequest = {
             skip: (this.pageNumber - 1) * Pagination.PAGINATION_LIMIT,
             limit: Pagination.PAGINATION_LIMIT
         }
-        let selectedClipping = this.selectedClipping;
-        let selectedEmission = this.selectedEmission;
         return {
             productType: ProductType.Money,
             productNo: this.moneyForm.controls.productNo.value,
@@ -195,53 +180,11 @@ export class ManagementCollectibleMoneyComponent implements OnInit, OnDestroy {
             minPrice: Number(this.moneyForm.controls.minPrice.value),
             maxPrice: Number(this.moneyForm.controls.maxPrice.value),
             condition: this.moneyForm.controls.condition.value ? Number(this.moneyForm.controls.condition.value) : null,
-            clipping: selectedClipping ? selectedClipping._id : "",
-            emission: selectedEmission ? selectedEmission._id : "",
+            clippings: this.moneyForm.controls.clippings.value ? this.moneyForm.controls.clippings.value : [],
+            emission: this.moneyForm.controls.emissions.value ? this.moneyForm.controls.emissions.value : '',
             sort: Sort.Desc,
             paginationRequest: paginationRequest,
         }
-    }
-
-    private createClippingGetAllRequest(): ClippingGetAllRequest {
-        const paginationRequest: PaginationRequest = {
-            skip: 0,
-            limit: 9999
-        }
-        return {
-            sort: Sort.Desc,
-            paginationRequest: paginationRequest,
-        }
-    }
-
-    private createEmissionGetAllRequest(): EmissionGetAllRequest {
-        const paginationRequest: PaginationRequest = {
-            skip: 0,
-            limit: 9999
-        }
-        return {
-            sort: Sort.Desc,
-            paginationRequest: paginationRequest,
-        }
-    }
-
-    onClippingSelected(item: ClippingBasic) {
-        this.selectedClipping = item;
-        console.log(item);
-    }
-
-    onEmissionSelected(item: EmissionBasic) {
-        this.selectedEmission = item;
-        console.log(item);
-    }
-
-    onEmissionDeSelect(item: EmissionBasic) {
-        this.selectedEmission = null;
-        console.log(item)
-    }
-
-    onClippingDeSelect(item: ClippingBasic) {
-        console.log(item)
-        this.selectedClipping = null;
     }
 
 }

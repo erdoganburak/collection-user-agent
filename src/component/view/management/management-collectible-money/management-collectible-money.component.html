@@ -49,24 +49,22 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputPrice">Emisyon</label>
+                        <label for="inputEmissons">Emisyon</label>
                         <div class="form-group">
-                            <ng-multiselect-dropdown [placeholder]="'Emisyon Seçiniz'" [data]="emissions"
-                                (click)="onEmissionsDropdownClicked()" formControlName="emissions"
-                                [settings]="dropdownEmissionSettings" (onSelect)="onEmissionSelected($event)"
-                                (onDeSelect)="onEmissionDeSelect($event)">
-                            </ng-multiselect-dropdown>
+                            <app-emission-select [controlName]="'emissions'"
+                                (onEmissionsReceived)="onEmissionsReceived($event)" [mode]="'default'">
+                            </app-emission-select>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="inputPrice">Küpür</label>
+                    <div *ngIf="clippings && controls.emissions.value" class="form-group">
+                        <label for="inputClippings">Küpür</label>
                         <div class="form-group">
-                            <ng-multiselect-dropdown [placeholder]="'Küpür Seçiniz'" [data]="clippings"
-                                (click)="onClippingDropdownClicked()" formControlName="clippings"
-                                [settings]="dropdownClippingSettings" (onSelect)="onClippingSelected($event)"
-                                (onDeSelect)="onClippingDeSelect($event)">
-                            </ng-multiselect-dropdown>
+                            <nz-select [nzMaxTagCount]="3" [formControlName]="'clippings'" nzPlaceHolder="Küpür seçiniz"
+                                nzMode="default" nzMode="multiple" [nzDropdownRender]="renderTemplate">
+                                <nz-option *ngFor="let c of clippings" [nzValue]="c._id" [nzLabel]="c.quantity">
+                                </nz-option>
+                            </nz-select>
                         </div>
                     </div>
 

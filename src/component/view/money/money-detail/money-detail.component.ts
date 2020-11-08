@@ -91,7 +91,7 @@ export class MoneyDetailComponent implements OnInit, OnDestroy {
             minPrice: null,
             maxPrice: null,
             condition: null,
-            clipping: "",
+            clippings: [],
             emission: this.item.emission._id,
             sort: Sort.Desc,
             paginationRequest: paginationRequest,

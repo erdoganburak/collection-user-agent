@@ -1,0 +1,19 @@
+<div *ngIf="controlName && mode">
+  <div *ngIf="mode=='default'">
+    <nz-select [formControlName]="controlName" nzShowSearch nzServerSearch nzAllowClear nzPlaceHolder="Küpür seçiniz"
+      nzMode="default" (nzOnSearch)="onSearch($event)" nzMode="default" (nzScrollToBottom)="loadMore()"
+      [nzDropdownRender]="renderTemplate">
+      <nz-option *ngFor="let c of clippings" [nzValue]="c._id" [nzLabel]="c.quantity"></nz-option>
+    </nz-select>
+  </div>
+  <div *ngIf="mode=='multiple'">
+    <nz-select [nzMaxTagCount]="3" [formControlName]="controlName" nzShowSearch nzServerSearch nzAllowClear
+      nzPlaceHolder="Küpür seçiniz" nzMode="default" (nzOnSearch)="onSearch($event)" nzMode="multiple"
+      (nzScrollToBottom)="loadMore()" [nzDropdownRender]="renderTemplate">
+      <nz-option *ngFor="let c of clippings" [nzValue]="c._id" [nzLabel]="c.quantity"></nz-option>
+    </nz-select>
+  </div>
+  <ng-template #renderTemplate>
+    <nz-spin *ngIf="isLoading"></nz-spin>
+  </ng-template>
+</div>

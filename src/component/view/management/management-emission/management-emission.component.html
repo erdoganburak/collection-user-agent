@@ -1,16 +1,8 @@
 <div class="row d-flex justify-content-center">
     <div class="col-xl-8 col-lg-12 col-md-12">
-
-
-        <nz-select ngModel="lucy">
-            <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
-            <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
-            <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
-        </nz-select>
-
-
         <div class="my-3">
-            <app-management-header [title]="title" [description]="description" [icon]="icon"></app-management-header>
+            <app-management-header [title]="title" [description]="description" [icon]="icon">
+            </app-management-header>
         </div>
         <div class="d-flex justify-content-end my-3">
             <button type="button" class="btn btn-primary" (click)="onClickAddNew()">Emisyon Ekle</button>
@@ -21,8 +13,6 @@
                     <tr>
                         <th style="width: 45%" scope="col">İsim</th>
                         <th style="width: 45%" scope="col">Küpürler</th>
-                        <th style="width: 5%" scope="col">Düzenle</th>
-                        <th style="width: 5%" scope="col">Sil</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,24 +21,33 @@
                         currentPage: pageNumber,
                         totalItems: this.paginationResponse.count
                     }">
-                        <th scope=" row">{{emission.name}}</th>
-                        <td scope=" row">
-                            <span *ngFor="let clipping of emission.clippings; let i = index">
-                        <td scope="row">{{clipping.quantity | currency: "TRY"}}</td>
-                        <span *ngIf="clipping && i!==emission.clippings.length-1">, </span>
-                        </span>
-                        </td>
-                        <td>
-                            <div class="d-flex justify-content-center" (click)="onClickEdit(emission)">
-                                <fa-icon [icon]="['fas', 'edit']" size="1x">
+                        <th scope="row">
+                            <span class="mx-2">
+                                {{emission.name}}
+                            </span>
+                            <span class="badge badge-secondary m-2">
+                                <fa-icon title="Düzenle" class="m-2" [icon]="['fas', 'edit']" size="1x"
+                                    (click)="onClickEdit(emission)">
                                 </fa-icon>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="d-flex justify-content-center" (click)="onClickDelete(emission)">
-                                <fa-icon [icon]="['fas', 'trash']" size="1x">
+                            </span>
+                            <span class="badge badge-danger m-2">
+                                <fa-icon title="Sil" class="m-2" [icon]="['fas', 'trash']" size="1x"
+                                    (click)="onClickDelete(emission)">
                                 </fa-icon>
-                            </div>
+                            </span>
+                        </th>
+                        <td scope="row">
+                            <h2 *ngFor="let clipping of emission.clippings; let i = index"
+                                class="badge badge-secondary mx-2">
+                                {{clipping.quantity | currency: "TRY"}}
+                                <fa-icon title="Küpürü Sil" (click)="onClickDeleteClipping(clipping, emission)"
+                                    class="mx-2" [icon]="['fas', 'times']" size="1x">
+                                </fa-icon>
+                            </h2>
+                            <h2 class="badge badge-primary mx-2" (click)="onClickAddClipping(emission)">
+                                <fa-icon title="Yeni Küpür Ekle" [icon]="['fas', 'plus']" size="1x">
+                                </fa-icon>
+                            </h2>
                         </td>
                     </tr>
                 </tbody>

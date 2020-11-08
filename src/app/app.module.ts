@@ -49,7 +49,7 @@ import { TitleComponent } from 'src/component/common/title/title.component';
 import { MoneyDetailComponent } from 'src/component/view/money/money-detail/money-detail.component';
 import player from 'lottie-web';
 
-import { faKey, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faKey, faPlus, faShoppingCart, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faCog } from '@fortawesome/free-solid-svg-icons';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
@@ -66,6 +66,10 @@ import { LottieModule } from 'ngx-lottie';
 import { EmptyCartComponent } from 'src/component/view/shopping-cart/empty-cart/empty-cart.component';
 import { MoneyShowcaseComponent } from 'src/component/view/money/money-showcase/money-showcase.component';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { ClippingSelectComponent } from 'src/component/common/clipping-select/clipping-select.component';
+import { ManagementClippingInsertModal } from 'src/component/view/management/management-clipping-insert-modal/management-clipping-insert-modal.component';
+import { EmissionSelectComponent } from 'src/component/common/emission-select/emission-select.component';
 
 export function playerFactory() {
   return player;
@@ -100,7 +104,10 @@ export function playerFactory() {
     ImageModal,
     ShoppingCartComponent,
     EmptyCartComponent,
-    MoneyShowcaseComponent
+    MoneyShowcaseComponent,
+    ClippingSelectComponent,
+    ManagementClippingInsertModal,
+    EmissionSelectComponent
   ],
   imports: [
     FormsModule,
@@ -111,6 +118,7 @@ export function playerFactory() {
     HttpClientModule,
     ReactiveFormsModule,
     NzSelectModule,
+    NzSpinModule,
     [LottieModule.forRoot({ player: playerFactory })],
     ToastrModule.forRoot({
       timeOut: 4000,
@@ -155,7 +163,8 @@ export function playerFactory() {
     ManagementClippingUpsertModal,
     ManagementEmissionUpsertModal,
     ManagementCollectibleMoneyUpsertModal,
-    ImageModal
+    ImageModal,
+    ManagementClippingInsertModal
   ],
   bootstrap: [AppComponent]
 })
@@ -178,6 +187,8 @@ export class AppModule {
     library.addIcons(faTrash);
     library.addIcons(faEdit);
     library.addIcons(faShoppingCart);
+    library.addIcons(faPlus);
+    library.addIcons(faTimes);
   }
 
 }

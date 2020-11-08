@@ -1,6 +1,6 @@
 <div class="modal-header">
   <h4 class="modal-title">
-    <span>Emisyon Ekleme / Güncelleme</span>
+    <span>Emisyon Yönetimi</span>
   </h4>
 </div>
 <div class="modal-body">
@@ -13,10 +13,8 @@
         <div *ngIf="controls.name.errors.required">İsim alanını doldurunuz</div>
       </div>
     </div>
-    <div class="form-group">
-      <ng-multiselect-dropdown [placeholder]="'Seçiniz'" [data]="clippings" formControlName="clippings"
-        [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onDeSelect)="onItemDeSelect($event)">
-      </ng-multiselect-dropdown>
+    <div *ngIf="!id" class="form-group">
+      <app-clipping-select [controlName]="'clippings'" [mode]="'multiple'"></app-clipping-select>
     </div>
     <div class="d-flex justify-content-end">
       <button type="button" class="btn btn-outline-primary mx-2" (click)="onCancelClicked($event)">Vazgeç</button>

@@ -1,0 +1,16 @@
+<div class="modal-header">
+  <h4 class="modal-title">
+    <span>Küpür Ekle</span>
+  </h4>
+</div>
+<div class="modal-body">
+  <form [formGroup]="clippingForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <app-clipping-select [controlName]="'clippings'" [mode]="'default'"></app-clipping-select>
+    </div>
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn btn-outline-primary mx-2" (click)="onCancelClicked($event)">Vazgeç</button>
+      <button type="submit" class="btn btn-info">Kaydet</button>
+    </div>
+  </form>
+</div>

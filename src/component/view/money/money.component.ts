@@ -53,7 +53,7 @@ export class MoneyComponent implements OnInit, OnDestroy {
             minPrice: null,
             maxPrice: null,
             condition: null,
-            clipping: "",
+            clippings: [],
             emission: "",
             sort: Sort.Desc,
             paginationRequest: paginationRequest,
