@@ -41,4 +41,8 @@ export class EmissionApiService extends BaseService {
 		return this.api.getEmissions(request).pipe(catchError((error) => this.handleError(error, [])));
 	}
 
+	public getEmissionById(emissionId: string): Observable<EmissionBasic> {
+		return this.api.getEmissionById(emissionId).pipe(catchError((error) => this.handleError(error, [])));
+	}
+
 }

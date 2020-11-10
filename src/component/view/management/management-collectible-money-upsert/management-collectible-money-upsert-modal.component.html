@@ -50,23 +50,25 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="inputPrice">Emisyon</label>
+    <div>
       <div class="form-group">
-        <ng-multiselect-dropdown [placeholder]="'Emisyon Seçiniz'" [data]="emissions" formControlName="emissions"
-          [settings]="dropdownEmissionSettings" (onSelect)="onEmissionSelected($event)"
-          (onDeSelect)="onEmissionDeSelect($event)">
-        </ng-multiselect-dropdown>
+        <label for="inputEmissons">Emisyon</label>
+        <div class="form-group">
+          <app-emission-select [parentForm]="moneyForm" [controlName]="'emission'" [selectedEmission]="data?.emission"
+            (onEmissionSelected)="onEmissionSelected($event)" [mode]="'default'">
+          </app-emission-select>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="inputPrice">Küpür</label>
-      <div class="form-group">
-        <ng-multiselect-dropdown [placeholder]="'Küpür Seçiniz'" [data]="clippings" formControlName="clippings"
-          [settings]="dropdownClippingSettings" (onSelect)="onClippingSelected($event)"
-          (onDeSelect)="onClippingDeSelect($event)">
-        </ng-multiselect-dropdown>
+      <div *ngIf="(clippings && controls.emission.value) || data" class="form-group">
+        <label for="inputClippings">Küpür</label>
+        <div class="form-group">
+          <nz-select [formControlName]="'clipping'" nzPlaceHolder="Küpür seçiniz" nzMode="default"
+            [nzDropdownRender]="renderTemplate">
+            <nz-option *ngFor="let c of clippings" [nzValue]="c._id" [nzLabel]="c.quantity">
+            </nz-option>
+          </nz-select>
+        </div>
       </div>
     </div>
 

@@ -1,15 +1,16 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, Input, SkipSelf, Output, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
-import ClippingGetAllRequest from 'src/model/clipping/clipping-get-all-request.model';
 import PaginationResponse from 'src/model/common/pagination-response.model';
 import { Pagination } from 'src/constant/pagination.constant';
 import PaginationRequest from 'src/model/common/pagination-request.model';
 import { Sort } from 'src/app/enum/sort.enum';
 import { debounceTime } from 'rxjs/operators';
-import { ControlContainer } from '@angular/forms';
+import { ControlContainer, FormGroup } from '@angular/forms';
 import EmissionBasic from 'src/model/emission/emission-basic.model';
 import { EmissionApiService } from 'src/service/emission/emission-api.service';
 import EmissionGetAllResponse from 'src/model/emission/emission-get-all-response.model';
+import EmissionGetAllRequest from 'src/model/emission/emission-get-all-request.model';
+import ClippingBasic from 'src/model/clipping/clipping-basic.model';
 
 @Component({
     selector: 'app-emission-select',
@@ -28,15 +29,19 @@ export class EmissionSelectComponent implements OnInit, OnDestroy, AfterViewInit
 
     @Input() controlName: string;
     @Input() mode: string;
+    @Input() selectedEmission: EmissionBasic;
+    @Input() parentForm: FormGroup;
 
-    @Output() onEmissionsReceived = new EventEmitter<Array<EmissionBasic>>();
+    @Output() onEmissionSelected = new EventEmitter<Array<ClippingBasic>>();
 
     public pageNumber: number;
     public isLoading: boolean;
     public emissions: Array<EmissionBasic>;
+    public newSelectedEmission;
 
     private valueChange: Subject<string> = new Subject();
     private paginationResponse: PaginationResponse;
+    private value: string;
 
     constructor(private emissionService: EmissionApiService) {
 
@@ -47,6 +52,16 @@ export class EmissionSelectComponent implements OnInit, OnDestroy, AfterViewInit
         this.isLoading = false;
         this.emissions = [];
         this.loadMore();
+        this.parentForm.get(this.controlName).valueChanges.subscribe(value => {
+            this.newSelectedEmission = value;
+            let selectedEmission = this.emissions.find(item => item._id === value);
+            this.onEmissionSelected.emit(selectedEmission ? selectedEmission.clippings : null);
+            if (this.selectedEmission && this.emissions.length > 0) {
+                if (this.selectedEmission._id == this.emissions[0]._id) {
+                    this.emissions.shift();
+                }
+            }
+        });
     }
 
     ngOnDestroy(): void {
@@ -57,13 +72,20 @@ export class EmissionSelectComponent implements OnInit, OnDestroy, AfterViewInit
         this.isLoading = true;
 
         this.valueChange.pipe(debounceTime(1000)).subscribe(value => {
-            this.emissionService.getEmissions(this.createEmissionGetAllRequest(value)).subscribe(
+            this.pageNumber = 1;
+            this.emissions = [];
+            this.value = value;
+            this.emissionService.getEmissions(this.createEmissionGetAllRequest()).subscribe(
                 (response: EmissionGetAllResponse) => {
                     if (response) {
                         this.emissions = response.emissions;
                         this.paginationResponse = response.paginationResponse;
                         this.isLoading = false;
-                        this.onEmissionsReceived.emit(response.emissions);
+                        if (!value) {
+                            if (this.selectedEmission && this.selectedEmission._id != this.emissions[0]._id && !this.newSelectedEmission) {
+                                this.emissions.unshift(this.selectedEmission);
+                            }
+                        }
                     }
                 }
             );
@@ -89,35 +111,31 @@ export class EmissionSelectComponent implements OnInit, OnDestroy, AfterViewInit
             (response: EmissionGetAllResponse) => {
                 if (response) {
                     this.emissions = [...this.emissions, ...response.emissions];
+
+                    if (this.selectedEmission && this.selectedEmission._id != this.emissions[0]._id && !this.newSelectedEmission) {
+                        this.emissions.unshift(this.selectedEmission);
+                    }
+
                     this.paginationResponse = response.paginationResponse;
                     this.isLoading = false;
-                    this.onEmissionsReceived.emit(this.emissions);
                 }
             }
         );
     }
 
-    private createEmissionGetAllRequest(quantity?: string): ClippingGetAllRequest {
+    private createEmissionGetAllRequest(): EmissionGetAllRequest {
         const paginationRequest: PaginationRequest = {
             skip: (this.pageNumber - 1) * Pagination.SELECT_PAGINATION_LIMIT,
             limit: Pagination.SELECT_PAGINATION_LIMIT
         }
 
-        let _quantity;
-
-        if (quantity != null) {
-            if (quantity.trim() !== "") {
-                this.pageNumber = 0;
-            } else if (quantity.trim() === "") {
-                this.pageNumber = 1;
-            }
-            paginationRequest.skip = 0;
-            _quantity = quantity;
-            this.emissions = [];
+        if (this.value != null) {
+            //paginationRequest.skip = 0;
+            //this.emissions = [];
         }
 
         return {
-            quantity: _quantity,
+            name: this.value,
             sort: Sort.Desc,
             paginationRequest: paginationRequest,
         };

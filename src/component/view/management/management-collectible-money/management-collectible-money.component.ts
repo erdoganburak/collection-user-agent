@@ -8,8 +8,6 @@ import ClippingBasic from 'src/model/clipping/clipping-basic.model';
 import PaginationRequest from 'src/model/common/pagination-request.model';
 import PaginationResponse from 'src/model/common/pagination-response.model';
 import EmissionBasic from 'src/model/emission/emission-basic.model';
-import { ClippingApiService } from 'src/service/clipping/clipping-api.service';
-import { EmissionApiService } from 'src/service/emission/emission-api.service';
 import { CollectibleMoneyApiService } from 'src/service/collectible-money/collectible-money-api.service';
 import { InteractionService } from 'src/service/interaction.service';
 import { ManagementCollectibleMoneyUpsertModal } from '../management-collectible-money-upsert/management-collectible-money-upsert-modal.component';
@@ -41,11 +39,9 @@ export class ManagementCollectibleMoneyComponent implements OnInit, OnDestroy, A
 
     private pageNumber: number;
 
-    constructor(private clippingService: ClippingApiService,
-        private collectibleMoneyService: CollectibleMoneyApiService,
+    constructor(private collectibleMoneyService: CollectibleMoneyApiService,
         private modalService: NgbModal,
         private interactionService: InteractionService,
-        private emissionService: EmissionApiService,
         private productService: ProductApiService,
         private formBuilder: FormBuilder
     ) {
@@ -62,7 +58,7 @@ export class ManagementCollectibleMoneyComponent implements OnInit, OnDestroy, A
             name: [''],
             condition: [''],
             serialNo: [''],
-            emissions: '',
+            emissions: null,
             clippings: [],
             minPrice: [''],
             maxPrice: [''],
@@ -88,15 +84,15 @@ export class ManagementCollectibleMoneyComponent implements OnInit, OnDestroy, A
                     this.clippings = selectedEmission.clippings;
                     this.controls.clippings.setValue(null)
                 }
-
             }
         });
     }
 
     public get controls() { return this.moneyForm.controls; }
 
-    public onEmissionsReceived(emissions: Array<EmissionBasic>): void {
-        this.emissions = emissions;
+    public onEmissionSelected(clippings: Array<ClippingBasic>) {
+        this.clippings = clippings;
+        this.controls.clippings.setValue(null)
     }
 
     public onClickAddNew(): void {
@@ -131,9 +127,7 @@ export class ManagementCollectibleMoneyComponent implements OnInit, OnDestroy, A
     private openModal(data: CollectibleMoneyBasic) {
         const modalRef = this.modalService.open(ManagementCollectibleMoneyUpsertModal, { centered: true, size: "lg" });
         (modalRef.componentInstance as ManagementCollectibleMoneyUpsertModal).data = data;
-        (modalRef.componentInstance as ManagementCollectibleMoneyUpsertModal).clippings = this.clippings;
-        (modalRef.componentInstance as ManagementCollectibleMoneyUpsertModal).emissions = this.emissions;
-
+     
         modalRef.result.then(() => {
             this.pageNumber = 1;
             this.getData();
@@ -161,10 +155,6 @@ export class ManagementCollectibleMoneyComponent implements OnInit, OnDestroy, A
                 }
             }
         );
-    }
-
-    public onEmissionSelected() {
-        debugger;
     }
 
     private createCollectibleMoneyRequest(): CollectibleMoneyFilterRequest {

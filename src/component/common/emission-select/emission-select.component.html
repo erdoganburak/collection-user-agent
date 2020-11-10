@@ -2,14 +2,14 @@
   <div *ngIf="mode=='default'">
     <nz-select [formControlName]="controlName" nzShowSearch nzServerSearch nzAllowClear nzPlaceHolder="Emisyon seçiniz"
       nzMode="default" (nzOnSearch)="onSearch($event)" nzMode="default" (nzScrollToBottom)="loadMore()"
-      [nzDropdownRender]="renderTemplate">
+      [nzDropdownRender]="renderTemplate" [nzNotFoundContent]="'Sonuç bulunamadı.'">
       <nz-option *ngFor="let e of emissions" [nzValue]="e._id" [nzLabel]="e.name"></nz-option>
     </nz-select>
   </div>
   <div *ngIf="mode=='multiple'">
     <nz-select [nzMaxTagCount]="3" [formControlName]="controlName" nzShowSearch nzServerSearch nzAllowClear
       nzPlaceHolder="Emisyon seçiniz" nzMode="default" (nzOnSearch)="onSearch($event)" nzMode="multiple"
-      (nzScrollToBottom)="loadMore()" [nzDropdownRender]="renderTemplate">
+      (nzScrollToBottom)="loadMore()" [nzDropdownRender]="renderTemplate" [nzNotFoundContent]="'Sonuç bulunamadı.'">
       <nz-option *ngFor="let e of emissions" [nzValue]="e._id" [nzLabel]="e.name"></nz-option>
     </nz-select>
   </div>

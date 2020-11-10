@@ -30,4 +30,8 @@ export class EmissionApi extends BaseApi {
 		return this.request(RequestTypes.POST, false, `/emission/get-all`, request, "EmissionGetAllResponse");
 	}
 
+	public getEmissionById(emissionId: string): Observable<EmissionBasic> {
+		return this.request(RequestTypes.GET, false, `/emission/get/${emissionId}`, "EmissionBasic");
+	}
+
 }

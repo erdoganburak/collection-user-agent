@@ -51,8 +51,8 @@
                     <div class="form-group">
                         <label for="inputEmissons">Emisyon</label>
                         <div class="form-group">
-                            <app-emission-select [controlName]="'emissions'"
-                                (onEmissionsReceived)="onEmissionsReceived($event)" [mode]="'default'">
+                            <app-emission-select [parentForm]="moneyForm" [controlName]="'emissions'"
+                                (onEmissionSelected)="onEmissionSelected($event)" [mode]="'default'">
                             </app-emission-select>
                         </div>
                     </div>

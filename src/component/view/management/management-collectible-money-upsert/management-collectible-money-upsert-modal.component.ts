@@ -7,12 +7,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import ClippingBasic from 'src/model/clipping/clipping-basic.model';
 import { InteractionService } from 'src/service/interaction.service';
 import { ToastrType } from 'src/app/enum/toastr.enum';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import EmissionBasic from 'src/model/emission/emission-basic.model';
 import { FileUpload } from 'src/constant/file-upload.constant';
 import { CollectibleMoneyApiService } from 'src/service/collectible-money/collectible-money-api.service';
 import CollectibleMoneyBasic from 'src/model/collectible-money/collectible-money-basic';
 import { environment } from 'src/environments/environment';
+import { ClippingApiService } from 'src/service/clipping/clipping-api.service';
+import { EmissionApiService } from 'src/service/emission/emission-api.service';
 
 @Component({
     selector: 'app-management-collectible-money-upsert-modal.component',
@@ -28,12 +29,6 @@ export class ManagementCollectibleMoneyUpsertModal extends BaseModalComponent im
 
     public moneyForm: FormGroup;
     public submitted = false;
-
-    public dropdownEmissionSettings: IDropdownSettings = {};
-    public dropdownClippingSettings: IDropdownSettings = {};
-    public selectedEmission: EmissionBasic;
-    public selectedClipping: ClippingBasic;
-
     public errorImageFileSize: string;
     public errorImageFileExtension: string;
     public imageField: string;
@@ -50,7 +45,8 @@ export class ManagementCollectibleMoneyUpsertModal extends BaseModalComponent im
         private activeModal: NgbActiveModal,
         private formBuilder: FormBuilder,
         private interactionService: InteractionService,
-        private collectibleMoneyService: CollectibleMoneyApiService
+        private collectibleMoneyService: CollectibleMoneyApiService,
+        private emissionService: EmissionApiService
     ) {
         super();
     }
@@ -62,8 +58,8 @@ export class ManagementCollectibleMoneyUpsertModal extends BaseModalComponent im
             name: ['', Validators.required],
             condition: ['', Validators.required],
             serialNo: ['', Validators.required],
-            emissions: ['', Validators.required],
-            clippings: ['', Validators.required],
+            emission: [null, Validators.required],
+            clipping: ['', Validators.required],
             price: ['', Validators.required],
             frontImage: [''],
             backImage: [''],
@@ -71,32 +67,30 @@ export class ManagementCollectibleMoneyUpsertModal extends BaseModalComponent im
 
         if (this.data && this.data._id) {
             this.moneyForm.patchValue(this.data);
-            this.selectedEmission = this.data.emission;
-            this.selectedClipping = this.data.clipping;
-            this.controls.emissions.setValue([this.data.emission]);
-            this.controls.clippings.setValue([this.data.clipping]);
+            /* this.selectedEmission = this.data.emission;
+             this.selectedClipping = this.data.clipping;*/
+            this.controls.emission.setValue(this.data.emission._id);
+            this.controls.clipping.setValue(this.data.clipping._id);
+
+            this.emissionService.getEmissionById(this.data.emission._id).subscribe(
+                (response: EmissionBasic) => {
+                    if (response) {
+                        this.clippings = response.clippings;
+                    }
+                }
+            );
+
             if (this.data.frontImage)
                 this.frontImageSrc = environment.API_IMAGE_PATH + this.data.frontImage;
             if (this.data.backImage)
                 this.backImageSrc = environment.API_IMAGE_PATH + this.data.backImage;
         }
 
-        this.dropdownEmissionSettings = {
-            singleSelection: true,
-            idField: '_id',
-            textField: 'name',
-            itemsShowLimit: 1,
-            allowSearchFilter: false,
-        };
+    }
 
-        this.dropdownClippingSettings = {
-            singleSelection: true,
-            idField: '_id',
-            textField: 'quantity',
-            itemsShowLimit: 1,
-            allowSearchFilter: false,
-            enableCheckAll: false
-        };
+    public onEmissionSelected(clippings: Array<ClippingBasic>) {
+        this.clippings = clippings;
+        this.controls.clipping.setValue(null)
     }
 
     ngOnDestroy(): void {
@@ -193,8 +187,8 @@ export class ManagementCollectibleMoneyUpsertModal extends BaseModalComponent im
         formData.append('name', this.controls.name.value);
         formData.append('condition', this.controls.condition.value);
         formData.append('serialNo', this.controls.serialNo.value);
-        formData.append('clipping', this.selectedClipping._id);
-        formData.append('emission', this.selectedEmission._id);
+        formData.append('clipping', this.moneyForm.controls.clipping.value);
+        formData.append('emission', this.moneyForm.controls.emission.value);
         formData.append('price', this.controls.price.value);
         if (this.newFrontImage != null) {
             formData.append('frontImage', this.newFrontImage);
@@ -219,26 +213,6 @@ export class ManagementCollectibleMoneyUpsertModal extends BaseModalComponent im
 
     public onOkClicked(event: MouseEvent): void {
         this.activeModal.close();
-    }
-
-    onClippingSelected(item: ClippingBasic) {
-        this.selectedClipping = item;
-        console.log(item);
-    }
-
-    onEmissionSelected(item: EmissionBasic) {
-        this.selectedEmission = item;
-        console.log(item);
-    }
-
-    onEmissionDeSelect(item: EmissionBasic) {
-        this.selectedEmission = null;
-        console.log(item)
-    }
-
-    onClippingDeSelect(item: ClippingBasic) {
-        console.log(item)
-        this.selectedClipping = null;
     }
 
 }
