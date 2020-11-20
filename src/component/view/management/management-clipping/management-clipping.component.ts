@@ -69,6 +69,7 @@ export class ManagementClippingComponent implements OnInit, OnDestroy {
                 (response: ClippingBasic) => {
                     if (response) {
                         this.interactionService.showMessage("Küpür başarıyla silindi.", ToastrType.Success, "")
+                        this.pageNumber = 1;
                         this.getData();
                     }
                 },

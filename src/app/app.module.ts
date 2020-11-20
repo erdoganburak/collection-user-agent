@@ -49,7 +49,7 @@ import { TitleComponent } from 'src/component/common/title/title.component';
 import { MoneyDetailComponent } from 'src/component/view/money/money-detail/money-detail.component';
 import player from 'lottie-web';
 
-import { faKey, faPlus, faShoppingCart, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faClipboardList, faFilm, faKey, faPlus, faShoppingCart, faTimes, faUsers, faVideo } from '@fortawesome/free-solid-svg-icons';
 import { faCog } from '@fortawesome/free-solid-svg-icons';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
@@ -70,6 +70,11 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { ClippingSelectComponent } from 'src/component/common/clipping-select/clipping-select.component';
 import { ManagementClippingInsertModal } from 'src/component/view/management/management-clipping-insert-modal/management-clipping-insert-modal.component';
 import { EmissionSelectComponent } from 'src/component/common/emission-select/emission-select.component';
+import { ManagementCategoryComponent } from 'src/component/view/management/management-category/management-category.component';
+import { CategoryApiService } from 'src/service/category/category-api.service';
+import { ManagementCategoryUpsertModal } from 'src/component/view/management/management-category-upsert/management-category-upsert-modal.component';
+import { CategorySelectComponent } from 'src/component/common/category-select/category-select.component';
+import { ManagementCategoryInsertModal } from 'src/component/view/management/management-category-insert-modal/management-category-insert-modal.component';
 
 export function playerFactory() {
   return player;
@@ -107,7 +112,11 @@ export function playerFactory() {
     MoneyShowcaseComponent,
     ClippingSelectComponent,
     ManagementClippingInsertModal,
-    EmissionSelectComponent
+    EmissionSelectComponent,
+    ManagementCategoryComponent,
+    ManagementCategoryUpsertModal,
+    CategorySelectComponent,
+    ManagementCategoryInsertModal
   ],
   imports: [
     FormsModule,
@@ -124,7 +133,6 @@ export function playerFactory() {
       timeOut: 4000,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
-
     }),
     BrowserAnimationsModule,
     NgxPaginationModule,
@@ -155,7 +163,8 @@ export function playerFactory() {
     ClippingApiService,
     EmissionApiService,
     CollectibleMoneyApiService,
-    ProductApiService
+    ProductApiService,
+    CategoryApiService
   ],
   entryComponents: [
     DialogComponent,
@@ -164,7 +173,9 @@ export function playerFactory() {
     ManagementEmissionUpsertModal,
     ManagementCollectibleMoneyUpsertModal,
     ImageModal,
-    ManagementClippingInsertModal
+    ManagementClippingInsertModal,
+    ManagementCategoryUpsertModal,
+    ManagementCategoryInsertModal
   ],
   bootstrap: [AppComponent]
 })
@@ -189,6 +200,10 @@ export class AppModule {
     library.addIcons(faShoppingCart);
     library.addIcons(faPlus);
     library.addIcons(faTimes);
+    library.addIcons(faFilm);
+    library.addIcons(faUsers);
+    library.addIcons(faVideo);
+    library.addIcons(faClipboardList);
   }
 
 }

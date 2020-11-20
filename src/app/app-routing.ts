@@ -14,6 +14,7 @@ import { ManagementEmissionComponent } from 'src/component/view/management/manag
 import { ManagementCollectibleMoneyComponent } from 'src/component/view/management/management-collectible-money/management-collectible-money.component';
 import { MoneyDetailComponent } from 'src/component/view/money/money-detail/money-detail.component';
 import { ShoppingCartComponent } from 'src/component/view/shopping-cart/shopping-cart.component';
+import { ManagementCategoryComponent } from 'src/component/view/management/management-category/management-category.component';
 
 const routes: Routes = [
   {
@@ -73,6 +74,26 @@ const routes: Routes = [
   },
   {
     path: PageRoutes.MANAGEMENT_MOVIE.path,
+    component: ManagementMovieComponent,
+    canActivate: [RoutingService],
+  },
+  {
+    path: PageRoutes.MANAGEMENT_MOVIE_ACTOR.path,
+    component: ManagementMovieComponent,
+    canActivate: [RoutingService],
+  },
+  {
+    path: PageRoutes.MANAGEMENT_MOVIE_DIRECTOR.path,
+    component: ManagementMovieComponent,
+    canActivate: [RoutingService],
+  },
+  {
+    path: PageRoutes.MANAGEMENT_MOVIE_CATEGORY.path,
+    component: ManagementCategoryComponent,
+    canActivate: [RoutingService],
+  },
+  {
+    path: PageRoutes.MANAGEMENT_COLLECTIBLE_MOVIE.path,
     component: ManagementMovieComponent,
     canActivate: [RoutingService],
   },

@@ -39,11 +39,6 @@ export const PageRoutes = {
 		fullPath: '/management/money',
 		value: 'Para Yönetimi'
 	},
-	MANAGEMENT_MOVIE: {
-		path: 'management/movie',
-		fullPath: '/management/movie',
-		value: 'Film Yönetimi'
-	},
 	MANAGEMENT_CLIPPING: {
 		path: 'management/money/clipping',
 		fullPath: '/management/money/clipping',
@@ -58,5 +53,31 @@ export const PageRoutes = {
 		path: 'management/money/collectible-money',
 		fullPath: '/management/money/collectible-money',
 		value: 'Koleksiyon Para Yönetimi'
-	}
+	},
+	MANAGEMENT_MOVIE: {
+		path: 'management/movie',
+		fullPath: '/management/movie',
+		value: 'Film Yönetimi'
+	},
+	MANAGEMENT_MOVIE_ACTOR: {
+		path: 'management/movie/actor',
+		fullPath: '/management/movie/actor',
+		value: 'Oyuncu Yönetimi'
+	},
+	MANAGEMENT_MOVIE_DIRECTOR: {
+		path: 'management/movie/director',
+		fullPath: '/management/movie/director',
+		value: 'Yönetmen Yönetimi'
+	},
+	MANAGEMENT_MOVIE_CATEGORY: {
+		path: 'management/movie/category',
+		fullPath: '/management/movie/category',
+		value: 'Kategori Yönetimi'
+	},
+	MANAGEMENT_COLLECTIBLE_MOVIE: {
+		path: 'management/movie/collectible-movie',
+		fullPath: '/management/movie/collectible-movie',
+		value: 'Koleksiyon Film Yönetimi'
+	},
+
 }

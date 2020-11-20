@@ -122,6 +122,35 @@ export class RoutingService implements CanActivate {
         ]
     }
 
+    public getManagementMovieItems(): Array<RoutingHeaderMenuItem> {
+        return [
+            {
+                title: PageRoutes.MANAGEMENT_MOVIE_ACTOR.value,
+                page: PageRoutes.MANAGEMENT_MOVIE_ACTOR,
+                icon: "users",
+                visible: true
+            },
+            {
+                title: PageRoutes.MANAGEMENT_MOVIE_DIRECTOR.value,
+                page: PageRoutes.MANAGEMENT_MOVIE_DIRECTOR,
+                icon: "video",
+                visible: true
+            },
+            {
+                title: PageRoutes.MANAGEMENT_MOVIE_CATEGORY.value,
+                page: PageRoutes.MANAGEMENT_MOVIE_CATEGORY,
+                icon: "clipboard-list",
+                visible: true
+            },
+            {
+                title: PageRoutes.MANAGEMENT_COLLECTIBLE_MOVIE.value,
+                page: PageRoutes.MANAGEMENT_COLLECTIBLE_MOVIE,
+                icon: "film",
+                visible: true
+            },
+        ]
+    }
+
     public gotoHeaderItem(item: RoutingHeaderMenuItem) {
         if (item.page) {
             this.activeHeaderPage = item.page.fullPath;
