@@ -1,6 +1,10 @@
 @import "../../../../styles/variables";
 
 :host {
+    .row {
+        padding: 5px;
+    }
+
     .icon-container {
         fa-icon {
             color: rgb(224, 224, 224);

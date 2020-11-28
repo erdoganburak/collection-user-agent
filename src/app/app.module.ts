@@ -75,6 +75,10 @@ import { CategoryApiService } from 'src/service/category/category-api.service';
 import { ManagementCategoryUpsertModal } from 'src/component/view/management/management-category-upsert/management-category-upsert-modal.component';
 import { CategorySelectComponent } from 'src/component/common/category-select/category-select.component';
 import { ManagementCategoryInsertModal } from 'src/component/view/management/management-category-insert-modal/management-category-insert-modal.component';
+import { ActorApiService } from 'src/service/actor/actor-api.service';
+import { DirectorApiService } from 'src/service/director/director-api.service';
+import { ManagementActorComponent } from 'src/component/view/management/management-actor/management-actor.component';
+import { ManagementActorUpsertModal } from 'src/component/view/management/management-actor-upsert/management-actor-upsert-modal.component';
 
 export function playerFactory() {
   return player;
@@ -116,7 +120,9 @@ export function playerFactory() {
     ManagementCategoryComponent,
     ManagementCategoryUpsertModal,
     CategorySelectComponent,
-    ManagementCategoryInsertModal
+    ManagementCategoryInsertModal,
+    ManagementActorComponent,
+    ManagementActorUpsertModal
   ],
   imports: [
     FormsModule,
@@ -164,7 +170,9 @@ export function playerFactory() {
     EmissionApiService,
     CollectibleMoneyApiService,
     ProductApiService,
-    CategoryApiService
+    CategoryApiService,
+    ActorApiService,
+    DirectorApiService
   ],
   entryComponents: [
     DialogComponent,
@@ -175,7 +183,8 @@ export function playerFactory() {
     ImageModal,
     ManagementClippingInsertModal,
     ManagementCategoryUpsertModal,
-    ManagementCategoryInsertModal
+    ManagementCategoryInsertModal,
+    ManagementActorUpsertModal
   ],
   bootstrap: [AppComponent]
 })

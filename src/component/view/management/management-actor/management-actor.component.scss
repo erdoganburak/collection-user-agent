@@ -12,6 +12,14 @@
     .table td {
         vertical-align: middle;
     }
+
+    .biography {
+        max-width: 50px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
     fa-icon:hover {
         opacity: 0.6;
         cursor: pointer;

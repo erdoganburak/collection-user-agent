@@ -5,7 +5,7 @@ import { InteractionService } from '../interaction.service';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { SessionService } from '../session.service';
-import { CategoryApi } from 'src/app/api/category/clipping.api';
+import { CategoryApi } from 'src/app/api/category/category.api';
 import CategoryUpsertRequest from 'src/model/category/category-upsert-request.model';
 import CategoryBasic from 'src/model/category/category-basic.model';
 import CategoryGetAllResponse from 'src/model/category/category-get-all-response.model';

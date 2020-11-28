@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-12">
+        <app-management-header [title]="title" [description]="description" [icon]="icon">
+        </app-management-header>
+    </div>
+    <div class="col-12">
+        <div class="row">
+            <div class="col-xl-2 form py-5">
+                <form [formGroup]="actorForm">
+                    <div class="form-group">
+                        <label for="inputName">İsim</label>
+                        <input type="text" formControlName="name" class="form-control form-control-sm" id="inputName"
+                            placeholder="İsim" [ngClass]="{ 'is-invalid': submitted && controls.name.errors }">
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-sm btn-outline-primary mx-2"
+                            (click)="onClickClear()">Temizle</button>
+                        <button type="button" class="btn btn-sm btn-info" (click)="search()">Ara</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-xl-10">
+                <div class="d-flex justify-content-end my-3">
+                    <button type="button" class="btn btn-sm btn-primary" (click)="onClickAddNew()">Oyuncu
+                        ekle</button>
+                </div>
+                <div *ngIf="paginationResponse != null" class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th style="width: 5%" scope="col">Resim</th>
+                                <th style="width: 20%" scope="col">İsim</th>
+                                <th style="width: 60%" scope="col">Biyografi</th>
+                                <th scope="col">Düzenle</th>
+                                <th scope="col">Sil</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let actor of actors | paginate: {
+                                    itemsPerPage: this.paginationResponse.limit,
+                                    currentPage: pageNumber,
+                                    totalItems: this.paginationResponse.count
+                                }">
+                                <td>
+                                    <div class="row d-flex justify-content-start">
+                                        <div class="col-sm-12 col-md-6 col-lg-4">
+                                            <img class="fit-image" src="{{imagePath + actor.image}}" />
+                                        </div>
+                                    </div>
+                                </td>
+                                <th scope=" row">{{actor.name}}</th>
+                                <td class="biography" scope="row">{{actor.biography}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-outline-primary"
+                                        (click)="onClickEdit(actor)">Düzenle</button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-danger"
+                                        (click)="onClickDelete(actor)">Sil</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <app-pagination [paginationResponse]="paginationResponse"
+                        (pageNumberChanged)="pageNumberChanged($event)">
+                    </app-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

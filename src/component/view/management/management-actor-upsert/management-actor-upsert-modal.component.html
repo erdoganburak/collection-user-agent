@@ -1,0 +1,53 @@
+<div class="modal-header">
+  <h4 class="modal-title">
+    <span>Oyuncu Ekleme / Güncelleme</span>
+  </h4>
+</div>
+<div class="modal-body">
+  <form [formGroup]="actorForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="inputName">İsim</label>
+      <input type="text" formControlName="name" class="form-control form-control-sm" id="inputName" placeholder="İsim"
+        [ngClass]="{ 'is-invalid': submitted && controls.name.errors }">
+      <div *ngIf="submitted && controls.name.errors" class="invalid-feedback">
+        <div *ngIf="controls.name.errors.required">İsim alanını doldurunuz.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputProductNo">Biyografi</label>
+      <textarea type="text" rows="10" cols="30" formControlName="biography" class="form-control form-control-sm"
+        id="inputBiography" placeholder="Biyografi"
+        [ngClass]="{ 'is-invalid': submitted && controls.biography.errors }"></textarea>
+      <div *ngIf="submitted && controls.biography.errors" class="invalid-feedback">
+        <div *ngIf="controls.biography.errors.required">Biyografi alanını doldurunuz.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputFrontImage">Resim</label>
+      <div class="form-group">
+        <input type="file" accept="image/jpg, image/jpeg" formControlName="image"
+          (change)="onFileChange($event,'image')" />
+      </div>
+      <div *ngIf="imageSrc" class="row d-flex justify-content-start">
+        <div class="col-sm-6 col-md-6 col-lg-4">
+          <img class="img-responsive fit-image" id="imageSrc" src="{{imageSrc}}" alt="image" />
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="errorImageFileSize">
+      <span class="image-error">{{errorImageFileSize}}</span>
+    </div>
+
+    <div *ngIf="errorImageFileExtension">
+      <span class="image-error">{{errorImageFileExtension}}</span>
+    </div>
+
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn btn-outline-primary mx-2" (click)="onCancelClicked($event)">Vazgeç</button>
+      <button type="submit" class="btn btn-info">Kaydet</button>
+    </div>
+  </form>
+</div>

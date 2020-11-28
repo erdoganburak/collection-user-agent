@@ -15,6 +15,7 @@ import { ManagementCollectibleMoneyComponent } from 'src/component/view/manageme
 import { MoneyDetailComponent } from 'src/component/view/money/money-detail/money-detail.component';
 import { ShoppingCartComponent } from 'src/component/view/shopping-cart/shopping-cart.component';
 import { ManagementCategoryComponent } from 'src/component/view/management/management-category/management-category.component';
+import { ManagementActorComponent } from 'src/component/view/management/management-actor/management-actor.component';
 
 const routes: Routes = [
   {
@@ -79,7 +80,7 @@ const routes: Routes = [
   },
   {
     path: PageRoutes.MANAGEMENT_MOVIE_ACTOR.path,
-    component: ManagementMovieComponent,
+    component: ManagementActorComponent,
     canActivate: [RoutingService],
   },
   {
