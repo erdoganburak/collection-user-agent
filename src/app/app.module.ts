@@ -79,6 +79,8 @@ import { ActorApiService } from 'src/service/actor/actor-api.service';
 import { DirectorApiService } from 'src/service/director/director-api.service';
 import { ManagementActorComponent } from 'src/component/view/management/management-actor/management-actor.component';
 import { ManagementActorUpsertModal } from 'src/component/view/management/management-actor-upsert/management-actor-upsert-modal.component';
+import { ManagementDirectorComponent } from 'src/component/view/management/management-director/management-director.component';
+import { ManagementDirectorUpsertModal } from 'src/component/view/management/management-director-upsert/management-director-upsert-modal.component';
 
 export function playerFactory() {
   return player;
@@ -122,7 +124,9 @@ export function playerFactory() {
     CategorySelectComponent,
     ManagementCategoryInsertModal,
     ManagementActorComponent,
-    ManagementActorUpsertModal
+    ManagementActorUpsertModal,
+    ManagementDirectorComponent,
+    ManagementDirectorUpsertModal
   ],
   imports: [
     FormsModule,
@@ -184,7 +188,8 @@ export function playerFactory() {
     ManagementClippingInsertModal,
     ManagementCategoryUpsertModal,
     ManagementCategoryInsertModal,
-    ManagementActorUpsertModal
+    ManagementActorUpsertModal,
+    ManagementDirectorUpsertModal
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,34 @@
+@import "../../../../styles/variables";
+
+:host {
+    .form {
+        border-right-width: 1px;
+        border-right-color: $secondary;
+        border-right-style: solid;
+    }
+    .table th {
+        vertical-align: middle;
+    }
+    .table td {
+        vertical-align: middle;
+    }
+
+    .biography {
+        max-width: 50px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    fa-icon:hover {
+        opacity: 0.6;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .fit-image {
+        width: 80px;
+        height: 30px;
+        object-fit: contain;
+        //height: 200px; /* only if you want fixed height */
+    }
+}

@@ -40,4 +40,9 @@ export class DirectorApiService extends BaseService {
 		return this.api.getDirectorById(directorId).pipe(catchError((error) => this.handleError(error, [])));
 	}
 
+	public deleteDirector(directorId: string): Observable<DirectorBasic> {
+		return this.api.deleteDirector(directorId).pipe(catchError((error) => this.handleError(error, [])));
+	}
+
+
 }

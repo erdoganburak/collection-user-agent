@@ -9,25 +9,25 @@ import PaginationResponse from 'src/model/common/pagination-response.model';
 import { InteractionService } from 'src/service/interaction.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { environment } from 'src/environments/environment';
-import ActorBasic from 'src/model/actor/actor-basic.model';
-import { ActorApiService } from 'src/service/actor/actor-api.service';
-import ActorGetAllRequest from 'src/model/actor/actor-get-all-request.model';
-import ActorGetAllResponse from 'src/model/actor/actor-get-all-response.model';
-import { ManagementActorUpsertModal } from '../management-actor-upsert/management-actor-upsert-modal.component';
+import DirectorBasic from 'src/model/director/director-basic.model';
+import DirectorGetAllRequest from 'src/model/director/director-get-all-request.model';
+import DirectorGetAllResponse from 'src/model/director/director-get-all-response.model';
+import { DirectorApiService } from 'src/service/director/director-api.service';
+import { ManagementDirectorUpsertModal } from '../management-director-upsert/management-director-upsert-modal.component';
 @Component({
-    selector: 'app-actor',
-    templateUrl: './management-actor.component.html',
-    styleUrls: ['./management-actor.component.scss']
+    selector: 'app-director',
+    templateUrl: './management-director.component.html',
+    styleUrls: ['./management-director.component.scss']
 })
 
-export class ManagementActorComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ManagementDirectorComponent implements OnInit, OnDestroy, AfterViewInit {
 
     public title: string;
     public description: string;
     public icon: string;
-    public actors: Array<ActorBasic>;
+    public directors: Array<DirectorBasic>;
     public paginationResponse: PaginationResponse;
-    public actorForm: FormGroup;
+    public directorForm: FormGroup;
     public imagePath: string;
 
     private pageNumber: number;
@@ -35,18 +35,18 @@ export class ManagementActorComponent implements OnInit, OnDestroy, AfterViewIni
     constructor(
         private modalService: NgbModal,
         private interactionService: InteractionService,
-        private actorService: ActorApiService,
+        private directorService: DirectorApiService,
         private formBuilder: FormBuilder
     ) {
     }
 
     ngOnInit(): void {
         this.imagePath = environment.API_IMAGE_PATH;
-        this.title = "Oyuncu Yönetimi";
-        this.description = "Oyuncu ekleme, çıkarma ve güncelleme"
-        this.icon = "users";
+        this.title = "Yönetmen Yönetimi";
+        this.description = "Yönetmen ekleme, çıkarma ve güncelleme"
+        this.icon = "video";
         this.pageNumber = 1;
-        this.actorForm = this.formBuilder.group({
+        this.directorForm = this.formBuilder.group({
             name: [''],
         });
 
@@ -61,40 +61,40 @@ export class ManagementActorComponent implements OnInit, OnDestroy, AfterViewIni
 
     }
 
-    public get controls() { return this.actorForm.controls; }
+    public get controls() { return this.directorForm.controls; }
 
     public onClickAddNew(): void {
         this.openModal(null)
     }
 
-    public onClickEdit(actor: ActorBasic): void {
-        this.openModal(actor);
+    public onClickEdit(director: DirectorBasic): void {
+        this.openModal(director);
     }
 
-    public onClickDelete(actor: ActorBasic): void {
+    public onClickDelete(director: DirectorBasic): void {
         this.interactionService.showDialog({
-            title: "Aktör Silme",
-            message: actor.name + " isimli oyuncuyu silmek istediğinize emin misiniz?",
+            title: "Yönetmen Silme",
+            message: director.name + " isimli yönetmeni silmek istediğinize emin misiniz?",
             type: DialogType.Danger
         }).then((result) => {
-            this.actorService.deleteActor(actor._id).subscribe(
+            this.directorService.deleteDirector(director._id).subscribe(
                 (response: any) => {
                     if (response) {
-                        this.interactionService.showMessage("Aktör başarıyla silindi.", ToastrType.Success, "")
+                        this.interactionService.showMessage("Yönetmen başarıyla silindi.", ToastrType.Success, "")
                         this.getData();
                     }
                 },
                 (err) => {
-                    this.interactionService.showMessage("Aktör silinirken hata oluştu.", ToastrType.Error, "")
+                    this.interactionService.showMessage("Yönetmen silinirken hata oluştu.", ToastrType.Error, "")
                 });
         }, (reason) => {
         });
     }
 
 
-    private openModal(data: ActorBasic) {
-        const modalRef = this.modalService.open(ManagementActorUpsertModal, { centered: true, size: "lg" });
-        (modalRef.componentInstance as ManagementActorUpsertModal).data = data;
+    private openModal(data: DirectorBasic) {
+        const modalRef = this.modalService.open(ManagementDirectorUpsertModal, { centered: true, size: "lg" });
+        (modalRef.componentInstance as ManagementDirectorUpsertModal).data = data;
 
         modalRef.result.then(() => {
             this.pageNumber = 1;
@@ -115,10 +115,10 @@ export class ManagementActorComponent implements OnInit, OnDestroy, AfterViewIni
     }
 
     public getData() {
-        this.actorService.getActors(this.createActorsRequest()).subscribe(
-            (response: ActorGetAllResponse) => {
+        this.directorService.getDirectors(this.createDirectorRequest()).subscribe(
+            (response: DirectorGetAllResponse) => {
                 if (response) {
-                    this.actors = response.actors;
+                    this.directors = response.directors;
                     this.paginationResponse = response.paginationResponse;
                 }
             }
@@ -126,16 +126,16 @@ export class ManagementActorComponent implements OnInit, OnDestroy, AfterViewIni
     }
 
     public onClickClear() {
-        this.actorForm.reset();
+        this.directorForm.reset();
     }
 
-    private createActorsRequest(): ActorGetAllRequest {
+    private createDirectorRequest(): DirectorGetAllRequest {
         const paginationRequest: PaginationRequest = {
             skip: (this.pageNumber - 1) * Pagination.PAGINATION_LIMIT,
             limit: Pagination.PAGINATION_LIMIT
         }
         return {
-            name: this.actorForm.controls.name.value,
+            name: this.directorForm.controls.name.value,
             sort: Sort.Desc,
             paginationRequest: paginationRequest,
         }
