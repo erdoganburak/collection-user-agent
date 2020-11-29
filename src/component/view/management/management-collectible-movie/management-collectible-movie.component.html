@@ -1,0 +1,144 @@
+<div class="row">
+    <div class="col-12">
+        <app-management-header [title]="title" [description]="description" [icon]="icon">
+        </app-management-header>
+    </div>
+    <div class="col-12">
+        <div class="row">
+            <div class="col-xl-2 form py-5">
+                <form [formGroup]="movieForm">
+                    <div class="form-group">
+                        <label for="inputName">İsim</label>
+                        <input type="text" formControlName="name" class="form-control form-control-sm" id="inputName"
+                            placeholder="İsim" [ngClass]="{ 'is-invalid': submitted && controls.name.errors }">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputCondition">Kondisyon</label>
+                        <input type="number" formControlName="condition" class="form-control form-control-sm"
+                            id="inputCondition" placeholder="Kondisyon"
+                            [ngClass]="{ 'is-invalid': submitted && controls.condition.errors }">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputMinPrice">Mininum Fiyat</label>
+                        <input type="number" formControlName="minPrice" class="form-control form-control-sm"
+                            id="inputMinPrice" placeholder="Minumum Fiyat"
+                            [ngClass]="{ 'is-invalid': submitted && controls.minPrice.errors }">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputMaxPrice">Maksimum Fiyat</label>
+                        <input type="number" formControlName="maxPrice" class="form-control form-control-sm"
+                            id="inputMaxPrice" placeholder="Maksimum Fiyat"
+                            [ngClass]="{ 'is-invalid': submitted && controls.maxPrice.errors }">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputCategories">Kategori</label>
+                        <div class="form-group">
+                            <app-category-select [parentForm]="movieForm" [controlName]="'categories'"
+                                [mode]="'multiple'">
+                            </app-category-select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputDirectors">Yönetmen</label>
+                        <div class="form-group">
+                            <app-director-select [parentForm]="movieForm" [controlName]="'directors'"
+                                [mode]="'multiple'">
+                            </app-director-select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputActors">Oyuncular</label>
+                        <div class="form-group">
+                            <app-actor-select [parentForm]="movieForm" [controlName]="'actors'" [mode]="'multiple'">
+                            </app-actor-select>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-sm btn-outline-primary mx-2"
+                            (click)="onClickClear()">Temizle</button>
+                        <button type="button" class="btn btn-sm btn-info" (click)="search()">Ara</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-xl-10">
+                <div class="d-flex justify-content-end my-3">
+                    <button type="button" class="btn btn-sm btn-primary" (click)="onClickAddNew()">Film
+                        ekle</button>
+                </div>
+                <div *ngIf="paginationResponse != null" class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th style="width: 5%" scope="col">Resim</th>
+                                <th scope="col">İsim</th>
+                                <th scope="col">Fiyat</th>
+                                <th scope="col">Kondisyon</th>
+                                <th scope="col">Kategori</th>
+                                <th scope="col">Oyuncu</th>
+                                <th scope="col">Yönetmen</th>
+                                <th scope="col">Süre</th>
+                                <th scope="col">Düzenle</th>
+                                <th scope="col">Sil</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let movie of collectibleMovies | paginate: {
+                                    itemsPerPage: this.paginationResponse.limit,
+                                    currentPage: pageNumber,
+                                    totalItems: this.paginationResponse.count
+                                }">
+                                <td>
+                                    <div class="row d-flex justify-content-start">
+                                        <div class="col-sm-12 col-md-6 col-lg-4">
+                                            <img class="fit-image" src="{{imagePath + movie.frontImage}}" />
+                                        </div>
+                                    </div>
+                                </td>
+                                <th scope=" row">{{movie.name}}</th>
+                                <td scope="row">{{movie.price | currency: "TRY"}}</td>
+                                <td scope="row">{{movie.condition}}</td>
+                                <td scope="row">
+                                    <h2 *ngFor="let category of movie.categories; let i = index"
+                                        class="badge badge-secondary mx-2">
+                                        {{category.name}}
+                                    </h2>
+                                </td>
+                                <td scope="row">
+                                    <h2 *ngFor="let actor of movie.actors; let i = index"
+                                        class="badge badge-secondary mx-2">
+                                        {{actor.name}}
+                                    </h2>
+                                </td>
+                                <td scope="row">
+                                    <h2 *ngFor="let director of movie.directors; let i = index"
+                                        class="badge badge-secondary mx-2">
+                                        {{director.name}}
+                                    </h2>
+                                </td>
+                                <td scope="row">{{movie.duration}} Dakika</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-outline-primary"
+                                        (click)="onClickEdit(movie)">Düzenle</button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-danger"
+                                        (click)="onClickDelete(movie)">Sil</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <app-pagination [paginationResponse]="paginationResponse"
+                        (pageNumberChanged)="pageNumberChanged($event)">
+                    </app-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -7,8 +7,7 @@
   <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="inputCategory">Kategori</label>
-      <app-category-select [parentForm]="categoryForm" [selectedCategory]="data" [controlName]="'name'"
-        [mode]="'default'">
+      <app-category-select [parentForm]="categoryForm" [controlName]="'name'" [mode]="'default'">
       </app-category-select>
     </div>
     <div class="d-flex justify-content-end">

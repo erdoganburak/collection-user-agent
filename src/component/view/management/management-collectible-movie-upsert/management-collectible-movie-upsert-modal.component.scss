@@ -1,0 +1,13 @@
+@import "../../../../styles/mixins/gradient.mixin.scss";
+@import "../../../../styles/variables";
+
+.image-error {
+    color: $danger;
+    font-size: 80%
+}
+
+.fit-image {
+    width: 100%;
+    object-fit: contain;
+    height: 300px; /* only if you want fixed height */
+}

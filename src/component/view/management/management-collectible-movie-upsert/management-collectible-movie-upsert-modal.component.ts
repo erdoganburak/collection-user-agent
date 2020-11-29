@@ -4,90 +4,97 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { BaseModalComponent } from 'src/component/common/modal/base-modal.component';
 import { IModal } from 'src/component/common/modal/modal.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import ClippingBasic from 'src/model/clipping/clipping-basic.model';
 import { InteractionService } from 'src/service/interaction.service';
 import { ToastrType } from 'src/app/enum/toastr.enum';
-import EmissionBasic from 'src/model/emission/emission-basic.model';
 import { FileUpload } from 'src/constant/file-upload.constant';
-import { CollectibleMoneyApiService } from 'src/service/collectible-money/collectible-money-api.service';
-import CollectibleMoneyBasic from 'src/model/collectible-money/collectible-money-basic';
 import { environment } from 'src/environments/environment';
-import { EmissionApiService } from 'src/service/emission/emission-api.service';
+import CollectibleMovieBasic from 'src/model/collectible-movie/collectible-movie-basic';
+import ActorBasic from 'src/model/actor/actor-basic.model';
+import DirectorBasic from 'src/model/director/director-basic.model';
+import CategoryBasic from 'src/model/category/category-basic.model';
+import { CollectibleMovieApiService } from 'src/service/collectible-movie/collectible-movie-api.service';
 
 @Component({
-    selector: 'app-management-collectible-money-upsert-modal.component',
-    templateUrl: './management-collectible-money-upsert-modal.component.html',
-    styleUrls: ['./management-collectible-money-upsert-modal.component.scss']
+    selector: 'app-management-collectible-movie-upsert-modal.component',
+    templateUrl: './management-collectible-movie-upsert-modal.component.html',
+    styleUrls: ['./management-collectible-movie-upsert-modal.component.scss']
 })
 
-export class ManagementCollectibleMoneyUpsertModal extends BaseModalComponent implements IModal, OnInit, OnDestroy, AfterViewInit {
+export class ManagementCollectibleMovieUpsertModal extends BaseModalComponent implements IModal, OnInit, OnDestroy, AfterViewInit {
 
-    public data: CollectibleMoneyBasic;
-    public clippings: Array<ClippingBasic>;
-    public emissions: Array<EmissionBasic>;
+    public data: CollectibleMovieBasic;
+    public actors: Array<ActorBasic>;
+    public directors: Array<DirectorBasic>;
+    public categories: Array<CategoryBasic>;
 
-    public moneyForm: FormGroup;
+    public movieForm: FormGroup;
     public submitted = false;
     public errorImageFileSize: string;
     public errorImageFileExtension: string;
     public imageField: string;
     public frontImageSrc;
-    public backImageSrc;
 
-    public errorEmissions: string;
-    public errorClippings: string;
+    public errorActors: string;
+    public errorCategories: string;
+    public errorDirectors: string;
 
     private newFrontImage;
-    private newBackImage;
 
     constructor(
         private activeModal: NgbActiveModal,
         private formBuilder: FormBuilder,
         private interactionService: InteractionService,
-        private collectibleMoneyService: CollectibleMoneyApiService,
-        private emissionService: EmissionApiService
+        private collectibleMovieService: CollectibleMovieApiService,
     ) {
         super();
     }
 
     ngOnInit(): void {
-        debugger;
-        this.moneyForm = this.formBuilder.group({
-            productNo: ['', Validators.required],
+        this.movieForm = this.formBuilder.group({
             name: ['', Validators.required],
+            directors: [null, Validators.required],
+            categories: [null, Validators.required],
+            actors: [null, Validators.required],
+            summary: ['', Validators.required],
             condition: ['', Validators.required],
-            serialNo: ['', Validators.required],
-            emission: [null, Validators.required],
-            clipping: ['', Validators.required],
             price: ['', Validators.required],
+            duration: ['', Validators.required],
             frontImage: [''],
-            backImage: [''],
         });
 
         if (this.data && this.data._id) {
-            this.moneyForm.patchValue(this.data);
-            this.controls.emission.setValue(this.data.emission._id);
-            this.controls.clipping.setValue(this.data.clipping._id);
+            this.movieForm.patchValue(this.data);
 
-            this.emissionService.getEmissionById(this.data.emission._id).subscribe(
-                (response: EmissionBasic) => {
-                    if (response) {
-                        this.clippings = response.clippings;
-                    }
-                }
-            );
+            let actorIds = []
+            if (this.data.actors) {
+                this.data.actors.forEach(actor => {
+                    actorIds.push(actor._id);
+                });
+            }
+
+            let directorIds = []
+            if (this.data.directors) {
+                this.data.directors.forEach(director => {
+                    directorIds.push(director._id);
+                });
+            }
+
+            let categoryIds = []
+            if (this.data.categories) {
+                this.data.categories.forEach(category => {
+                    categoryIds.push(category._id);
+                });
+            }
+
+            this.controls.actors.setValue(actorIds);
+            this.controls.directors.setValue(directorIds);
+            this.controls.categories.setValue(categoryIds);
 
             if (this.data.frontImage)
                 this.frontImageSrc = environment.API_IMAGE_PATH + this.data.frontImage;
-            if (this.data.backImage)
-                this.backImageSrc = environment.API_IMAGE_PATH + this.data.backImage;
+
         }
 
-    }
-
-    public onEmissionSelected(clippings: Array<ClippingBasic>) {
-        this.clippings = clippings;
-        this.controls.clipping.setValue(null)
     }
 
     ngOnDestroy(): void {
@@ -124,8 +131,6 @@ export class ManagementCollectibleMoneyUpsertModal extends BaseModalComponent im
             if (this.errorImageFileExtension || this.errorImageFileSize) {
                 if (field === "frontImage")
                     this.frontImageSrc = null;
-                else if (field === "backImage")
-                    this.backImageSrc = null;
                 return;
             }
 
@@ -135,44 +140,39 @@ export class ManagementCollectibleMoneyUpsertModal extends BaseModalComponent im
                 reader.onload = e => this.frontImageSrc = reader.result;
                 reader.readAsDataURL(file);
                 this.newFrontImage = file;
-            } else {
-                reader.onload = e => this.backImageSrc = reader.result;
-                reader.readAsDataURL(file);
-                this.newBackImage = file;
             }
-
         }
     }
 
-    public get controls() { return this.moneyForm.controls; }
+    public get controls() { return this.movieForm.controls; }
 
     public onSubmit() {
         this.submitted = true;
         if (this.errorImageFileExtension || this.errorImageFileSize) {
             return;
         }
-        if (this.moneyForm.invalid) {
+        if (this.movieForm.invalid) {
             return;
         }
 
         if (this.data && this.data._id) {
-            this.collectibleMoneyService.updateCollectibleMoney(this.data._id, this.createUpsertRequest()).subscribe(
-                (response: CollectibleMoneyBasic) => {
-                    this.interactionService.showMessage("Para başarıyla güncellendi.", ToastrType.Success, "")
+            this.collectibleMovieService.updateCollectibleMovie(this.data._id, this.createUpsertRequest()).subscribe(
+                (response: CollectibleMovieBasic) => {
+                    this.interactionService.showMessage("Film başarıyla güncellendi.", ToastrType.Success, "")
                     this.activeModal.close();
                 },
                 (err) => {
-                    this.interactionService.showMessage("Para güncellenirken hata oluştu.", ToastrType.Error, "")
+                    this.interactionService.showMessage("Film güncellenirken hata oluştu.", ToastrType.Error, "")
                 });
 
         } else {
-            this.collectibleMoneyService.saveCollectibleMoney(this.createUpsertRequest()).subscribe(
-                (response: CollectibleMoneyBasic) => {
-                    this.interactionService.showMessage("Para başarıyla eklendi.", ToastrType.Success, "")
+            this.collectibleMovieService.saveCollectibleMovie(this.createUpsertRequest()).subscribe(
+                (response: CollectibleMovieBasic) => {
+                    this.interactionService.showMessage("Film başarıyla eklendi.", ToastrType.Success, "")
                     this.activeModal.close();
                 },
                 (err) => {
-                    this.interactionService.showMessage("Para eklenirken hata oluştu.", ToastrType.Error, "")
+                    this.interactionService.showMessage("Film eklenirken hata oluştu.", ToastrType.Error, "")
                 });
         }
 
@@ -180,22 +180,26 @@ export class ManagementCollectibleMoneyUpsertModal extends BaseModalComponent im
 
     private createUpsertRequest(): FormData {
         let formData = new FormData();
-        formData.append('productNo', this.controls.productNo.value);
         formData.append('name', this.controls.name.value);
+
+        for (let director of this.movieForm.controls.directors.value) {
+            formData.append('directors[]', director);
+        }
+        for (let category of this.movieForm.controls.categories.value) {
+            formData.append('categories[]', category);
+        }
+        for (let actor of this.movieForm.controls.actors.value) {
+            formData.append('actors[]', actor);
+        }
+
+        formData.append('summary', this.controls.summary.value);
         formData.append('condition', this.controls.condition.value);
-        formData.append('serialNo', this.controls.serialNo.value);
-        formData.append('clipping', this.moneyForm.controls.clipping.value);
-        formData.append('emission', this.moneyForm.controls.emission.value);
         formData.append('price', this.controls.price.value);
+        formData.append('duration', this.controls.duration.value);
         if (this.newFrontImage != null) {
             formData.append('frontImage', this.newFrontImage);
             if (this.data && this.data.frontImage)
                 formData.append('frontImageId', this.data.frontImage);
-        }
-        if (this.newBackImage != null) {
-            formData.append('backImage', this.newBackImage);
-            if (this.data && this.data.backImage)
-                formData.append('backImageId', this.data.backImage);
         }
         return formData;
     }

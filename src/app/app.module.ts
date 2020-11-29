@@ -81,6 +81,11 @@ import { ManagementActorComponent } from 'src/component/view/management/manageme
 import { ManagementActorUpsertModal } from 'src/component/view/management/management-actor-upsert/management-actor-upsert-modal.component';
 import { ManagementDirectorComponent } from 'src/component/view/management/management-director/management-director.component';
 import { ManagementDirectorUpsertModal } from 'src/component/view/management/management-director-upsert/management-director-upsert-modal.component';
+import { ActorSelectComponent } from 'src/component/common/actor-select/actor-select.component';
+import { DirectorSelectComponent } from 'src/component/common/director-select/director-select.component';
+import { ManagementCollectibleMovieComponent } from 'src/component/view/management/management-collectible-movie/management-collectible-movie.component';
+import { CollectibleMovieApiService } from 'src/service/collectible-movie/collectible-movie-api.service';
+import { ManagementCollectibleMovieUpsertModal } from 'src/component/view/management/management-collectible-movie-upsert/management-collectible-movie-upsert-modal.component';
 
 export function playerFactory() {
   return player;
@@ -126,7 +131,11 @@ export function playerFactory() {
     ManagementActorComponent,
     ManagementActorUpsertModal,
     ManagementDirectorComponent,
-    ManagementDirectorUpsertModal
+    ManagementDirectorUpsertModal,
+    ActorSelectComponent,
+    DirectorSelectComponent,
+    ManagementCollectibleMovieComponent,
+    ManagementCollectibleMovieUpsertModal
   ],
   imports: [
     FormsModule,
@@ -176,7 +185,9 @@ export function playerFactory() {
     ProductApiService,
     CategoryApiService,
     ActorApiService,
-    DirectorApiService
+    DirectorApiService,
+    CollectibleMoneyApiService,
+    CollectibleMovieApiService
   ],
   entryComponents: [
     DialogComponent,
@@ -189,7 +200,8 @@ export function playerFactory() {
     ManagementCategoryUpsertModal,
     ManagementCategoryInsertModal,
     ManagementActorUpsertModal,
-    ManagementDirectorUpsertModal
+    ManagementDirectorUpsertModal,
+    ManagementCollectibleMovieUpsertModal
   ],
   bootstrap: [AppComponent]
 })
