@@ -1,0 +1,10 @@
+:host {
+    .showAll {
+        opacity: 1;
+        transition: 0.3s;
+    }
+    .showAll:hover {
+        opacity: 0.8;
+        cursor: pointer;
+    }
+}

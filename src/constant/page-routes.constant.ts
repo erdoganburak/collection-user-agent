@@ -19,6 +19,11 @@ export const PageRoutes = {
 		fullPath: '/movies',
 		value: 'Filmler'
 	},
+	MOVIE_DETAIL: {
+		path: 'movie-detail',
+		fullPath: '/movie-detail',
+		value: 'Film Detay'
+	},
 	MONEY: {
 		path: 'money',
 		fullPath: '/money',

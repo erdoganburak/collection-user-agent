@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-12">
+        <app-title [title]="title" [description]="description" [centerTitle]="centerTitle"></app-title>
+    </div>
+    <div *ngIf="showAll" class="col-12 showAll text-right">
+        <span (click)="onClickShowAll(event)">Tümünü Göster</span>
+    </div>
+    <div class="col-12">
+        <div [ngClass]="{'d-flex justify-content-center': centerProducts}" class="row"
+            *ngIf="collectibleMovies && paginationResponse" [@listAnimation]="collectibleMovies.length">
+            <div *ngFor="let item of collectibleMovies | paginate: {
+                itemsPerPage: this.paginationResponse.limit,
+                currentPage: pageNumber,
+                totalItems: this.paginationResponse.count
+            }" class="col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6 my-3">
+                <app-movie-item (click)="onClickItem(item)" [item]="item"></app-movie-item>
+            </div>
+            <div *ngIf="showPagination" class="col-12 my-5">
+                <app-pagination [paginationResponse]="paginationResponse"
+                    (pageNumberChanged)="pageNumberChanged($event)">
+                </app-pagination>
+            </div>
+        </div>
+    </div>
+</div>

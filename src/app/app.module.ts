@@ -86,6 +86,8 @@ import { DirectorSelectComponent } from 'src/component/common/director-select/di
 import { ManagementCollectibleMovieComponent } from 'src/component/view/management/management-collectible-movie/management-collectible-movie.component';
 import { CollectibleMovieApiService } from 'src/service/collectible-movie/collectible-movie-api.service';
 import { ManagementCollectibleMovieUpsertModal } from 'src/component/view/management/management-collectible-movie-upsert/management-collectible-movie-upsert-modal.component';
+import { MovieShowcaseComponent } from 'src/component/view/movie/movie-showcase/movie-showcase.component';
+import { MovieItemComponent } from 'src/component/view/movie/movie-item/movie-item.component';
 
 export function playerFactory() {
   return player;
@@ -135,7 +137,9 @@ export function playerFactory() {
     ActorSelectComponent,
     DirectorSelectComponent,
     ManagementCollectibleMovieComponent,
-    ManagementCollectibleMovieUpsertModal
+    ManagementCollectibleMovieUpsertModal,
+    MovieShowcaseComponent,
+    MovieItemComponent
   ],
   imports: [
     FormsModule,
