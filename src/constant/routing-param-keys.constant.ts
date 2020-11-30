@@ -1,3 +1,4 @@
 export const RoutingParamKeys = {
-    MoneyId: "mid"
+    MoneyId: "mid",
+    MovieId: "moid"
 }

@@ -8,7 +8,7 @@
   </div>
   <div *ngIf="mode=='multiple'">
     <nz-select [nzMaxTagCount]="3" [formControlName]="controlName" nzShowSearch nzServerSearch nzAllowClear
-      nzPlaceHolder="Aktör seçiniz" nzMode="default" (nzOnSearch)="onSearch($event)" nzMode="multiple"
+      nzPlaceHolder="Oyuncu seçiniz" nzMode="default" (nzOnSearch)="onSearch($event)" nzMode="multiple"
       (nzScrollToBottom)="loadMore()" [nzDropdownRender]="renderTemplate" [nzNotFoundContent]="'Sonuç bulunamadı.'">
       <nz-option *ngFor="let a of actors" [nzValue]="a._id" [nzLabel]="a.name"></nz-option>
     </nz-select>

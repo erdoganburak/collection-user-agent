@@ -6,113 +6,118 @@ import { ListAnimation } from 'src/app/animations/list-up.animation';
 import { ProductType } from 'src/app/enum/product-type.enum';
 import { Sort } from 'src/app/enum/sort.enum';
 import { ImageModal } from 'src/component/common/image-modal/image-modal.component';
+import { MovieFormats } from 'src/constant/movie-format.constant';
 import { Pagination } from 'src/constant/pagination.constant';
 import { RoutingParamKeys } from 'src/constant/routing-param-keys.constant';
 import { environment } from 'src/environments/environment';
-import CollectibleMoneyBasic from 'src/model/collectible-money/collectible-money-basic';
-import CollectibleMoneyFilterRequest from 'src/model/collectible-money/collectible-money-filter-request';
+import CollectibleMovieBasic from 'src/model/collectible-movie/collectible-movie-basic';
+import CollectibleMovieFilterRequest from 'src/model/collectible-movie/collectible-movie-filter-request';
 import PaginationRequest from 'src/model/common/pagination-request.model';
 import PaginationResponse from 'src/model/common/pagination-response.model';
-import { CollectibleMoneyApiService } from 'src/service/collectible-money/collectible-money-api.service';
+import { CollectibleMovieApiService } from 'src/service/collectible-movie/collectible-movie-api.service';
 import { RoutingParams, RoutingService } from 'src/service/routing.service';
 
 @Component({
-    selector: 'app-money-detail',
-    templateUrl: './money-detail.component.html',
-    styleUrls: ['./money-detail.component.scss'],
+    selector: 'app-movie-detail',
+    templateUrl: './movie-detail.component.html',
+    styleUrls: ['./movie-detail.component.scss'],
     animations: ListAnimation
 })
 
-export class MoneyDetailComponent implements OnInit, OnDestroy {
+export class MovieDetailComponent implements OnInit, OnDestroy {
 
-    public collectibleMoneys: Array<CollectibleMoneyBasic>;
+    public collectibleMovies: Array<CollectibleMovieBasic>;
     public paginationResponse: PaginationResponse;
     public title: string;
     public description: string;
-    public item: CollectibleMoneyBasic;
+    public item: CollectibleMovieBasic;
     public id: string;
     public imagePath: string;
     public otherProductsTitle: string;
-    public otherProductsRequest: CollectibleMoneyFilterRequest;
+    public otherProductsRequest: CollectibleMovieFilterRequest;
     public showAll: boolean;
     public showPagination: boolean;
     public centerTitle: boolean;
     public centerProducts: boolean;
     public dontUseRouting: boolean;
+    public formats;
 
     private routingParams: RoutingParams;
-    private collectibleMoneySubscription: Subscription;
+    private collectibleMovieSubscription: Subscription;
     private images: Array<string>;
 
     constructor(
         private route: ActivatedRoute,
         private routingService: RoutingService,
-        private collectibleMoneyService: CollectibleMoneyApiService,
+        private collectibleMovieService: CollectibleMovieApiService,
         private modalService: NgbModal
     ) {
     }
 
     ngOnInit(): void {
         this.images = [];
+        this.formats = MovieFormats;
         this.route.queryParams.subscribe(params => {
             this.routingParams = this.routingService.getRoutingParams(
                 params,
-                [RoutingParamKeys.MoneyId],
-                [RoutingParamKeys.MoneyId]
+                [RoutingParamKeys.MovieId],
+                [RoutingParamKeys.MovieId]
             );
-            this.getMoneyById();
+            this.getMovieById();
         });
     }
 
     ngOnDestroy(): void {
-        if (this.collectibleMoneySubscription) this.collectibleMoneySubscription.unsubscribe();
+        if (this.collectibleMovieSubscription) this.collectibleMovieSubscription.unsubscribe();
     }
 
     public onClickImage(): void {
-        const modalRef = this.modalService.open(ImageModal, { centered: true, size: "lg" });
-        (modalRef.componentInstance as ImageModal).items = this.images;
-        modalRef.result.then(() => {
-
-        }, (reason) => {
-
-        });
+        /* const modalRef = this.modalService.open(ImageModal, { centered: true, size: "lg" });
+         (modalRef.componentInstance as ImageModal).items = this.images;
+         modalRef.result.then(() => {
+ 
+         }, (reason) => {
+ 
+         });*/
     }
 
-    private createCollectibleMoneyRequest(): CollectibleMoneyFilterRequest {
+    private createCollectibleMovieRequest(): CollectibleMovieFilterRequest {
+        let categoryIds = [];
+        this.item.categories.forEach(element => {
+            categoryIds.push(element._id)
+        });
         const paginationRequest: PaginationRequest = {
             skip: 0,
             limit: Pagination.DETAIL_PAGINATION_LIMIT
         }
         return {
-            productType: ProductType.Money,
-            productNo: "",
+            productType: ProductType.Movie,
+            condition: null,
             name: "",
-            serialNo: "",
             minPrice: null,
             maxPrice: null,
-            condition: null,
-            clippings: [],
-            emission: this.item.emission._id,
+            actors: [],
+            directors: [],
+            categories: categoryIds,
+            year: null,
+            format: null,
             sort: Sort.Desc,
             paginationRequest: paginationRequest,
         }
     }
 
-    private getMoneyById() {
+    private getMovieById() {
         if (this.routingParams.hasParam) {
-            if (!this.item && this.routingParams[RoutingParamKeys.MoneyId]) {
-                this.id = this.routingParams[RoutingParamKeys.MoneyId];
+            if (!this.item && this.routingParams[RoutingParamKeys.MovieId]) {
+                this.id = this.routingParams[RoutingParamKeys.MovieId];
             }
             this.images = [];
-            this.collectibleMoneySubscription = this.collectibleMoneyService.getMoneyById(this.id).subscribe(
-                (response: CollectibleMoneyBasic) => {
+            this.collectibleMovieSubscription = this.collectibleMovieService.getMovieById(this.id).subscribe(
+                (response: CollectibleMovieBasic) => {
                     this.item = response;
                     this.imagePath = environment.API_IMAGE_PATH + this.item.frontImage;
                     if (this.item.frontImage)
                         this.images.push(this.item.frontImage);
-                    if (this.item.backImage)
-                        this.images.push(this.item.backImage);
-
                     this.initializeOtherProducts();
                 }
             );
@@ -120,8 +125,8 @@ export class MoneyDetailComponent implements OnInit, OnDestroy {
     }
 
     private initializeOtherProducts(): void {
-        this.otherProductsTitle = "İlgilenebileceğiniz Diğer " + this.item.emission.name + " Ürünleri"
-        this.otherProductsRequest = this.createCollectibleMoneyRequest();
+        this.otherProductsTitle = "İlgilenebileceğiniz Diğer Filmler"
+        this.otherProductsRequest = this.createCollectibleMovieRequest();
         this.showAll = false;
         this.showPagination = true;
         this.centerTitle = true;
@@ -129,10 +134,10 @@ export class MoneyDetailComponent implements OnInit, OnDestroy {
         this.dontUseRouting = true;
     }
 
-    public otherProductItemClicked(item: CollectibleMoneyBasic): void {
+    public otherProductItemClicked(item: CollectibleMovieBasic): void {
         this.item = item;
         this.id = item._id;
-        this.getMoneyById();
+        this.getMovieById();
         window.scroll(0, 0);
     }
 

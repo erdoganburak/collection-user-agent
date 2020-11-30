@@ -1,3 +1,4 @@
+import { MovieFormat } from 'src/app/enum/movie-format.enum';
 import { ProductType } from 'src/app/enum/product-type.enum';
 import { Sort } from 'src/app/enum/sort.enum';
 import ActorBasic from '../actor/actor-basic.model';
@@ -14,6 +15,8 @@ export default interface CollectibleMovieFilterRequest {
     directors: Array<DirectorBasic>;
     actors: Array<ActorBasic>;
     categories: Array<CategoryBasic>;
+    year: number,
+    format: MovieFormat,
     sort: Sort;
     paginationRequest: PaginationRequest;
 }

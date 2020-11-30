@@ -66,7 +66,7 @@ export class MovieShowcaseComponent implements OnInit, OnDestroy {
             this.itemClicked.emit(item);
         } else {
             let params = {};
-            params[RoutingParamKeys.MoneyId] = item._id;
+            params[RoutingParamKeys.MovieId] = item._id;
             this.routingService.gotoPage(PageRoutes.MOVIE_DETAIL.fullPath, params);
         }
     }
@@ -100,6 +100,8 @@ export class MovieShowcaseComponent implements OnInit, OnDestroy {
             actors: [],
             directors: [],
             categories: [],
+            year: null,
+            format: null,
             sort: Sort.Desc,
             paginationRequest: paginationRequest,
         }

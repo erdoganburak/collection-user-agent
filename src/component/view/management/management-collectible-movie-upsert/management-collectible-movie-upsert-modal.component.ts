@@ -59,6 +59,8 @@ export class ManagementCollectibleMovieUpsertModal extends BaseModalComponent im
             condition: ['', Validators.required],
             price: ['', Validators.required],
             duration: ['', Validators.required],
+            formats: ['', Validators.required],
+            year: ['', Validators.required],
             frontImage: [''],
         });
 
@@ -89,6 +91,7 @@ export class ManagementCollectibleMovieUpsertModal extends BaseModalComponent im
             this.controls.actors.setValue(actorIds);
             this.controls.directors.setValue(directorIds);
             this.controls.categories.setValue(categoryIds);
+            this.controls.formats.setValue(this.data.format)
 
             if (this.data.frontImage)
                 this.frontImageSrc = environment.API_IMAGE_PATH + this.data.frontImage;
@@ -196,6 +199,8 @@ export class ManagementCollectibleMovieUpsertModal extends BaseModalComponent im
         formData.append('condition', this.controls.condition.value);
         formData.append('price', this.controls.price.value);
         formData.append('duration', this.controls.duration.value);
+        formData.append('year', this.controls.year.value);
+        formData.append('format', this.controls.formats.value);
         if (this.newFrontImage != null) {
             formData.append('frontImage', this.newFrontImage);
             if (this.data && this.data.frontImage)

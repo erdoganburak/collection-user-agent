@@ -49,7 +49,7 @@ import { TitleComponent } from 'src/component/common/title/title.component';
 import { MoneyDetailComponent } from 'src/component/view/money/money-detail/money-detail.component';
 import player from 'lottie-web';
 
-import { faClipboardList, faFilm, faKey, faPlus, faShoppingCart, faTimes, faUsers, faVideo } from '@fortawesome/free-solid-svg-icons';
+import { faClipboardList, faCompactDisc, faFilm, faKey, faPlus, faShoppingCart, faTimes, faUsers, faVideo } from '@fortawesome/free-solid-svg-icons';
 import { faCog } from '@fortawesome/free-solid-svg-icons';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
@@ -88,6 +88,8 @@ import { CollectibleMovieApiService } from 'src/service/collectible-movie/collec
 import { ManagementCollectibleMovieUpsertModal } from 'src/component/view/management/management-collectible-movie-upsert/management-collectible-movie-upsert-modal.component';
 import { MovieShowcaseComponent } from 'src/component/view/movie/movie-showcase/movie-showcase.component';
 import { MovieItemComponent } from 'src/component/view/movie/movie-item/movie-item.component';
+import { MovieFormatSelectComponent } from 'src/component/common/movie-format-select/movie-format-select.component';
+import { MovieDetailComponent } from 'src/component/view/movie/movie-detail/movie-detail.component';
 
 export function playerFactory() {
   return player;
@@ -139,7 +141,9 @@ export function playerFactory() {
     ManagementCollectibleMovieComponent,
     ManagementCollectibleMovieUpsertModal,
     MovieShowcaseComponent,
-    MovieItemComponent
+    MovieItemComponent,
+    MovieFormatSelectComponent,
+    MovieDetailComponent
   ],
   imports: [
     FormsModule,
@@ -234,6 +238,7 @@ export class AppModule {
     library.addIcons(faUsers);
     library.addIcons(faVideo);
     library.addIcons(faClipboardList);
+    library.addIcons(faCompactDisc);
   }
 
 }

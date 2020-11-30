@@ -1,0 +1,11 @@
+<div *ngIf="controlName && mode">
+  <div *ngIf="mode=='default'">
+    <nz-select [formControlName]="controlName" nzAllowClear nzPlaceHolder="Format seçiniz" nzMode="default"
+      nzMode="default" [nzDropdownRender]="renderTemplate">
+      <nz-option *ngFor="let f of formats" [nzValue]="f.value" [nzLabel]="f.label"></nz-option>
+    </nz-select>
+  </div>
+  <ng-template #renderTemplate>
+    <nz-spin *ngIf="isLoading"></nz-spin>
+  </ng-template>
+</div>

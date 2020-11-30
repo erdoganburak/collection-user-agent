@@ -18,6 +18,7 @@ import { ManagementCategoryComponent } from 'src/component/view/management/manag
 import { ManagementActorComponent } from 'src/component/view/management/management-actor/management-actor.component';
 import { ManagementDirectorComponent } from 'src/component/view/management/management-director/management-director.component';
 import { ManagementCollectibleMovieComponent } from 'src/component/view/management/management-collectible-movie/management-collectible-movie.component';
+import { MovieDetailComponent } from 'src/component/view/movie/movie-detail/movie-detail.component';
 
 const routes: Routes = [
   {
@@ -49,6 +50,11 @@ const routes: Routes = [
     path: PageRoutes.MOVIES.path,
     component: MovieComponent,
     canActivate: [RoutingService]
+  },
+  {
+    path: PageRoutes.MOVIE_DETAIL.path,
+    component: MovieDetailComponent,
+    canActivate: [RoutingService],
   },
   {
     path: PageRoutes.SHOPPING_CART.path,

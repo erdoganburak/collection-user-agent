@@ -79,6 +79,8 @@ export class HomeComponent implements OnInit, OnDestroy {
             actors: [],
             directors: [],
             categories: [],
+            year: null,
+            format: null,
             sort: Sort.Desc,
             paginationRequest: paginationRequest,
         }

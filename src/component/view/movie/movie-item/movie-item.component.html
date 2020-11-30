@@ -4,12 +4,21 @@
     </div>
     <div class="body">
         <p class="title h5">{{item.name}}</p>
+        <ng-container *ngFor="let f of formats">
+            <span *ngIf="f.value === item.format">
+                <fa-icon [ngStyle]="{'color': f.color }" [icon]="['fas', 'compact-disc']" size="1x">
+                </fa-icon>
+                {{f.label}}
+            </span>
+        </ng-container>
         <small class="text-muted">Kondisyon: {{item.condition}} / 10</small>
-        <h2 *ngFor="let category of item.categories; let i = index" class="badge badge-secondary mr-2">
-            {{category.name}}
-        </h2>
+        <div>
+            <h2 *ngFor="let category of item.categories; let i = index" class="badge badge-secondary mr-2">
+                {{category.name}}
+            </h2>
+        </div>
     </div>
-    <div class="footer">
-        <p class="text h5">{{item.price | currency: "TRY"}}</p>
+    <div class="footer mt-2">
+        <p class="text h4">{{item.price | currency: "TRY"}}</p>
     </div>
 </div>

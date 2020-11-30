@@ -33,12 +33,12 @@
                 -webkit-line-clamp: 3; /* after 3 line show ... */
                 -webkit-box-orient: vertical;
             }
-            .text {
-                font-weight: bold;
-            }
         }
         .footer {
             height: 20px;
+            .text {
+                font-weight: bold;
+            }
         }
     }
 

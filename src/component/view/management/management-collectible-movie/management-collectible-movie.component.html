@@ -60,6 +60,18 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="inputYear">Yıl</label>
+                        <input type="number" formControlName="year" class="form-control form-control-sm" id="inputYear"
+                            placeholder="Yıl" [ngClass]="{ 'is-invalid': submitted && controls.year.errors }">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputYear">Format</label>
+                        <app-movie-format-select [parentForm]="movieForm" [controlName]="'formats'" [mode]="'default'">
+                        </app-movie-format-select>
+                    </div>
+
                     <div class="d-flex justify-content-end">
                         <button type="button" class="btn btn-sm btn-outline-primary mx-2"
                             (click)="onClickClear()">Temizle</button>
@@ -84,6 +96,8 @@
                                 <th scope="col">Oyuncu</th>
                                 <th scope="col">Yönetmen</th>
                                 <th scope="col">Süre</th>
+                                <th scope="col">Yıl</th>
+                                <th scope="col">Format</th>
                                 <th scope="col">Düzenle</th>
                                 <th scope="col">Sil</th>
                             </tr>
@@ -123,6 +137,17 @@
                                     </h2>
                                 </td>
                                 <td scope="row">{{movie.duration}} Dakika</td>
+                                <td scope="row">{{movie.year}}</td>
+                                <td scope="row">
+                                    <ng-container *ngFor="let f of formats">
+                                        <span *ngIf="f.value === movie.format">
+                                            <fa-icon [ngStyle]="{'color': f.color }" [icon]="['fas', 'compact-disc']"
+                                                size="1x">
+                                            </fa-icon>
+                                            {{f.label}}
+                                        </span>
+                                    </ng-container>
+                                </td>
                                 <td>
                                     <button type="button" class="btn btn-sm btn-outline-primary"
                                         (click)="onClickEdit(movie)">Düzenle</button>

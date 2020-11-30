@@ -16,9 +16,10 @@ import CollectibleMovieBasic from 'src/model/collectible-movie/collectible-movie
 import CategoryBasic from 'src/model/category/category-basic.model';
 import ActorBasic from 'src/model/actor/actor-basic.model';
 import DirectorBasic from 'src/model/director/director-basic.model';
-import CollectibleMovieFilterRequest from 'src/model/collectible-movie/collectible-movie-filter-request';
 import CollectibleMovieFilterResponse from 'src/model/collectible-movie/collectible-movie-filter-response';
 import { ManagementCollectibleMovieUpsertModal } from '../management-collectible-movie-upsert/management-collectible-movie-upsert-modal.component';
+import { MovieFormats } from 'src/constant/movie-format.constant';
+import CollectibleMovieFilterRequest from 'src/model/collectible-movie/collectible-movie-filter-request';
 
 @Component({
     selector: 'app-collectible-movie',
@@ -38,6 +39,7 @@ export class ManagementCollectibleMovieComponent implements OnInit, OnDestroy, A
     public paginationResponse: PaginationResponse;
     public movieForm: FormGroup;
     public imagePath: string;
+    public formats;
 
     private pageNumber: number;
 
@@ -55,6 +57,7 @@ export class ManagementCollectibleMovieComponent implements OnInit, OnDestroy, A
         this.description = "Film ekleme, çıkarma ve güncelleme"
         this.icon = "film";
         this.pageNumber = 1;
+        this.formats = MovieFormats;
         this.movieForm = this.formBuilder.group({
             name: [''],
             minPrice: [''],
@@ -63,6 +66,8 @@ export class ManagementCollectibleMovieComponent implements OnInit, OnDestroy, A
             actors: [],
             directors: [],
             categories: [],
+            year: [''],
+            formats: ['']
         });
 
         this.getData();
@@ -145,6 +150,7 @@ export class ManagementCollectibleMovieComponent implements OnInit, OnDestroy, A
             skip: (this.pageNumber - 1) * Pagination.PAGINATION_LIMIT,
             limit: Pagination.PAGINATION_LIMIT
         }
+        debugger;
         return {
             productType: ProductType.Movie,
             condition: this.movieForm.controls.condition.value ? Number(this.movieForm.controls.condition.value) : null,
@@ -154,6 +160,8 @@ export class ManagementCollectibleMovieComponent implements OnInit, OnDestroy, A
             directors: this.movieForm.controls.directors.value ? this.movieForm.controls.directors.value : [],
             actors: this.movieForm.controls.actors.value ? this.movieForm.controls.actors.value : [],
             categories: this.movieForm.controls.categories.value ? this.movieForm.controls.categories.value : [],
+            year: this.movieForm.controls.year.value ? Number(this.movieForm.controls.year.value) : null,
+            format: this.movieForm.controls.formats.value ? Number(this.movieForm.controls.formats.value) : null,
             sort: Sort.Desc,
             paginationRequest: paginationRequest,
         }
