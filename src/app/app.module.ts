@@ -90,6 +90,9 @@ import { MovieShowcaseComponent } from 'src/component/view/movie/movie-showcase/
 import { MovieItemComponent } from 'src/component/view/movie/movie-item/movie-item.component';
 import { MovieFormatSelectComponent } from 'src/component/common/movie-format-select/movie-format-select.component';
 import { MovieDetailComponent } from 'src/component/view/movie/movie-detail/movie-detail.component';
+import { ActorDetailComponent } from 'src/component/view/movie/actor-detail/actor-detail.component';
+import { DirectorDetailComponent } from 'src/component/view/movie/director-detail/director-detail.component';
+import { CategoryDetailComponent } from 'src/component/view/movie/category-detail/category-detail.component';
 
 export function playerFactory() {
   return player;
@@ -143,7 +146,10 @@ export function playerFactory() {
     MovieShowcaseComponent,
     MovieItemComponent,
     MovieFormatSelectComponent,
-    MovieDetailComponent
+    MovieDetailComponent,
+    ActorDetailComponent,
+    DirectorDetailComponent,
+    CategoryDetailComponent
   ],
   imports: [
     FormsModule,

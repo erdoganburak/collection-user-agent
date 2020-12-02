@@ -11,20 +11,21 @@
             <div class="col-xl-6 col-lg-12 col-md-12 detail my-5">
                 <div class="col-12 detail-item-container py-3">
                     <p class="title h2">{{item.name}}</p>
-                    <h2 *ngFor="let category of item.categories; let i = index" class="badge badge-secondary mr-2">
-                        {{category.name}}
+                    <h2 *ngFor="let category of item.categories; let i = index"
+                        class="badge badge-secondary mr-2 clickable">
+                        <span (click)="onClickCategory(category)">{{category.name}}</span>
                     </h2>
                 </div>
                 <div class="col-12 detail-item-container py-3">
                     <span class="h6 field">Yönetmen: </span>
-                    <span *ngFor="let director of item.directors; let i = index" class="mr-2">
-                        <span class="h6 value">{{director.name}}</span>
+                    <span *ngFor="let director of item.directors; let i = index" class="mr-2 clickable">
+                        <span class="h6 value" (click)="onClickDirector(director)">{{director.name}}</span>
                     </span>
                 </div>
                 <div class="col-12 detail-item-container py-3">
                     <span class="h6 field">Oyuncular: </span>
-                    <span *ngFor="let actor of item.actors; let i = index" class="mr-2">
-                        <span class="h6 value">
+                    <span *ngFor="let actor of item.actors; let i = index" class="mr-2 clickable">
+                        <span class="h6 value" (click)="onClickActor(actor)">
                             {{actor.name}}
                         </span>
                         <span *ngIf="item.actors.length-1 != i" class="h6 value">

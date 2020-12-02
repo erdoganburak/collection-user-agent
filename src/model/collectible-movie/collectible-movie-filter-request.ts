@@ -12,9 +12,9 @@ export default interface CollectibleMovieFilterRequest {
     name: string;
     minPrice: number;
     maxPrice: number;
-    directors: Array<DirectorBasic>;
-    actors: Array<ActorBasic>;
-    categories: Array<CategoryBasic>;
+    directors: Array<string>;
+    actors: Array<string>;
+    categories: Array<string>;
     year: number,
     format: MovieFormat,
     sort: Sort;

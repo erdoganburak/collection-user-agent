@@ -26,7 +26,7 @@ export class CategoryApi extends BaseApi {
 		return this.request(RequestTypes.PATCH, true, `/category/update-category/${categoryId}`, request, "CategoryBasic");
 	}
 
-	public getCategoryById(categoryId: string): Observable<CategoryGetAllResponse> {
+	public getCategoryById(categoryId: string): Observable<CategoryBasic> {
 		return this.request(RequestTypes.GET, false, `/category/get/${categoryId}`, null, "CategoryGetAllResponse");
 	}
 

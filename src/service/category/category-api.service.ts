@@ -41,7 +41,7 @@ export class CategoryApiService extends BaseService {
 		return this.api.getCategories(request).pipe(catchError((error) => this.handleError(error, [])));
 	}
 
-	public getCategoryById(categoryId: string): Observable<CategoryGetAllResponse> {
+	public getCategoryById(categoryId: string): Observable<CategoryBasic> {
 		return this.api.getCategoryById(categoryId).pipe(catchError((error) => this.handleError(error, [])));
 	}
 

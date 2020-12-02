@@ -19,6 +19,9 @@ import { ManagementActorComponent } from 'src/component/view/management/manageme
 import { ManagementDirectorComponent } from 'src/component/view/management/management-director/management-director.component';
 import { ManagementCollectibleMovieComponent } from 'src/component/view/management/management-collectible-movie/management-collectible-movie.component';
 import { MovieDetailComponent } from 'src/component/view/movie/movie-detail/movie-detail.component';
+import { ActorDetailComponent } from 'src/component/view/movie/actor-detail/actor-detail.component';
+import { DirectorDetailComponent } from 'src/component/view/movie/director-detail/director-detail.component';
+import { CategoryDetailComponent } from 'src/component/view/movie/category-detail/category-detail.component';
 
 const routes: Routes = [
   {
@@ -54,6 +57,21 @@ const routes: Routes = [
   {
     path: PageRoutes.MOVIE_DETAIL.path,
     component: MovieDetailComponent,
+    canActivate: [RoutingService],
+  },
+  {
+    path: PageRoutes.ACTOR_DETAIL.path,
+    component: ActorDetailComponent,
+    canActivate: [RoutingService],
+  },
+  {
+    path: PageRoutes.DIRECTOR_DETAIL.path,
+    component: DirectorDetailComponent,
+    canActivate: [RoutingService],
+  },
+  {
+    path: PageRoutes.CATEGORY_DETAIL.path,
+    component: CategoryDetailComponent,
     canActivate: [RoutingService],
   },
   {

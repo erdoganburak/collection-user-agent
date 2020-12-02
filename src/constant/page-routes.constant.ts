@@ -24,6 +24,21 @@ export const PageRoutes = {
 		fullPath: '/movie-detail',
 		value: 'Film Detay'
 	},
+	ACTOR_DETAIL: {
+		path: 'actor-detail',
+		fullPath: '/actor-detail',
+		value: 'Oyuncu Detay'
+	},
+	DIRECTOR_DETAIL: {
+		path: 'director-detail',
+		fullPath: '/director-detail',
+		value: 'Yönetmen Detay'
+	},
+	CATEGORY_DETAIL: {
+		path: 'category-detail',
+		fullPath: '/category-detail',
+		value: 'Category Detay'
+	},
 	MONEY: {
 		path: 'money',
 		fullPath: '/money',
