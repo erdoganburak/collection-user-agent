@@ -118,7 +118,7 @@ export class DirectorDetailComponent implements OnInit, OnDestroy {
     }
 
     private initializeOtherProducts(): void {
-        this.otherProductsTitle = "Yönetmenin Diğer Filmleri"
+        this.otherProductsTitle = "Yönetmenin Yer Aldığı Filmler"
         this.otherProductsRequest = this.createCollectibleMovieRequest();
         this.showAll = false;
         this.showPagination = true;
