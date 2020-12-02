@@ -15,6 +15,7 @@ import PaginationRequest from 'src/model/common/pagination-request.model';
 import PaginationResponse from 'src/model/common/pagination-response.model';
 import { CollectibleMoneyApiService } from 'src/service/collectible-money/collectible-money-api.service';
 import { RoutingParams, RoutingService } from 'src/service/routing.service';
+import { ShoppingCartService } from 'src/service/shopping-cart.service';
 
 @Component({
     selector: 'app-money-detail',
@@ -48,7 +49,8 @@ export class MoneyDetailComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private routingService: RoutingService,
         private collectibleMoneyService: CollectibleMoneyApiService,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private shoppingCartService: ShoppingCartService
     ) {
     }
 
@@ -134,6 +136,10 @@ export class MoneyDetailComponent implements OnInit, OnDestroy {
         this.id = item._id;
         this.getMoneyById();
         window.scroll(0, 0);
+    }
+
+    public onAddToCart() {
+        this.shoppingCartService.addToCart(this.item._id)
     }
 
 }

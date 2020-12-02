@@ -93,6 +93,8 @@ import { MovieDetailComponent } from 'src/component/view/movie/movie-detail/movi
 import { ActorDetailComponent } from 'src/component/view/movie/actor-detail/actor-detail.component';
 import { DirectorDetailComponent } from 'src/component/view/movie/director-detail/director-detail.component';
 import { CategoryDetailComponent } from 'src/component/view/movie/category-detail/category-detail.component';
+import { ShoppingCartService } from 'src/service/shopping-cart.service';
+import { ShoppingCartItemComponent } from 'src/component/view/shopping-cart/shopping-cart-item/shopping-cart-item.component';
 
 export function playerFactory() {
   return player;
@@ -149,7 +151,8 @@ export function playerFactory() {
     MovieDetailComponent,
     ActorDetailComponent,
     DirectorDetailComponent,
-    CategoryDetailComponent
+    CategoryDetailComponent,
+    ShoppingCartItemComponent
   ],
   imports: [
     FormsModule,
@@ -201,7 +204,8 @@ export function playerFactory() {
     ActorApiService,
     DirectorApiService,
     CollectibleMoneyApiService,
-    CollectibleMovieApiService
+    CollectibleMovieApiService,
+    ShoppingCartService
   ],
   entryComponents: [
     DialogComponent,

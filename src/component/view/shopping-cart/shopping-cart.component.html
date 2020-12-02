@@ -1,3 +1,10 @@
-<div class="mt-5">
+<div class="mt-5" *ngIf="cartItems.length > 0">
+    <div *ngIf="products.length > 0">
+        <div *ngFor="let item of products">
+            <app-shopping-cart-item [product]="item"></app-shopping-cart-item>
+        </div>
+    </div>
+</div>
+<div class="mt-5" *ngIf="cartItems.length === 0">
     <app-empty-cart></app-empty-cart>
 </div>

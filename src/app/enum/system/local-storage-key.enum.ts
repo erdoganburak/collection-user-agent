@@ -3,4 +3,5 @@ export const LocalStorageKey = {
     REFRESHTOKEN: 'collection_refresh',
     EXPIREDATE: 'collection_expire',
     KEEPLOGGEDIN: 'collection_loggedin',
+    CART: 'collection_cart'
 }

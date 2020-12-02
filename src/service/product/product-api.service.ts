@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { SessionService } from '../session.service';
 import { ProductApi } from 'src/app/api/product/product.api';
-import CollectibleMoneyBasic from 'src/model/collectible-money/collectible-money-basic';
+import GetProductsRequest from 'src/model/product/get-products-request.model';
 
 @Injectable()
 export class ProductApiService extends BaseService {
@@ -25,6 +25,10 @@ export class ProductApiService extends BaseService {
 
     public getProductById(productId: string): Observable<any> {
         return this.api.getProductById(productId).pipe(catchError((error) => this.handleError(error, [])));
+    }
+
+    public getProducts(request: GetProductsRequest): Observable<any> {
+        return this.api.getProductsByIds(request).pipe(catchError((error) => this.handleError(error, [])));
     }
 
     public deleteProduct(productId: string): Observable<any> {

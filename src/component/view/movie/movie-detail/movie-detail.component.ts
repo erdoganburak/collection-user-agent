@@ -19,6 +19,7 @@ import PaginationResponse from 'src/model/common/pagination-response.model';
 import DirectorBasic from 'src/model/director/director-basic.model';
 import { CollectibleMovieApiService } from 'src/service/collectible-movie/collectible-movie-api.service';
 import { RoutingParams, RoutingService } from 'src/service/routing.service';
+import { ShoppingCartService } from 'src/service/shopping-cart.service';
 
 @Component({
     selector: 'app-movie-detail',
@@ -53,7 +54,8 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private routingService: RoutingService,
         private collectibleMovieService: CollectibleMovieApiService,
-        private modalService: NgbModal
+        private shoppingCartService: ShoppingCartService,
+        private modalService: NgbModal,
     ) {
     }
 
@@ -160,6 +162,10 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         this.id = item._id;
         this.getMovieById();
         window.scroll(0, 0);
+    }
+
+    public onAddToCart() {
+        this.shoppingCartService.addToCart(this.item._id)
     }
 
 }
