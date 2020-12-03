@@ -10,7 +10,6 @@ export default interface CollectibleMovieBasic extends Product {
     categories: Array<CategoryBasic>;
     summary: string;
     condition: number;
-    price: number;
     duration: number;
     year: number;
     format: MovieFormat;

@@ -1,13 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductType } from 'src/app/enum/product-type.enum';
 import { Sort } from 'src/app/enum/sort.enum';
 import { Pagination } from 'src/constant/pagination.constant';
 import CollectibleMoneyFilterRequest from 'src/model/collectible-money/collectible-money-filter-request';
 import CollectibleMovieFilterRequest from 'src/model/collectible-movie/collectible-movie-filter-request';
 import PaginationRequest from 'src/model/common/pagination-request.model';
-import { InteractionService } from 'src/service/interaction.service';
-import { MoneyApiService } from 'src/service/money/money-api.service';
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',

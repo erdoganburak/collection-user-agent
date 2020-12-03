@@ -1,2 +1,18 @@
-{{product.name}}
-{{product.price}}
+<div class="row container">
+    <div class="col-2">
+        <div class="col-12 picture-container my-5">
+            <img class="picture" src="{{imagePath}}" alt="picture">
+        </div>
+    </div>
+    <div class="col-6 name-container">
+        {{product.name}}
+    </div>
+    <div class="col-4 price-container">
+        <div>
+            {{product.price | currency: "TRY"}}
+        </div>
+        <div class="delete-container">
+            <button type="button" class="btn btn-sm btn-outline-primary ml-3" (click)="onClickDelete()">Sil</button>
+        </div>
+    </div>
+</div>

@@ -8,7 +8,6 @@ export default interface CollectibleMoneyBasic extends Product {
     serialNo: string;
     emission: EmissionBasic;
     clipping: ClippingBasic;
-    price: number;
     frontImage: string,
     backImage: string
 }

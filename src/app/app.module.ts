@@ -49,7 +49,7 @@ import { TitleComponent } from 'src/component/common/title/title.component';
 import { MoneyDetailComponent } from 'src/component/view/money/money-detail/money-detail.component';
 import player from 'lottie-web';
 
-import { faClipboardList, faCompactDisc, faFilm, faKey, faPlus, faShoppingCart, faTimes, faUsers, faVideo } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faClipboardList, faCompactDisc, faFilm, faKey, faPlus, faShoppingCart, faTimes, faUsers, faVideo } from '@fortawesome/free-solid-svg-icons';
 import { faCog } from '@fortawesome/free-solid-svg-icons';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
@@ -95,6 +95,8 @@ import { DirectorDetailComponent } from 'src/component/view/movie/director-detai
 import { CategoryDetailComponent } from 'src/component/view/movie/category-detail/category-detail.component';
 import { ShoppingCartService } from 'src/service/shopping-cart.service';
 import { ShoppingCartItemComponent } from 'src/component/view/shopping-cart/shopping-cart-item/shopping-cart-item.component';
+import { ShoppingCartSummaryComponent } from 'src/component/view/shopping-cart/shopping-cart-summary/shopping-cart-summary.component';
+import { AddedToCartModal } from 'src/component/view/added-to-cart/added-to-cart-modal.component';
 
 export function playerFactory() {
   return player;
@@ -152,7 +154,9 @@ export function playerFactory() {
     ActorDetailComponent,
     DirectorDetailComponent,
     CategoryDetailComponent,
-    ShoppingCartItemComponent
+    ShoppingCartItemComponent,
+    ShoppingCartSummaryComponent,
+    AddedToCartModal
   ],
   imports: [
     FormsModule,
@@ -219,7 +223,8 @@ export function playerFactory() {
     ManagementCategoryInsertModal,
     ManagementActorUpsertModal,
     ManagementDirectorUpsertModal,
-    ManagementCollectibleMovieUpsertModal
+    ManagementCollectibleMovieUpsertModal,
+    AddedToCartModal
   ],
   bootstrap: [AppComponent]
 })
@@ -249,6 +254,7 @@ export class AppModule {
     library.addIcons(faVideo);
     library.addIcons(faClipboardList);
     library.addIcons(faCompactDisc);
+    library.addIcons(faCheck);
   }
 
 }

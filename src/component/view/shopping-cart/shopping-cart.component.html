@@ -1,10 +1,35 @@
-<div class="mt-5" *ngIf="cartItems.length > 0">
-    <div *ngIf="products.length > 0">
-        <div *ngFor="let item of products">
-            <app-shopping-cart-item [product]="item"></app-shopping-cart-item>
+<div class="row d-flex justify-content-center">
+    <div class="col-xl-8 col-lg-12 col-md-12">
+        <div class="m-3 d-flex flex-column justify-content-center" *ngIf="products.length > 0">
+            <div class="my-3 d-flex justify-content-start">
+                <h2 class="title mr-2">Sepetim</h2>
+                <h3 class="pt-1">({{products.length}} Ürün)</h3>
+            </div>
+            <div class="d-flex row" *ngIf="products.length > 0">
+                <div class="col-xl-8 col-lg-12 col-md-12">
+                    <div *ngFor="let item of products">
+                        <app-shopping-cart-item (onProductDeleted)="onProductDeleted($event)" [product]="item">
+                        </app-shopping-cart-item>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-12 col-md-12 mt-3">
+                    <app-shopping-cart-summary [products]="products"></app-shopping-cart-summary>
+                </div>
+                <div *ngIf="products[0]?.productType==='Movie' && requestOtherProducts!=null" class="col-12">
+                    <app-movie-showcase [title]="title" [description]="description" [request]="requestOtherProducts"
+                        [showAll]="showAll" [showPagination]="showPagination">
+                    </app-movie-showcase>
+                </div>
+                <div *ngIf="products[0]?.productType==='Money' && requestOtherProducts !=null" class="col-12">
+                    <app-money-showcase [title]="title" [description]="description" [request]="requestOtherProducts"
+                        [showAll]="showAll" [showPagination]="showPagination">
+                    </app-money-showcase>
+                </div>
+            </div>
+        </div>
+        <div class="mt-5" *ngIf="products.length === 0">
+            <app-empty-cart></app-empty-cart>
         </div>
     </div>
-</div>
-<div class="mt-5" *ngIf="cartItems.length === 0">
-    <app-empty-cart></app-empty-cart>
+
 </div>

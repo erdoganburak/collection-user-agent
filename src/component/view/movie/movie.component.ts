@@ -26,7 +26,7 @@ export class MovieComponent implements OnInit, OnDestroy {
     constructor() {
         this.title = "Film Koleksiyonu";
         this.description = "Koleksiyonel filmleri bu sayfadan listeleyebilirsiniz.";
-        this.request = this.createCollectibleMoneyRequest();
+        this.request = this.createCollectibleMovieRequest();
         this.showAll = false;
         this.showPagination = true;
     }
@@ -39,7 +39,7 @@ export class MovieComponent implements OnInit, OnDestroy {
 
     }
 
-    private createCollectibleMoneyRequest(): CollectibleMovieFilterRequest {
+    private createCollectibleMovieRequest(): CollectibleMovieFilterRequest {
         const paginationRequest: PaginationRequest = {
             skip: 0,
             limit: Pagination.PAGINATION_LIMIT
