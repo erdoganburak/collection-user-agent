@@ -97,6 +97,7 @@ import { ShoppingCartService } from 'src/service/shopping-cart.service';
 import { ShoppingCartItemComponent } from 'src/component/view/shopping-cart/shopping-cart-item/shopping-cart-item.component';
 import { ShoppingCartSummaryComponent } from 'src/component/view/shopping-cart/shopping-cart-summary/shopping-cart-summary.component';
 import { AddedToCartModal } from 'src/component/view/added-to-cart/added-to-cart-modal.component';
+import { ProductStatusSelectComponent } from 'src/component/common/product-status-select/product-status-select.component';
 
 export function playerFactory() {
   return player;
@@ -156,7 +157,8 @@ export function playerFactory() {
     CategoryDetailComponent,
     ShoppingCartItemComponent,
     ShoppingCartSummaryComponent,
-    AddedToCartModal
+    AddedToCartModal,
+    ProductStatusSelectComponent
   ],
   imports: [
     FormsModule,

@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { ProductStatus } from 'src/app/enum/product-status.enum';
 import { ProductType } from 'src/app/enum/product-type.enum';
 import { Sort } from 'src/app/enum/sort.enum';
 import { Pagination } from 'src/constant/pagination.constant';
@@ -82,6 +83,8 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
             condition: null,
             clippings: [],
             emission: ((this.products[0] as (CollectibleMoneyBasic)).emission._id),
+            status: ProductStatus.Active,
+            stock: null,
             sort: Sort.Desc,
             paginationRequest: paginationRequest,
         }
@@ -103,6 +106,8 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
             categories: [(this.products[0] as (CollectibleMovieBasic)).categories[0] + ""],
             year: null,
             format: null,
+            stock: null,
+            status: ProductStatus.Active,
             sort: Sort.Desc,
             paginationRequest: paginationRequest,
         }

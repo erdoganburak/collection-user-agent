@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { ListAnimation } from 'src/app/animations/list-up.animation';
+import { ProductStatus } from 'src/app/enum/product-status.enum';
 import { ProductType } from 'src/app/enum/product-type.enum';
 import { Sort } from 'src/app/enum/sort.enum';
 import { PageRoutes } from 'src/constant/page-routes.constant';
@@ -102,6 +103,8 @@ export class MovieShowcaseComponent implements OnInit, OnDestroy {
             categories: [],
             year: null,
             format: null,
+            stock: null,
+            status: ProductStatus.Active,
             sort: Sort.Desc,
             paginationRequest: paginationRequest,
         }

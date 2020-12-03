@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ProductStatus } from 'src/app/enum/product-status.enum';
 import { ProductType } from 'src/app/enum/product-type.enum';
 import { Sort } from 'src/app/enum/sort.enum';
 import { PageRoutes } from 'src/constant/page-routes.constant';
@@ -90,7 +91,7 @@ export class CategoryDetailComponent implements OnInit, OnDestroy {
         params[RoutingParamKeys.MovieId] = item._id;
         this.routingService.gotoPage(PageRoutes.MOVIE_DETAIL.fullPath, params);
     }
-    
+
     private createCollectibleMovieRequest(): CollectibleMovieFilterRequest {
         const paginationRequest: PaginationRequest = {
             skip: 0,
@@ -106,6 +107,8 @@ export class CategoryDetailComponent implements OnInit, OnDestroy {
             directors: [],
             categories: [this.id],
             year: null,
+            stock: null,
+            status: ProductStatus.Active,
             format: null,
             sort: Sort.Desc,
             paginationRequest: paginationRequest,

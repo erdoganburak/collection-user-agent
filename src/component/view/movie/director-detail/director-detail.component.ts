@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ListAnimation } from 'src/app/animations/list-up.animation';
+import { ProductStatus } from 'src/app/enum/product-status.enum';
 import { ProductType } from 'src/app/enum/product-type.enum';
 import { Sort } from 'src/app/enum/sort.enum';
 import { MovieFormats } from 'src/constant/movie-format.constant';
@@ -94,6 +95,8 @@ export class DirectorDetailComponent implements OnInit, OnDestroy {
             categories: [],
             year: null,
             format: null,
+            stock: null,
+            status: ProductStatus.Active,
             sort: Sort.Desc,
             paginationRequest: paginationRequest,
         }

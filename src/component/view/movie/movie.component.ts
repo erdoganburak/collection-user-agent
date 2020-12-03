@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ProductStatus } from 'src/app/enum/product-status.enum';
 import { ProductType } from 'src/app/enum/product-type.enum';
 import { Sort } from 'src/app/enum/sort.enum';
 import { Pagination } from 'src/constant/pagination.constant';
@@ -55,6 +56,8 @@ export class MovieComponent implements OnInit, OnDestroy {
             categories: [],
             year: null,
             format: null,
+            stock: null,
+            status: ProductStatus.Active,
             sort: Sort.Desc,
             paginationRequest: paginationRequest,
         }

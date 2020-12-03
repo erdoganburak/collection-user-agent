@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ListAnimation } from 'src/app/animations/list-up.animation';
+import { ProductStatus } from 'src/app/enum/product-status.enum';
 import { ProductType } from 'src/app/enum/product-type.enum';
 import { Sort } from 'src/app/enum/sort.enum';
 import { Pagination } from 'src/constant/pagination.constant';
@@ -55,6 +56,8 @@ export class MoneyComponent implements OnInit, OnDestroy {
             condition: null,
             clippings: [],
             emission: "",
+            status: ProductStatus.Active,
+            stock: null,
             sort: Sort.Desc,
             paginationRequest: paginationRequest,
         }

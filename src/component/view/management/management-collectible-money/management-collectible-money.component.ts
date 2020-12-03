@@ -18,6 +18,8 @@ import { ProductType } from 'src/app/enum/product-type.enum';
 import { ProductApiService } from 'src/service/product/product-api.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { environment } from 'src/environments/environment';
+import { ProductSitutations } from 'src/constant/product-status.constant';
+import { ProductStatus } from 'src/app/enum/product-status.enum';
 
 @Component({
     selector: 'app-collectible-money',
@@ -36,6 +38,7 @@ export class ManagementCollectibleMoneyComponent implements OnInit, OnDestroy, A
     public paginationResponse: PaginationResponse;
     public moneyForm: FormGroup;
     public imagePath: string;
+    public productSitutations;
 
     private pageNumber: number;
 
@@ -53,6 +56,7 @@ export class ManagementCollectibleMoneyComponent implements OnInit, OnDestroy, A
         this.description = "Para ekleme, çıkarma ve güncelleme"
         this.icon = "money-bill-alt";
         this.pageNumber = 1;
+        this.productSitutations = ProductSitutations;
         this.moneyForm = this.formBuilder.group({
             productNo: [''],
             name: [''],
@@ -62,6 +66,7 @@ export class ManagementCollectibleMoneyComponent implements OnInit, OnDestroy, A
             clippings: [],
             minPrice: [''],
             maxPrice: [''],
+            status: ['']
         });
 
         this.onChanges();
@@ -127,7 +132,7 @@ export class ManagementCollectibleMoneyComponent implements OnInit, OnDestroy, A
     private openModal(data: CollectibleMoneyBasic) {
         const modalRef = this.modalService.open(ManagementCollectibleMoneyUpsertModal, { centered: true, size: "lg" });
         (modalRef.componentInstance as ManagementCollectibleMoneyUpsertModal).data = data;
-     
+
         modalRef.result.then(() => {
             this.pageNumber = 1;
             this.getData();
@@ -172,6 +177,8 @@ export class ManagementCollectibleMoneyComponent implements OnInit, OnDestroy, A
             condition: this.moneyForm.controls.condition.value ? Number(this.moneyForm.controls.condition.value) : null,
             clippings: this.moneyForm.controls.clippings.value ? this.moneyForm.controls.clippings.value : [],
             emission: this.moneyForm.controls.emissions.value ? this.moneyForm.controls.emissions.value : '',
+            status: this.moneyForm.controls.status.value ? Number(this.moneyForm.controls.status.value) : ProductStatus.All,
+            stock: null,
             sort: Sort.Desc,
             paginationRequest: paginationRequest,
         }

@@ -15,6 +15,21 @@
     </div>
 
     <div class="form-group">
+      <label for="inputActive">Satışa Çıkar</label>
+      <input type="checkbox" formControlName="status" class="form-control form-control-sm" id="active" name="active">
+    </div>
+
+    <div class="form-group">
+      <label for="inputStock">Stok</label>
+      <input type="number" formControlName="stock" class="form-control form-control-sm" id="inputStock"
+        placeholder="Stok" [ngClass]="{ 'is-invalid': submitted && controls.condition.errors }">
+      <div *ngIf="submitted && controls.condition.errors" class="invalid-feedback">
+        <div *ngIf="controls.stock.errors.required">Stok alanını doldurunuz.</div>
+      </div>
+    </div>
+
+
+    <div class="form-group">
       <label for="inputProductNo">Ürün Numarası</label>
       <input type="text" formControlName="productNo" class="form-control form-control-sm" id="inputProductNo"
         placeholder="Ürün Numarası" [ngClass]="{ 'is-invalid': submitted && controls.productNo.errors }">

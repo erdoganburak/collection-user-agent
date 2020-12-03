@@ -20,6 +20,7 @@ import CollectibleMovieFilterResponse from 'src/model/collectible-movie/collecti
 import { ManagementCollectibleMovieUpsertModal } from '../management-collectible-movie-upsert/management-collectible-movie-upsert-modal.component';
 import { MovieFormats } from 'src/constant/movie-format.constant';
 import CollectibleMovieFilterRequest from 'src/model/collectible-movie/collectible-movie-filter-request';
+import { ProductStatus } from 'src/app/enum/product-status.enum';
 
 @Component({
     selector: 'app-collectible-movie',
@@ -67,7 +68,8 @@ export class ManagementCollectibleMovieComponent implements OnInit, OnDestroy, A
             directors: [],
             categories: [],
             year: [''],
-            formats: ['']
+            formats: [''],
+            status: ['']
         });
 
         this.getData();
@@ -162,6 +164,8 @@ export class ManagementCollectibleMovieComponent implements OnInit, OnDestroy, A
             categories: this.movieForm.controls.categories.value ? this.movieForm.controls.categories.value : [],
             year: this.movieForm.controls.year.value ? Number(this.movieForm.controls.year.value) : null,
             format: this.movieForm.controls.formats.value ? Number(this.movieForm.controls.formats.value) : null,
+            stock: null,
+            status: this.movieForm.controls.status.value ? Number(this.movieForm.controls.status.value) : ProductStatus.All,
             sort: Sort.Desc,
             paginationRequest: paginationRequest,
         }

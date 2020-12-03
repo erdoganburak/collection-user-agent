@@ -13,6 +13,7 @@ import { CollectibleMoneyApiService } from 'src/service/collectible-money/collec
 import CollectibleMoneyBasic from 'src/model/collectible-money/collectible-money-basic';
 import { environment } from 'src/environments/environment';
 import { EmissionApiService } from 'src/service/emission/emission-api.service';
+import { ProductStatus } from 'src/app/enum/product-status.enum';
 
 @Component({
     selector: 'app-management-collectible-money-upsert-modal.component',
@@ -62,13 +63,19 @@ export class ManagementCollectibleMoneyUpsertModal extends BaseModalComponent im
             price: ['', Validators.required],
             frontImage: [''],
             backImage: [''],
+            stock: ['', [Validators.required, Validators.min(0)]],
+            status: ['', Validators.required]
         });
 
         if (this.data && this.data._id) {
             this.moneyForm.patchValue(this.data);
             this.controls.emission.setValue(this.data.emission._id);
             this.controls.clipping.setValue(this.data.clipping._id);
-
+            if (this.data.status === ProductStatus.Active) {
+                this.controls.status.setValue(true);
+            } else {
+                this.controls.status.setValue(false);
+            }
             this.emissionService.getEmissionById(this.data.emission._id).subscribe(
                 (response: EmissionBasic) => {
                     if (response) {
@@ -187,6 +194,8 @@ export class ManagementCollectibleMoneyUpsertModal extends BaseModalComponent im
         formData.append('clipping', this.moneyForm.controls.clipping.value);
         formData.append('emission', this.moneyForm.controls.emission.value);
         formData.append('price', this.controls.price.value);
+        formData.append('status', this.controls.status.value === true ? ProductStatus.Active.toString() : ProductStatus.Passive.toString());
+        formData.append('stock', this.controls.stock.value);
         if (this.newFrontImage != null) {
             formData.append('frontImage', this.newFrontImage);
             if (this.data && this.data.frontImage)

@@ -72,6 +72,13 @@
                         </app-movie-format-select>
                     </div>
 
+
+                    <div class="form-group">
+                        <label for="inputYear">Satış Durumu</label>
+                        <app-product-status-select [parentForm]="movieForm" [controlName]="'status'" [mode]="'default'">
+                        </app-product-status-select>
+                    </div>
+
                     <div class="d-flex justify-content-end">
                         <button type="button" class="btn btn-sm btn-outline-primary mx-2"
                             (click)="onClickClear()">Temizle</button>

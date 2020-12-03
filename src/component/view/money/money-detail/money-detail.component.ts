@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { ListAnimation } from 'src/app/animations/list-up.animation';
+import { ProductStatus } from 'src/app/enum/product-status.enum';
 import { ProductType } from 'src/app/enum/product-type.enum';
 import { Sort } from 'src/app/enum/sort.enum';
 import { ImageModal } from 'src/component/common/image-modal/image-modal.component';
@@ -95,6 +96,8 @@ export class MoneyDetailComponent implements OnInit, OnDestroy {
             condition: null,
             clippings: [],
             emission: this.item.emission._id,
+            status: ProductStatus.Active,
+            stock: null,
             sort: Sort.Desc,
             paginationRequest: paginationRequest,
         }

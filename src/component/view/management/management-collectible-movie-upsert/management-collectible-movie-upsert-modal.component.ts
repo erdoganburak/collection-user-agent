@@ -13,6 +13,7 @@ import ActorBasic from 'src/model/actor/actor-basic.model';
 import DirectorBasic from 'src/model/director/director-basic.model';
 import CategoryBasic from 'src/model/category/category-basic.model';
 import { CollectibleMovieApiService } from 'src/service/collectible-movie/collectible-movie-api.service';
+import { ProductStatus } from 'src/app/enum/product-status.enum';
 
 @Component({
     selector: 'app-management-collectible-movie-upsert-modal.component',
@@ -62,6 +63,8 @@ export class ManagementCollectibleMovieUpsertModal extends BaseModalComponent im
             formats: ['', Validators.required],
             year: ['', Validators.required],
             frontImage: [''],
+            stock: ['', [Validators.required, Validators.min(0)]],
+            status: ['', Validators.required]
         });
 
         if (this.data && this.data._id) {
@@ -91,7 +94,12 @@ export class ManagementCollectibleMovieUpsertModal extends BaseModalComponent im
             this.controls.actors.setValue(actorIds);
             this.controls.directors.setValue(directorIds);
             this.controls.categories.setValue(categoryIds);
-            this.controls.formats.setValue(this.data.format)
+            this.controls.formats.setValue(this.data.format);
+            if (this.data.status === ProductStatus.Active) {
+                this.controls.status.setValue(true);
+            } else {
+                this.controls.status.setValue(false);
+            }
 
             if (this.data.frontImage)
                 this.frontImageSrc = environment.API_IMAGE_PATH + this.data.frontImage;
@@ -201,6 +209,9 @@ export class ManagementCollectibleMovieUpsertModal extends BaseModalComponent im
         formData.append('duration', this.controls.duration.value);
         formData.append('year', this.controls.year.value);
         formData.append('format', this.controls.formats.value);
+        formData.append('status', this.controls.status.value === true ? ProductStatus.Active.toString() : ProductStatus.Passive.toString());
+        formData.append('stock', this.controls.stock.value);
+
         if (this.newFrontImage != null) {
             formData.append('frontImage', this.newFrontImage);
             if (this.data && this.data.frontImage)
