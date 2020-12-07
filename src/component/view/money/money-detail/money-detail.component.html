@@ -10,23 +10,23 @@
             </div>
             <div class="col-xl-6 col-lg-12 col-md-12 detail my-5">
                 <div class="col-12 detail-item-container py-3">
-                    <p class="title h2">{{item.name}}</p>
+                    <div class="title">{{item.name}}</div>
                 </div>
                 <div class="col-12 detail-item-container py-3">
-                    <span class="h6 field">Ürün Numarası: </span>
-                    <span class="h6 value"> {{item.productNo}}</span>
+                    <span class="field">Ürün Numarası: </span>
+                    <span class="value"> {{item.productNo}}</span>
                 </div>
                 <div class="col-12 detail-item-container py-3">
-                    <span class="h6 field">Seri Numarası: </span>
-                    <span class="h6 value"> {{item.serialNo}}</span>
+                    <span class="field">Seri Numarası: </span>
+                    <span class="value"> {{item.serialNo}}</span>
                 </div>
                 <div class="col-12 detail-item-container py-3">
-                    <span class="h6 field">Kondisyon: </span>
-                    <span class="h6 value">{{item.condition}} / 10</span>
+                    <span class="field">Kondisyon: </span>
+                    <span class="value">{{item.condition}} / 10</span>
                 </div>
                 <div class="col-12 pt-5">
                     <div class="d-flex align-content-center flex-column">
-                        <p class="h1 price">{{item.price | currency: "TRY"}}</p>
+                        <div class="price">{{item.price | currency: "TRY"}}</div>
                         <div class="mt-4">
                             <button type="button" class="btn btn-primary mx-2" (click)="onBuyNow($event)"
                                 autofocus>Hemen

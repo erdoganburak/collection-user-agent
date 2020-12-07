@@ -3,14 +3,16 @@
 :host {
     .title {
         font-weight: bold;
+        font-size: 28px;
+    }
+
+    .box {
+        border-radius: $border-radius;
+        -webkit-box-shadow: 0px 0px 6px 4px rgba(0, 0, 0, 0.06);
+        -moz-box-shadow: 0px 0px 6px 4px rgba(0, 0, 0, 0.06);
+        box-shadow: 0px 0px 6px 4px rgba(0, 0, 0, 0.06);
     }
     .container {
-        background-color: $app-gray;
-        border-radius: $border-radius;
-        -webkit-box-shadow: -1px 2px 9px 2px rgba(173, 173, 173, 0.68);
-        -moz-box-shadow: -1px 2px 9px 2px rgba(173, 173, 173, 0.68);
-        box-shadow: -1px 2px 9px 2px rgba(173, 173, 173, 0.68);
-
         .main-item {
         }
         .picture-container {
@@ -54,23 +56,34 @@
                         flex: 0.8;
                         display: flex;
                         justify-content: flex-start;
+                        align-self: center;
                     }
 
                     .format-label-container {
                         flex: 9.2;
                         display: flex;
                         justify-content: flex-start;
+
+                        .format-label {
+                            font-size: 24px;
+                            font-weight: bold;
+                        }
                     }
                 }
             }
             .price {
                 font-weight: bold;
-                color: $dark;
+                font-size: 36px;
+                color: $primary;
             }
         }
     }
-    .summary {
-        text-align: justify;
-        text-justify: inter-word;
+
+    .summary-container {
+        background-color: $secondary;
+        .summary {
+            text-align: justify;
+            text-justify: inter-word;
+        }
     }
 }

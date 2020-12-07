@@ -65,20 +65,38 @@ export class RoutingService implements CanActivate {
     }
 
     public setMenuManagementItems() {
-        const management = this._menuItems.find(item => item.title === 'Yönetim');
+        /*const management = this._menuItems.find(item => item.title === 'Yönetim');
         if (!management) {
             this._menuItems.push(this.getManagementItems());
-        }
+        }*/
     }
 
     public removeMenuManagementItems() {
-        const management = this._menuItems.find(item => item.title === 'Yönetim');
-        if (management) {
-            this._menuItems.pop();
-        }
+        /* const management = this._menuItems.find(item => item.title === 'Yönetim');
+         if (management) {
+             this._menuItems.pop();
+         }*/
     }
 
-    private getManagementItems(): RoutingHeaderMenuItem {
+    public getUrl(): string {
+        return this.router.url
+    }
+
+    public isCurrentPageManagement(): boolean {
+        /* this.getManagementItems().forEach(item => {
+             if (item.page.fullPath === this.getUrl()) {
+                 return true;
+             } else {
+                 let found = item.childs.find(i => i.page.fullPath === this.getUrl());
+                 if (found) {
+                     return true;
+                 }
+             }
+         });*/
+        return false;
+    }
+
+    public getManagementItems(): Array<RoutingHeaderMenuItem> {
         let menuItems: RoutingHeaderMenuItem = {
             title: "Yönetim",
             page: PageRoutes.MENU,
@@ -92,11 +110,12 @@ export class RoutingService implements CanActivate {
                 {
                     title: PageRoutes.MANAGEMENT_MOVIE.value,
                     page: PageRoutes.MANAGEMENT_MOVIE,
+                    childs: this.getManagementMovieItems(),
                     visible: true
                 }
             ]
         };
-        return menuItems;
+        return menuItems.childs;
     }
 
     public getManagementMoneyItems(): Array<RoutingHeaderMenuItem> {
@@ -187,7 +206,9 @@ export class RoutingService implements CanActivate {
         return this.validateUrlNavigation(url).pipe(
             map(
                 response => {
-                    if (response == true) this.reloadedRouterStateSnapshot = state;
+                    if (response == true) {
+                        this.reloadedRouterStateSnapshot = state;
+                    }
                     return response;
                 }
             )
@@ -202,7 +223,8 @@ export class RoutingService implements CanActivate {
          return this.validateUrlNavigation(url);
      }*/
 
-    private checkIfManagementPage(url: string): boolean {
+    public checkIfManagementPage(url: string): boolean {
+        // TODO Important
         switch (url) {
             case PageRoutes.MANAGEMENT_MONEY.fullPath:
                 return true;
@@ -211,6 +233,16 @@ export class RoutingService implements CanActivate {
             case PageRoutes.MANAGEMENT_CLIPPING.fullPath:
                 return true;
             case PageRoutes.MANAGEMENT_EMISSION.fullPath:
+                return true;
+            case PageRoutes.MANAGEMENT_MOVIE_ACTOR.fullPath:
+                return true;
+            case PageRoutes.MANAGEMENT_MOVIE_DIRECTOR.fullPath:
+                return true;
+            case PageRoutes.MANAGEMENT_MOVIE_CATEGORY.fullPath:
+                return true;
+            case PageRoutes.MANAGEMENT_COLLECTIBLE_MONEY.fullPath:
+                return true;
+            case PageRoutes.MANAGEMENT_COLLECTIBLE_MOVIE.fullPath:
                 return true;
             default:
                 return false;
@@ -233,7 +265,6 @@ export class RoutingService implements CanActivate {
                                 return false;
                             }
                         } else {
-                            console.log("shiiit not logged in")
                             this.gotoPage(PageRoutes.LOGIN.path);
                             return false;
                         }
@@ -254,7 +285,6 @@ export class RoutingService implements CanActivate {
                             return false;
                         }
                     } else {
-                        console.log("shiiit logged in")
                         this.gotoPage(PageRoutes.LOGIN.path);
                         return false;
                     }
@@ -306,7 +336,6 @@ export class RoutingService implements CanActivate {
             return params;
         }
     }
-
 
 }
 

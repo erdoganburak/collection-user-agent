@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.sessionService.login(this.controls.username.value, this.controls.password.value, this.controls.rememberMe.value).subscribe(
             (response: SessionResponse) => {
                 if (response) {
-                    this.routingService.gotoPage(PageRoutes.HOME.path);
+                    this.routingService.gotoPage(PageRoutes.MANAGEMENT_MONEY.path);
                 }
             });
     }

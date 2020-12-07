@@ -14,7 +14,7 @@ export const MovieFormats = [
 	{
 		value: MovieFormat.Bluray,
 		label: 'Blu-ray',
-		color: '#00669e'
+		color: '#2C6C94'
 	},
 	{
 		value: MovieFormat.Bluray4K,

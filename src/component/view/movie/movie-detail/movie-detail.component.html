@@ -1,64 +1,64 @@
 <div *ngIf="item" class="row d-flex justify-content-center">
-    <div class="col-xl-8 col-lg-12 col-md-12 my-5 mx-3 container">
+    <div class="col-xl-8 col-lg-12 col-md-12 my-5 mx-3 container box">
         <div class="row">
             <div class="col-xl-6 col-lg-12 col-md-12">
                 <div class="row">
                     <div class="col-12 picture-container my-5" (click)="onClickImage()">
-                        <img class="picture" src="{{imagePath}}" alt="Money picture">
+                        <img class="picture" src="{{imagePath}}" alt="Movie picture">
                     </div>
                 </div>
             </div>
-            <div class="col-xl-6 col-lg-12 col-md-12 detail my-5">
-                <div class="col-12 detail-item-container py-3">
-                    <p class="title h2">{{item.name}}</p>
+            <div class="col-xl-6 col-lg-12 col-md-12 detail">
+                <div class="col-12 detail-item-container mb-3 py-3">
+                    <div class="title">{{item.name}}</div>
                     <h2 *ngFor="let category of item.categories; let i = index"
                         class="badge badge-secondary mr-2 clickable">
                         <span (click)="onClickCategory(category)">{{category.name}}</span>
                     </h2>
                 </div>
                 <div class="col-12 detail-item-container py-3">
-                    <span class="h6 field">Yönetmen: </span>
+                    <span class="field">Yönetmen: </span>
                     <span *ngFor="let director of item.directors; let i = index" class="mr-2 clickable">
-                        <span class="h6 value" (click)="onClickDirector(director)">{{director.name}}</span>
+                        <span class="value" (click)="onClickDirector(director)">{{director.name}}</span>
                     </span>
                 </div>
                 <div class="col-12 detail-item-container py-3">
-                    <span class="h6 field">Oyuncular: </span>
+                    <span class="field">Oyuncular: </span>
                     <span *ngFor="let actor of item.actors; let i = index" class="mr-2 clickable">
-                        <span class="h6 value" (click)="onClickActor(actor)">
+                        <span class="value" (click)="onClickActor(actor)">
                             {{actor.name}}
                         </span>
-                        <span *ngIf="item.actors.length-1 != i" class="h6 value">
+                        <span *ngIf="item.actors.length-1 != i" class="value">
                             ,
                         </span>
                     </span>
                 </div>
                 <div class="col-12 detail-item-container py-3">
-                    <span class="h6 field">Yıl: </span>
-                    <span class="h6 value"> {{item.year}}</span>
+                    <span class="field">Yıl: </span>
+                    <span class="value"> {{item.year}}</span>
                 </div>
                 <div class="col-12 detail-item-container py-3">
-                    <span class="h6 field">Kondisyon: </span>
-                    <span class="h6 value">{{item.condition}} / 10</span>
+                    <span class="field">Kondisyon: </span>
+                    <span class="value">{{item.condition}} / 10</span>
                 </div>
 
-                <div class="col-12 detail-item-container pt-3">
+                <div class="col-12 detail-item-container py-3">
                     <ng-container *ngFor="let f of formats">
                         <div *ngIf="f.value === item.format" class="format-container">
-                            <div class="format-icon">
+                            <div class="format-icon pr-2">
                                 <fa-icon [ngStyle]="{'color': f.color }" [icon]="['fas', 'compact-disc']" size="2x">
                                 </fa-icon>
                             </div>
-                            <div class=format-label-container>
-                                <p class="h3">{{f.label}}</p>
+                            <div class="format-label-container">
+                                <div class="format-label">{{f.label}}</div>
                             </div>
                         </div>
                     </ng-container>
                 </div>
 
-                <div class="col-12 pt-5">
+                <div class="col-12 mb-4 pt-5">
                     <div class="d-flex align-content-center flex-column">
-                        <p class="h1 price">{{item.price | currency: "TRY"}}</p>
+                        <div class="price">{{item.price | currency: "TRY"}}</div>
                         <div class="mt-4">
                             <button type="button" class="btn btn-primary mx-2" (click)="onBuyNow($event)"
                                 autofocus>Hemen
@@ -73,12 +73,16 @@
             </div>
         </div>
     </div>
-    <div class="row d-flex justify-content-center">
-        <div class="col-8">
-            <p class="summary p-3">{{item.summary}}</p>
+
+    <div class="col-xl-8 col-lg-12 col-md-12 my-5 mx-3 p-5 box summary-container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-8">
+                <div class="summary p-3">{{item.summary}}</div>
+            </div>
         </div>
     </div>
-    <div class="col-xl-8 col-lg-12 col-md-12 my-5 mx-3">
+
+    <div class="col-xl-8 col-lg-12 col-md-12 mx-3">
         <app-movie-showcase (itemClicked)="otherProductItemClicked($event)" [title]="otherProductsTitle"
             [request]="otherProductsRequest" [showAll]="showAll" [showPagination]="showPagination"
             [centerTitle]="centerTitle" [centerProducts]="centerProducts" [dontUseRouting]="dontUseRouting">

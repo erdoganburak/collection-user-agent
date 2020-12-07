@@ -1,8 +1,16 @@
 @import "../../../styles/mixins/gradient.mixin.scss";
 @import "../../../styles/variables";
 
+.first-nav {
+    background-color: $body-bg !important;
+}
+
+.management-nav {
+    background-color: $body-bg !important;
+}
+
 .header-nav {
-    @include linear-gradient(to right, $primary 30%, $dark 100%);
+    background-color: #e0dede;
     .nav-link {
         color: $secondary;
     }
@@ -10,5 +18,11 @@
     .nav-link:hover {
         cursor: pointer;
         color: $light;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .search-area {
+        display: none;
     }
 }

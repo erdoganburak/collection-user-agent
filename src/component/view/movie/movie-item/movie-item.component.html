@@ -3,7 +3,7 @@
         <img class="picture" src="{{imagePath}}" alt="Movie picture">
     </div>
     <div class="body">
-        <p class="title h5">{{item.name}}</p>
+        <div class="title">{{item.name}}</div>
         <ng-container *ngFor="let f of formats">
             <span *ngIf="f.value === item.format">
                 <fa-icon [ngStyle]="{'color': f.color }" [icon]="['fas', 'compact-disc']" size="1x">
@@ -19,6 +19,6 @@
         </div>
     </div>
     <div class="footer mt-2">
-        <p class="text h4">{{item.price | currency: "TRY"}}</p>
+        <span class="text">{{item.price | currency: "TRY"}}</span>
     </div>
 </div>

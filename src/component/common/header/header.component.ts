@@ -12,24 +12,31 @@ import { PageRoutes } from '../../../constant/page-routes.constant'
 export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
 
     public menuItems: Array<RoutingHeaderMenuItem>;
-    public isNavbarCollapsed: boolean = true;
+    public isFirstNavbarCollapsed: boolean = true;
+    public isSecondNavbarCollapsed: boolean = true;
+    public isManagementNavbarCollapsed: boolean = true;
+
+    public managementHeaderVisible: boolean = false;
+
     public activePage: string;
+    public managementPages: Array<RoutingHeaderMenuItem>;
 
     constructor(private routingService: RoutingService, private sessionService: SessionService) {
 
     }
 
     ngOnInit(): void {
+        this.managementPages = [];
         this.render();
         if (this.sessionService.isLoggedIn) {
-            this.routingService.setMenuManagementItems();
+            this.setMenuManagementItems();
         }
         this.sessionService.onLoginStatusChanged.subscribe(
             (loginState: boolean) => {
                 if (loginState) {
-                    this.routingService.setMenuManagementItems();
+                    this.setMenuManagementItems();
                 } else {
-                    this.routingService.removeMenuManagementItems();
+                    this.removeMenuManagementItems();
                 }
                 this.render();
             }
@@ -40,6 +47,16 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
                 this.render();
             }
         );
+
+        this.managementHeaderVisible = this.canShowManagementHeader()
+    }
+
+    private setMenuManagementItems() {
+        this.managementPages = this.routingService.getManagementItems();
+    }
+
+    private removeMenuManagementItems() {
+        this.managementPages = [];
     }
 
     ngAfterViewInit(): void {
@@ -55,12 +72,16 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     public gotoPage(item: RoutingHeaderMenuItem) {
-        this.isNavbarCollapsed = true;
+        this.isSecondNavbarCollapsed = true;
+        this.isFirstNavbarCollapsed = true;
+        this.isManagementNavbarCollapsed = true;
         this.routingService.gotoHeaderItem(item);
     }
 
     public onClickLogin() {
-        this.isNavbarCollapsed = true;
+        this.isSecondNavbarCollapsed = true;
+        this.isFirstNavbarCollapsed = true;
+        this.isManagementNavbarCollapsed = true;
         this.routingService.gotoPage(PageRoutes.LOGIN.path);
     }
 
@@ -70,6 +91,41 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
 
     public goToShoppingCart() {
         this.routingService.goToShoppingCart();
+    }
+
+    public canShowFirstHeader(): boolean {
+        if (this.routingService.getUrl() === PageRoutes.LOGIN.fullPath) {
+            return false;
+        }
+        else if (this.routingService.checkIfManagementPage(this.routingService.getUrl())) {
+            return false;
+        }
+        return true;
+    }
+
+    public canShowSecondHeader(): boolean {
+        if (this.routingService.getUrl() === PageRoutes.LOGIN.fullPath) {
+            return false;
+        }
+        else if (this.routingService.checkIfManagementPage(this.routingService.getUrl())) {
+            return false;
+        }
+        return true;
+    }
+
+    public canShowManagementHeader(): boolean {
+        if (this.routingService.getUrl() === PageRoutes.LOGIN.fullPath) {
+            return true;
+        } else {
+            if (!this.sessionService.isLoggedIn) {
+                return false;
+            }
+            else if (this.routingService.checkIfManagementPage(this.routingService.getUrl())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }

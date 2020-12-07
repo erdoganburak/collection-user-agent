@@ -1,9 +1,9 @@
-<div>
-    <h2 class="title">Sipariş Özeti</h2>
-    <p class="pt-1 h5">{{products.length}} Ürün</p>
+<div class="container p-5">
+    <div class="title">Sipariş Özeti</div>
+    <div class="length pt-1">{{products.length}} Ürün</div>
     <div class="d-flex flex-row row">
         <div class="col-2">
-            <p class="pt-1 h6">Toplam</p>
+            <span class="pt-1 sum-text">Toplam</span>
         </div>
         <div class="col-10 d-flex justify-content-end sum">
             {{sum | currency: "TRY"}}

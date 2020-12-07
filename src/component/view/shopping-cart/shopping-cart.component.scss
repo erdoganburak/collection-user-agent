@@ -1,7 +1,30 @@
-.title {
-    font-weight: bold;
-}
+@import "../../../styles/variables";
 
-.item-length {
+:host {
+    .container {
+        @media screen and (max-width: 1025px ) {
+            .shopping-cart-summary {
+                margin-top: 10px;
+            }
+        }
 
+        .items {
+            border-radius: $border-radius;
+            -webkit-box-shadow: 0px 0px 6px 4px rgba(0, 0, 0, 0.06);
+            -moz-box-shadow: 0px 0px 6px 4px rgba(0, 0, 0, 0.06);
+            box-shadow: 0px 0px 6px 4px rgba(0, 0, 0, 0.06);
+        }
+
+        .title {
+            font-weight: bold;
+            font-size: 26px;
+        }
+
+        .length {
+            font-size: 22px;
+        }
+
+        .item-length {
+        }
+    }
 }
