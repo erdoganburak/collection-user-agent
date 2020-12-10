@@ -98,6 +98,7 @@ import { ShoppingCartItemComponent } from 'src/component/view/shopping-cart/shop
 import { ShoppingCartSummaryComponent } from 'src/component/view/shopping-cart/shopping-cart-summary/shopping-cart-summary.component';
 import { AddedToCartModal } from 'src/component/view/added-to-cart/added-to-cart-modal.component';
 import { ProductStatusSelectComponent } from 'src/component/common/product-status-select/product-status-select.component';
+import { CheckoutComponent } from 'src/component/view/shopping-cart/checkout/checkout.component';
 
 export function playerFactory() {
   return player;
@@ -158,7 +159,8 @@ export function playerFactory() {
     ShoppingCartItemComponent,
     ShoppingCartSummaryComponent,
     AddedToCartModal,
-    ProductStatusSelectComponent
+    ProductStatusSelectComponent,
+    CheckoutComponent
   ],
   imports: [
     FormsModule,

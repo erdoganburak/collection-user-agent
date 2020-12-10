@@ -54,6 +54,11 @@ export const PageRoutes = {
 		fullPath: '/cart',
 		value: 'Alışveriş Sepeti'
 	},
+	CHECKOUT: {
+		path: 'checkout',
+		fullPath: '/checkout',
+		value: 'Siparişi Tamamla'
+	},
 	MANAGEMENT_MONEY: {
 		path: 'management/money',
 		fullPath: '/management/money',

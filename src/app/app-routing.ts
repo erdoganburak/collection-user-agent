@@ -22,6 +22,7 @@ import { MovieDetailComponent } from 'src/component/view/movie/movie-detail/movi
 import { ActorDetailComponent } from 'src/component/view/movie/actor-detail/actor-detail.component';
 import { DirectorDetailComponent } from 'src/component/view/movie/director-detail/director-detail.component';
 import { CategoryDetailComponent } from 'src/component/view/movie/category-detail/category-detail.component';
+import { CheckoutComponent } from 'src/component/view/shopping-cart/checkout/checkout.component';
 
 const routes: Routes = [
   {
@@ -77,6 +78,11 @@ const routes: Routes = [
   {
     path: PageRoutes.SHOPPING_CART.path,
     component: ShoppingCartComponent,
+    canActivate: [RoutingService]
+  },
+  {
+    path: PageRoutes.CHECKOUT.path,
+    component: CheckoutComponent,
     canActivate: [RoutingService]
   },
   {

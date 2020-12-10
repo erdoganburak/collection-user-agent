@@ -1,0 +1,76 @@
+<div class="row d-flex justify-content-center">
+    <div class="col-xl-8 col-lg-12 col-md-12 container">
+
+        <div class="jumbotron my-5">
+            <h1 class="display-4">Siparişi Tamamla!</h1>
+            <p class="lead">Sipariş formunu gönderdikten sonra siparişiniz incelenecek ve en kısa süre içerisinde
+                verdiğiniz email
+                adresine bir teyit emaili gönderilecektir</p>
+            <hr class="my-4">
+            <p>Teyit emailinde ödemeyi nasıl yapacağınız ve benzeri hususlar tarafınıza bildirilecektir. Bu emaili
+                alana kadar hiçbir ödeme yapmayınız.
+                Email adresinin doğru yazılması gönderilecek teyit emailinin ulaşması ve daha sonraki iletişimin
+                sağlanması açısından önemlidir.
+                Tarafımızdan gönderilecek bazı emailler otomatik formatlı olduğu için bazı mail sunucularınca
+                (hotmail,
+                yahoo, mynet, gmail vb.) SPAM veya JUNK (istenmeyen posta) olarak değerlendirilebilir. Bu durumda
+                emailimizi
+                güvenilir email listesine ekleyerek, gelecekteki mesajların gözden kaçmasını engelleyebilirsiniz.</p>
+        </div>
+
+        <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="inputName">İsim / Soyisim</label>
+                    <input type="text" formControlName="name" class="form-control form-control-sm" id="inputName"
+                        placeholder="İsim / Soyisim" [ngClass]="{ 'is-invalid': submitted && controls.name.errors }">
+                    <div *ngIf="submitted && controls.name.errors" class="invalid-feedback">
+                        <div *ngIf="controls.name.errors.required">İsim alanını doldurunuz.</div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="inputEmail">E-Posta</label>
+                    <input type="email" formControlName="email" class="form-control form-control-sm" id="inputEmail"
+                        placeholder="E-Posta Adresi" [ngClass]="{ 'is-invalid': submitted && controls.email.errors }">
+                    <div *ngIf="submitted && controls.email.errors" class="invalid-feedback">
+                        <div *ngIf="controls.email.errors.required">E-Posta alanını doldurunuz.</div>
+                        <div *ngIf="controls.email.errors.email">Geçerli bir e-posta adresi girin.</div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="inputPhone">Telefon Numarası</label>
+                    <input type="tel" pattern="[0-9]{11}" formControlName="phone" class="form-control form-control-sm"
+                        id="inputPhone" placeholder="Telefon Numarası"
+                        [ngClass]="{ 'is-invalid': submitted && controls.phone.errors }">
+                    <small>Format: 05XXXXXXXXX</small><br><br>
+
+                    <div *ngIf="submitted && controls.phone.errors" class="invalid-feedback">
+                        <div *ngIf="controls.phone.errors.required">Telefon numarası alanını doldurunuz.</div>
+                    </div>
+                </div>
+
+                <div class="form-group col-12">
+                    <label for="inputAddress">Ev Adresi</label>
+                    <textarea type="text" rows="10" cols="30" formControlName="address"
+                        class="form-control form-control-sm" id="inputAddress" placeholder="Ev Adresi"
+                        [ngClass]="{ 'is-invalid': submitted && controls.address.errors }"></textarea>
+                    <div *ngIf="submitted && controls.address.errors" class="invalid-feedback">
+                        <div *ngIf="controls.address.errors.required">Ev adresi alanını doldurunuz.</div>
+                    </div>
+                </div>
+
+                <div class="form-group col-12">
+                    <label for="inputDescription">Açıklama</label>
+                    <textarea type="text" rows="10" cols="30" formControlName="description"
+                        class="form-control form-control-sm" id="inputDescription" placeholder="Açıklama"></textarea>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end my-5">
+                <button type="submit" class="btn btn-lg btn-danger">Siparişi Tamamla</button>
+            </div>
+        </form>
+    </div>
+</div>

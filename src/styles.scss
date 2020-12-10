@@ -21,6 +21,10 @@ a {
     font-weight: bold;
 }
 
+textarea {
+    resize: none !important;
+}
+
 /*.ant-select-focused .ant-select-selection,
 .ant-select-selection:focus,
 .ant-select-selection:active,

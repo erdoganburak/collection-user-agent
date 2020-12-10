@@ -57,6 +57,11 @@ export class RoutingService implements CanActivate {
                 title: PageRoutes.SHOPPING_CART.value,
                 page: PageRoutes.SHOPPING_CART,
                 visible: false
+            },
+            {
+                title: PageRoutes.CHECKOUT.value,
+                page: PageRoutes.CHECKOUT,
+                visible: false
             }
         ];
 

@@ -1,0 +1,12 @@
+@import "../../../../styles/variables";
+@import "../../../../styles/mixins/gradient.mixin.scss";
+@import "../../../../styles/mixins/border.mixin.scss";
+@import "../../../../styles/mixins/flex.mixin.scss";
+
+:host {
+    .container {
+        .jumbotron {
+            @include linear-gradient(to right, $secondary 20%, $body-bg 80%);
+        }
+    }
+}

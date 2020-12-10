@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, SimpleChanges } from '@angular/core';
+import { PageRoutes } from 'src/constant/page-routes.constant';
 import Product from 'src/model/product/product';
+import { RoutingService } from 'src/service/routing.service';
 
 @Component({
     selector: 'app-shopping-cart-summary',
@@ -13,7 +15,7 @@ export class ShoppingCartSummaryComponent implements OnInit, OnDestroy {
 
     public sum: number = undefined;
 
-    constructor() {
+    constructor(private routingService: RoutingService) {
 
     }
 
@@ -28,6 +30,10 @@ export class ShoppingCartSummaryComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
 
+    }
+
+    public onClickBuy() {
+        this.routingService.gotoPage(PageRoutes.CHECKOUT.fullPath, null);
     }
 
     private calculateSum() {
