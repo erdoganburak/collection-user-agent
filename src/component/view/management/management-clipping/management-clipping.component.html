@@ -4,7 +4,7 @@
             <app-management-header [title]="title" [description]="description" [icon]="icon"></app-management-header>
         </div>
         <div class="d-flex justify-content-end my-3">
-            <button type="button" class="btn btn-primary" (click)="onClickAddNew()">Küpür Ekle</button>
+            <button type="button" class="btn btn-sm btn-primary" (click)="onClickAddNew()">Küpür Ekle</button>
         </div>
         <div *ngIf="paginationResponse != null" class="table-container">
             <table class="table table-striped">
@@ -23,16 +23,12 @@
                     }">
                         <td scope="row">{{clipping.quantity | currency: "TRY"}}</td>
                         <td>
-                            <div class="d-flex justify-content-center" (click)="onClickEdit(clipping)">
-                                <fa-icon [icon]="['fas', 'edit']" size="1x">
-                                </fa-icon>
-                            </div>
+                            <button type="button" class="btn btn-sm btn-outline-primary"
+                                (click)="onClickEdit(clipping)">Düzenle</button>
                         </td>
                         <td>
-                            <div class="d-flex justify-content-center" (click)="onClickDelete(clipping)">
-                                <fa-icon [icon]="['fas', 'trash']" size="1x">
-                                </fa-icon>
-                            </div>
+                            <button type="button" class="btn btn-sm btn-danger"
+                                (click)="onClickDelete(clipping)">Sil</button>
                         </td>
                     </tr>
                 </tbody>

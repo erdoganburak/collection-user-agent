@@ -4,7 +4,7 @@
             <app-management-header [title]="title" [description]="description" [icon]="icon"></app-management-header>
         </div>
         <div class="d-flex justify-content-end my-3">
-            <button type="button" class="btn btn-primary" (click)="onClickAddNew()">Kategori Ekle</button>
+            <button type="button" class="btn btn-sm btn-primary" (click)="onClickAddNew()">Kategori Ekle</button>
         </div>
         <div *ngIf="paginationResponse != null" class="table-container">
             <table class="table table-striped">
@@ -23,16 +23,12 @@
                     }">
                         <td scope="row">{{category.name}}</td>
                         <td>
-                            <div class="d-flex justify-content-center" (click)="onClickEdit(category)">
-                                <fa-icon [icon]="['fas', 'edit']" size="1x">
-                                </fa-icon>
-                            </div>
+                            <button type="button" class="btn btn-sm btn-outline-primary"
+                                (click)="onClickEdit(category)">Düzenle</button>
                         </td>
                         <td>
-                            <div class="d-flex justify-content-center" (click)="onClickDelete(category)">
-                                <fa-icon [icon]="['fas', 'trash']" size="1x">
-                                </fa-icon>
-                            </div>
+                            <button type="button" class="btn btn-sm btn-danger"
+                                (click)="onClickDelete(category)">Sil</button>
                         </td>
                     </tr>
                 </tbody>

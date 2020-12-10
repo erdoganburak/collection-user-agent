@@ -5,68 +5,63 @@
 </div>
 <div class="modal-body">
   <form [formGroup]="moneyForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="inputName">İsim</label>
-      <input type="text" formControlName="name" class="form-control form-control-sm" id="inputName" placeholder="İsim"
-        [ngClass]="{ 'is-invalid': submitted && controls.name.errors }">
-      <div *ngIf="submitted && controls.name.errors" class="invalid-feedback">
-        <div *ngIf="controls.name.errors.required">İsim alanını doldurunuz.</div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputName">İsim</label>
+        <input type="text" formControlName="name" class="form-control form-control-sm" id="inputName" placeholder="İsim"
+          [ngClass]="{ 'is-invalid': submitted && controls.name.errors }">
+        <div *ngIf="submitted && controls.name.errors" class="invalid-feedback">
+          <div *ngIf="controls.name.errors.required">İsim alanını doldurunuz.</div>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="inputActive">Satışa Çıkar</label>
-      <input type="checkbox" formControlName="status" class="form-control form-control-sm" id="active" name="active">
-    </div>
-
-    <div class="form-group">
-      <label for="inputStock">Stok</label>
-      <input type="number" formControlName="stock" class="form-control form-control-sm" id="inputStock"
-        placeholder="Stok" [ngClass]="{ 'is-invalid': submitted && controls.condition.errors }">
-      <div *ngIf="submitted && controls.condition.errors" class="invalid-feedback">
-        <div *ngIf="controls.stock.errors.required">Stok alanını doldurunuz.</div>
+      <div class="form-group col-md-6">
+        <label for="inputStock">Stok</label>
+        <input type="number" formControlName="stock" class="form-control form-control-sm" id="inputStock"
+          placeholder="Stok" [ngClass]="{ 'is-invalid': submitted && controls.condition.errors }">
+        <div *ngIf="submitted && controls.condition.errors" class="invalid-feedback">
+          <div *ngIf="controls.stock.errors.required">Stok alanını doldurunuz.</div>
+        </div>
       </div>
-    </div>
 
 
-    <div class="form-group">
-      <label for="inputProductNo">Ürün Numarası</label>
-      <input type="text" formControlName="productNo" class="form-control form-control-sm" id="inputProductNo"
-        placeholder="Ürün Numarası" [ngClass]="{ 'is-invalid': submitted && controls.productNo.errors }">
-      <div *ngIf="submitted && controls.productNo.errors" class="invalid-feedback">
-        <div *ngIf="controls.productNo.errors.required">Ürün Numarası alanını doldurunuz.</div>
+      <div class="form-group col-md-6">
+        <label for="inputProductNo">Ürün Numarası</label>
+        <input type="text" formControlName="productNo" class="form-control form-control-sm" id="inputProductNo"
+          placeholder="Ürün Numarası" [ngClass]="{ 'is-invalid': submitted && controls.productNo.errors }">
+        <div *ngIf="submitted && controls.productNo.errors" class="invalid-feedback">
+          <div *ngIf="controls.productNo.errors.required">Ürün Numarası alanını doldurunuz.</div>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="inputSerialNo">Seri Numarası</label>
-      <input type="text" formControlName="serialNo" class="form-control form-control-sm" id="inputSerialNo"
-        placeholder="Numarası" [ngClass]="{ 'is-invalid': submitted && controls.serialNo.errors }">
-      <div *ngIf="submitted && controls.serialNo.errors" class="invalid-feedback">
-        <div *ngIf="controls.serialNo.errors.required">Seri Numarası alanını doldurunuz.</div>
+      <div class="form-group col-md-6">
+        <label for="inputSerialNo">Seri Numarası</label>
+        <input type="text" formControlName="serialNo" class="form-control form-control-sm" id="inputSerialNo"
+          placeholder="Numarası" [ngClass]="{ 'is-invalid': submitted && controls.serialNo.errors }">
+        <div *ngIf="submitted && controls.serialNo.errors" class="invalid-feedback">
+          <div *ngIf="controls.serialNo.errors.required">Seri Numarası alanını doldurunuz.</div>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="inputCondition">Kondisyon</label>
-      <input type="number" formControlName="condition" class="form-control form-control-sm" id="inputCondition"
-        placeholder="Kondisyon" [ngClass]="{ 'is-invalid': submitted && controls.condition.errors }">
-      <div *ngIf="submitted && controls.condition.errors" class="invalid-feedback">
-        <div *ngIf="controls.condition.errors.required">Kondisyon alanını doldurunuz.</div>
+      <div class="form-group col-md-6">
+        <label for="inputCondition">Kondisyon</label>
+        <input type="number" formControlName="condition" class="form-control form-control-sm" id="inputCondition"
+          placeholder="Kondisyon" [ngClass]="{ 'is-invalid': submitted && controls.condition.errors }">
+        <div *ngIf="submitted && controls.condition.errors" class="invalid-feedback">
+          <div *ngIf="controls.condition.errors.required">Kondisyon alanını doldurunuz.</div>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="inputPrice">Fiyat</label>
-      <input type="number" formControlName="price" class="form-control form-control-sm" id="inputPrice"
-        placeholder="Fiyat" [ngClass]="{ 'is-invalid': submitted && controls.price.errors }">
-      <div *ngIf="submitted && controls.price.errors" class="invalid-feedback">
-        <div *ngIf="controls.price.errors.required">Fiyat alanını doldurunuz.</div>
+      <div class="form-group col-md-6">
+        <label for="inputPrice">Fiyat</label>
+        <input type="number" formControlName="price" class="form-control form-control-sm" id="inputPrice"
+          placeholder="Fiyat" [ngClass]="{ 'is-invalid': submitted && controls.price.errors }">
+        <div *ngIf="submitted && controls.price.errors" class="invalid-feedback">
+          <div *ngIf="controls.price.errors.required">Fiyat alanını doldurunuz.</div>
+        </div>
       </div>
-    </div>
 
-    <div>
-      <div class="form-group">
+      <div class="form-group col-md-6">
         <label for="inputEmissons">Emisyon</label>
         <div class="form-group">
           <app-emission-select [parentForm]="moneyForm" [controlName]="'emission'" [selectedEmission]="data?.emission"
@@ -75,7 +70,7 @@
         </div>
       </div>
 
-      <div *ngIf="(clippings && controls.emission.value) || data" class="form-group">
+      <div *ngIf="(clippings && controls.emission.value) || data" class="form-group col-md-6">
         <label for="inputClippings">Küpür</label>
         <div class="form-group">
           <nz-select [formControlName]="'clipping'" nzPlaceHolder="Küpür seçiniz" nzMode="default"
@@ -85,47 +80,50 @@
           </nz-select>
         </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="inputFrontImage">Paranın Ön Resmi</label>
-      <div class="form-group">
-        <input type="file" accept="image/jpg, image/jpeg" formControlName="frontImage"
-          (change)="onFileChange($event,'frontImage')" />
-      </div>
-      <div *ngIf="frontImageSrc" class="row d-flex justify-content-start">
-        <div class="col-sm-6 col-md-6 col-lg-4">
-          <img class="img-responsive fit-image" id="frontImage" src="{{frontImageSrc}}" alt="front image" />
+      <div class="form-group col-md-6">
+        <label for="inputFrontImage">Paranın Ön Resmi</label>
+        <div class="form-group">
+          <input type="file" accept="image/jpg, image/jpeg" formControlName="frontImage"
+            (change)="onFileChange($event,'frontImage')" />
         </div>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="inputFrontImage">Paranın Arka Resmi</label>
-      <div class="form-group">
-        <input type="file" accept="image/jpg, image/jpeg" formControlName="backImage"
-          (change)="onFileChange($event,'backImage')" />
-      </div>
-      <div *ngIf="backImageSrc" class="row d-flex justify-content-start">
-        <div class="col-sm-6 col-md-6 col-lg-4">
-          <img class="img-responsive fit-image" id="backImage" src="{{backImageSrc}}" alt="back image" />
+        <div *ngIf="frontImageSrc" class="row d-flex justify-content-start">
+          <div class="col-sm-6 col-md-6 col-lg-4">
+            <img class="img-responsive fit-image" id="frontImage" src="{{frontImageSrc}}" alt="front image" />
+          </div>
         </div>
       </div>
 
-    </div>
+      <div class="form-group col-md-6">
+        <label for="inputFrontImage">Paranın Arka Resmi</label>
+        <div class="form-group">
+          <input type="file" accept="image/jpg, image/jpeg" formControlName="backImage"
+            (change)="onFileChange($event,'backImage')" />
+        </div>
+        <div *ngIf="backImageSrc" class="row d-flex justify-content-start">
+          <div class="col-sm-6 col-md-6 col-lg-4">
+            <img class="img-responsive fit-image" id="backImage" src="{{backImageSrc}}" alt="back image" />
+          </div>
+        </div>
+      </div>
 
-    <div *ngIf="errorImageFileSize">
-      <span class="image-error">{{errorImageFileSize}}</span>
-    </div>
+      <div class="form-group col-md-12">
+        <label for="inputActive">Satışa Çıkar</label>
+        <input type="checkbox" formControlName="status" class="form-control form-control-sm" id="active" name="active">
+      </div>
 
-    <div *ngIf="errorImageFileExtension">
-      <span class="image-error">{{errorImageFileExtension}}</span>
-    </div>
+      <div *ngIf="errorImageFileSize">
+        <span class="image-error">{{errorImageFileSize}}</span>
+      </div>
 
+      <div *ngIf="errorImageFileExtension">
+        <span class="image-error">{{errorImageFileExtension}}</span>
+      </div>
 
-    <div class="d-flex justify-content-end">
-      <button type="button" class="btn btn-outline-primary mx-2" (click)="onCancelClicked($event)">Vazgeç</button>
-      <button type="submit" class="btn btn-primary">Kaydet</button>
+      <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-outline-primary mx-2" (click)="onCancelClicked($event)">Vazgeç</button>
+        <button type="submit" class="btn btn-primary">Kaydet</button>
+      </div>
     </div>
   </form>
 </div>

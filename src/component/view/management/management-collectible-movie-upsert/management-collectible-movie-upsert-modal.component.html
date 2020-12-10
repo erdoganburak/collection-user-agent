@@ -5,124 +5,127 @@
 </div>
 <div class="modal-body">
   <form [formGroup]="movieForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="inputName">İsim</label>
-      <input type="text" formControlName="name" class="form-control form-control-sm" id="inputName" placeholder="İsim"
-        [ngClass]="{ 'is-invalid': submitted && controls.name.errors }">
-      <div *ngIf="submitted && controls.name.errors" class="invalid-feedback">
-        <div *ngIf="controls.name.errors.required">İsim alanını doldurunuz.</div>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="inputStatus">Satışa Çıkar</label>
-      <input type="checkbox" formControlName="status" class="form-control form-control-sm" id="status" name="status">
-    </div>
-
-    <div class="form-group">
-      <label for="inputStock">Stok</label>
-      <input type="number" formControlName="stock" class="form-control form-control-sm" id="inputStock"
-        placeholder="Stok" [ngClass]="{ 'is-invalid': submitted && controls.condition.errors }">
-      <div *ngIf="submitted && controls.condition.errors" class="invalid-feedback">
-        <div *ngIf="controls.stock.errors.required">Stok alanını doldurunuz.</div>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="inputSummary">Özet</label>
-      <textarea type="text" rows="10" cols="30" formControlName="summary" class="form-control form-control-sm"
-        id="inputSummary" placeholder="Özet"
-        [ngClass]="{ 'is-invalid': submitted && controls.summary.errors }"></textarea>
-      <div *ngIf="submitted && controls.summary.errors" class="invalid-feedback">
-        <div *ngIf="controls.summary.errors.required">Özet alanını doldurunuz.</div>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="inputCondition">Kondisyon</label>
-      <input type="number" formControlName="condition" class="form-control form-control-sm" id="inputCondition"
-        placeholder="Kondisyon" [ngClass]="{ 'is-invalid': submitted && controls.condition.errors }">
-      <div *ngIf="submitted && controls.condition.errors" class="invalid-feedback">
-        <div *ngIf="controls.condition.errors.required">Kondisyon alanını doldurunuz.</div>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="inputPrice">Fiyat</label>
-      <input type="number" formControlName="price" class="form-control form-control-sm" id="inputPrice"
-        placeholder="Fiyat" [ngClass]="{ 'is-invalid': submitted && controls.price.errors }">
-      <div *ngIf="submitted && controls.price.errors" class="invalid-feedback">
-        <div *ngIf="controls.price.errors.required">Fiyat alanını doldurunuz.</div>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="inputDuration">Süre</label>
-      <input type="number" formControlName="duration" class="form-control form-control-sm" id="inputDuration"
-        placeholder="Süre (Dakika)" [ngClass]="{ 'is-invalid': submitted && controls.duration.errors }">
-      <div *ngIf="submitted && controls.duration.errors" class="invalid-feedback">
-        <div *ngIf="controls.duration.errors.required">Süre alanını doldurunuz.</div>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="inputCategories">Kategori</label>
-      <div class="form-group">
-        <app-category-select [selectedCategories]="data?.categories" [parentForm]="movieForm"
-          [controlName]="'categories'" [mode]="'multiple'">
-        </app-category-select>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="inputDirectors">Yönetmen</label>
-      <div class="form-group">
-        <app-director-select [parentForm]="movieForm" [controlName]="'directors'" [mode]="'multiple'">
-        </app-director-select>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="inputActors">Oyuncular</label>
-      <div class="form-group">
-        <app-actor-select [selectedActors]="data?.actors" [parentForm]="movieForm" [controlName]="'actors'"
-          [mode]="'multiple'">
-        </app-actor-select>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="inputYear">Yıl</label>
-      <input type="number" formControlName="year" class="form-control form-control-sm" id="inputYear" placeholder="Yıl"
-        [ngClass]="{ 'is-invalid': submitted && controls.year.errors }">
-    </div>
-
-    <div class="form-group">
-      <label for="inputYear">Format</label>
-      <app-movie-format-select [parentForm]="movieForm" [controlName]="'formats'" [mode]="'default'">
-      </app-movie-format-select>
-    </div>
-
-    <div class="form-group">
-      <label for="inputFrontImage">Resim</label>
-      <div class="form-group">
-        <input type="file" accept="image/jpg, image/jpeg" formControlName="frontImage"
-          (change)="onFileChange($event,'frontImage')" />
-      </div>
-      <div *ngIf="frontImageSrc" class="row d-flex justify-content-start">
-        <div class="col-sm-6 col-md-6 col-lg-4">
-          <img class="img-responsive fit-image" id="frontImage" src="{{frontImageSrc}}" alt="front image" />
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputName">İsim</label>
+        <input type="text" formControlName="name" class="form-control form-control-sm" id="inputName" placeholder="İsim"
+          [ngClass]="{ 'is-invalid': submitted && controls.name.errors }">
+        <div *ngIf="submitted && controls.name.errors" class="invalid-feedback">
+          <div *ngIf="controls.name.errors.required">İsim alanını doldurunuz.</div>
         </div>
       </div>
+
+      <div class="form-group col-md-6">
+        <label for="inputStock">Stok</label>
+        <input type="number" formControlName="stock" class="form-control form-control-sm" id="inputStock"
+          placeholder="Stok" [ngClass]="{ 'is-invalid': submitted && controls.condition.errors }">
+        <div *ngIf="submitted && controls.condition.errors" class="invalid-feedback">
+          <div *ngIf="controls.stock.errors.required">Stok alanını doldurunuz.</div>
+        </div>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="inputCondition">Kondisyon</label>
+        <input type="number" formControlName="condition" class="form-control form-control-sm" id="inputCondition"
+          placeholder="Kondisyon" [ngClass]="{ 'is-invalid': submitted && controls.condition.errors }">
+        <div *ngIf="submitted && controls.condition.errors" class="invalid-feedback">
+          <div *ngIf="controls.condition.errors.required">Kondisyon alanını doldurunuz.</div>
+        </div>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="inputPrice">Fiyat</label>
+        <input type="number" formControlName="price" class="form-control form-control-sm" id="inputPrice"
+          placeholder="Fiyat" [ngClass]="{ 'is-invalid': submitted && controls.price.errors }">
+        <div *ngIf="submitted && controls.price.errors" class="invalid-feedback">
+          <div *ngIf="controls.price.errors.required">Fiyat alanını doldurunuz.</div>
+        </div>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="inputDuration">Süre</label>
+        <input type="number" formControlName="duration" class="form-control form-control-sm" id="inputDuration"
+          placeholder="Süre (Dakika)" [ngClass]="{ 'is-invalid': submitted && controls.duration.errors }">
+        <div *ngIf="submitted && controls.duration.errors" class="invalid-feedback">
+          <div *ngIf="controls.duration.errors.required">Süre alanını doldurunuz.</div>
+        </div>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="inputYear">Yıl</label>
+        <input type="number" formControlName="year" class="form-control form-control-sm" id="inputYear"
+          placeholder="Yıl" [ngClass]="{ 'is-invalid': submitted && controls.year.errors }">
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="inputCategories">Kategori</label>
+        <div class="form-group">
+          <app-category-select [selectedCategories]="data?.categories" [parentForm]="movieForm"
+            [controlName]="'categories'" [mode]="'multiple'">
+          </app-category-select>
+        </div>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="inputDirectors">Yönetmen</label>
+        <div class="form-group">
+          <app-director-select [parentForm]="movieForm" [controlName]="'directors'" [mode]="'multiple'">
+          </app-director-select>
+        </div>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="inputActors">Oyuncular</label>
+        <div class="form-group">
+          <app-actor-select [selectedActors]="data?.actors" [parentForm]="movieForm" [controlName]="'actors'"
+            [mode]="'multiple'">
+          </app-actor-select>
+        </div>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="inputYear">Format</label>
+        <app-movie-format-select [parentForm]="movieForm" [controlName]="'formats'" [mode]="'default'">
+        </app-movie-format-select>
+      </div>
+
+      <div class="form-group col-12">
+        <label for="inputSummary">Özet</label>
+        <textarea type="text" rows="10" cols="30" formControlName="summary" class="form-control form-control-sm"
+          id="inputSummary" placeholder="Özet"
+          [ngClass]="{ 'is-invalid': submitted && controls.summary.errors }"></textarea>
+        <div *ngIf="submitted && controls.summary.errors" class="invalid-feedback">
+          <div *ngIf="controls.summary.errors.required">Özet alanını doldurunuz.</div>
+        </div>
+      </div>
+
+      <div class="form-group col-12">
+        <label for="inputStatus">Satışa Çıkar</label>
+        <input type="checkbox" formControlName="status" class="form-control form-control-sm" id="status" name="status">
+      </div>
+
+      <div class="form-group col-12">
+        <label for="inputFrontImage">Resim</label>
+        <div class="form-group">
+          <input type="file" accept="image/jpg, image/jpeg" formControlName="frontImage"
+            (change)="onFileChange($event,'frontImage')" />
+        </div>
+        <div *ngIf="frontImageSrc" class="row d-flex justify-content-start">
+          <div class="col-sm-6 col-md-6 col-lg-4">
+            <img class="img-responsive fit-image" id="frontImage" src="{{frontImageSrc}}" alt="front image" />
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="errorImageFileSize">
+        <span class="image-error">{{errorImageFileSize}}</span>
+      </div>
+
+      <div *ngIf="errorImageFileExtension">
+        <span class="image-error">{{errorImageFileExtension}}</span>
+      </div>
     </div>
 
-    <div *ngIf="errorImageFileSize">
-      <span class="image-error">{{errorImageFileSize}}</span>
-    </div>
-
-    <div *ngIf="errorImageFileExtension">
-      <span class="image-error">{{errorImageFileExtension}}</span>
-    </div>
 
 
     <div class="d-flex justify-content-end">
